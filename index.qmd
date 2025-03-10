@@ -1,5 +1,33 @@
 # Preface {.unnumbered}
 
-This is a Quarto book.
+## Academic information
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+**Thesis**
+
+-   Title: Are compostable biobased plastics a solution to plastic pollution?
+
+-   Degree: Degree in Marine Sciences
+
+-   Course: 2024-2025
+
+**Student**
+
+-   Name: Vera Gómez-Limón Gallardo
+
+-   National identity number (DNI): 
+
+**Tutor**
+
+-   Name: Dra. Blanca Beatriz Landa Del Castillo
+
+-   Position: Research Scientist Institute for Sustainable Agriculture, Spanish National Research Council (IAS-CSIC)
+
+-   ORCiD: <https://orcid.org/0000-0002-9511-3731>
+
+**Co-tutor**
+
+-   Name: Dr. José Mario González Pajuelo
+
+-   Position: Researcher at Institute for Environmental Studies and Natural Resources, University of Las Plamas de Gran Canaria (i-UNAT-ULPGC)
+
+-   ORCiD: <https://orcid.org/0000-0003-2990-6079>

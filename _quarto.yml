@@ -2,13 +2,13 @@ project:
   type: book
 
 book:
-  title: "TFG"
+  title: "Thesis"
   author: "Vera Gómez-Limón Gallardo"
   date: last-modified
   chapters:
     - index.qmd
-    - intro.qmd
     - abstract.qmd
+    - intro.qmd
     - references.qmd
 
 bibliography: references.bib
