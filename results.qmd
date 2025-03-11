@@ -1,47 +1,29 @@
----
-title: "Experiment results"
-date: today
-license: "CC BY-NC-SA 4.0"
-author:
-    name: "Vera Gómez-Limón Gallardo"
-    email: "vera.gomez101@alu.ulpgc.es"
-format:
-  html:
-    embed-resources: true
-    code-fold: true
-    toc: true
-    number-sections: true
-editor: source
-bibliography: references.bib
----
+# Results
 
 ```{r}
 #| label: setup
-#| message: false
+#| include: false
 
 library(tidyverse)
 library(tidymodels)
 library(gt)
 
-pressures <-
-  read_csv("./data/pressures.csv", show_col_types = F)
+pressures <- read_csv("_data/pressures.csv")
 
 levels_habitat <- c("lake", "sea", "blank")
-  
 levels_treatment <- c("paper", "plastic", "control", "blank")
 
 labels_habitat <-
   c(
-    lake  = "Lake",
-    sea   = "Sea",
-    blank = "Blank"
+    lake     = "Lake",
+    sea      = "Sea",
+    blank    = "Blank"
   )
-
 labels_treatment <- 
   c(
     paper    = "Paper",
     plastic  = "Plastic",
-    control  = "Negative control",
+    control  = "Control",
     blank    = "Blank"
   )
 
@@ -50,27 +32,9 @@ pressures <-
   mutate(
     habitat = habitat |> fct(levels = levels_habitat),
     treatment = treatment |> fct(levels = levels_treatment),
-    time = time / (24 * 60)
+    time = time / (60 * 24)
   )
-```
 
-## Calculation of Biological Oxygen Demand (BOD)
-
-Differences in pressure are adjusted offsetting from the mean value in the empty reactors---those codified as `"blank"` in `treatment` and `habitat` variables. All blanks rose to approximately 9 hPa over the starting pressure of the experiment (@fig-blanks), due to the increase in temperature inside the incubator---at 25ºC. The experiment's aim is to measure differences in pressure due to oxygen consumption, the effect of temperature rise was therefore neutralized by averaging between blanks and subtracting form the reactors containing benthic habitats. Reactor B27 lost pressure early in the experiment and remained zero difference from the starting pressure, probably due to sealing defects. It was filtered out in the calculation of adjusted pressure difference.
-
-:::{#fig-blanks}
-```{r}
-pressures |> 
-  filter(treatment == "blank") |> 
-  ggplot(aes(x = time, y = pressure, color = reactor)) +
-  geom_jitter() +
-  labs(x = "Time (days)", y = "Pressure (hPa)", color = "Reactor") +
-  theme_classic()
-```
-Pressure evolution inside empty reactors. B27 dropping to zero means it was not properly sealed.
-:::
-
-```{r}
 blanks <- 
   pressures |> 
   filter(habitat == "blank") |> 
@@ -84,25 +48,7 @@ pressures <-
   pressures |> 
   left_join(blanks, by = join_by(time)) |> 
   mutate(adj_pressure = pressure - blk_pressure)
-```
 
-BOD was calculated using the formula:
-
-$
-BOD=\frac{M_{O_2}}{RT_m}\left(\frac{V_t-V_h}{V_h}+\alpha{}\frac{T_m}{T_0}\right)\Delta{}p_{O_2}
-$
-
-where
-
--   $M_{O_2}$ is oxygen gas molecular weight in $mg\cdot{}mol^{-1}$
--   $R$ is the gas constant in $L\cdot{}hPa \cdot{}mol^{-1}\cdot{}K^{-1}$
--   $T_m$ is the sample temperature in $K$
--   $T_0$ is the reference temperature in $K$
--   $\alpha$ is the Bunsen absorption coefficient
--   $V_t$ is reactor volume in $mL$
--   $V_h$ is habitat volume in $mL$
-
-```{r}
 tm <- 25 + 273.15 # sample temperature in Kelvin
 t0 <- 273.15 # reference temperature in Kelvin
 a <- 0.03103 # Bunsen absorption coefficient
@@ -113,172 +59,122 @@ sv <- 260 # sample volume in mL.
 
 pressures <- 
   pressures |> 
-  mutate(bod = mo2 / (r * tm) * ((vt - sv) / sv + a * tm / t0) * - adj_pressure)
-```
-
-## Unkown variables
-
-Reactor L13 ---empty habitat--- had significantly lower BOD compared to the other three empty lake habitats, the same patterns appears with reactors L17 and L18 ---both treated with plastic--- (@fig-lake-mystery). An uncontrolled variable in the lake habitats was affecting BOD in both treatments. The higher BOD group was arbitrarily chosen for the propose of model fitting in @sec-modelling.
-
-:::{#fig-lake-mystery}
-```{r}
-pressures |> 
-  filter(habitat == "lake") |> 
-  filter(treatment %in% c("plastic", "control")) |> 
-  ggplot(aes(x = time, y = bod, color = reactor)) +
-  geom_jitter() +
-  labs(x = "Time (days)", y = "Oxygen consumption (mg O₂/L)", color = "Reactor") +
-  facet_wrap(~ treatment, ncol = 2) +
-  theme_classic()
+  mutate(bod = mo2 / (r * tm) * ((vt - sv) / sv + a * tm / t0) * -adj_pressure)
 
 pressures <- 
   pressures |> 
   mutate(outliers = if_else(reactor %in% c("L13", "L17", "L18"), TRUE, FALSE))
 ```
-Evolution of BOD in the lake habitat. An unknown variable was grouping BOD into two clearly distinct groups independently of treatment.
+
+## Blank evolution
+
+Differences in pressure are adjusted offsetting from the mean value in the empty reactors---also called blanks. During the first couple of days, all blanks rose to approximately 9 hPa over the starting pressure (@fig-blanks). The response is likely due to warming air inside the reactor, because the incubator chamber was at 25°C, which was slightly above room temperature.
+
+Reactor B27 lost pressure early in the experiment and dropped to zero, this behavior implies evident sealing defects and the reactor was not considered for the analysis.
+
+Our goal is to measure differences in pressure due to oxygen consumption ---or CO-2- production---, so we neutralized the effect of temperature by adjusting the pressure difference with the formula:
+
+$p_{OD} = p - \overline{p}_{blanks}$
+
+Were $p_{OD}$ is the pressure difference driven by oxygen consumption, $p$ is the relative pressure of the reactors containing benthic habitats, and $\overline{p}_{blanks}$ is the average relative pressure measured in empty reactors ---excluding reactor B27.
+
+:::{#fig-blanks}
+```{r}
+pressures |> 
+  filter(time %% 1 == 0) |> 
+  filter(treatment == "blank") |> 
+  ggplot(aes(x = time, y = pressure, color = reactor)) +
+  geom_point() +
+  geom_line() +
+  labs(x = "Time (days)", y = "Relative pressure (hPa)", color = "Reactor") +
+  theme_classic()
+```
+Relative pressure evolution inside empty reactors. Reactor B27 dropping to zero implies that it was not properly sealed.
 :::
-
-# Modelling {#sec-modelling}
-
-The formula for the model will be:
-
-$
-Y=\frac{BOD_L}{1+e^{-k(t-t_{1/2})}}
-$
-
-where
-
--   $Y$ is BOD in $mg\cdot{}L^{-1}$
--   $t_{1/2}$ is the half-degradation time in days.
--   $BOD_L$ is the limit BOD in $mg\cdot{}L^{-1}$
--   $k$ is the logistic growth rate.
-
-```{r}
-sea_control <- pressures |> filter(habitat == "sea", treatment == "control")
-
-nlsfit <-
-  nls(
-    bod ~ limit / (1 + exp(-k * (time - half_time))),
-    data = sea_control,
-    start = list(half_time = 0, k = .1, limit = 70)
-  )
-
-nlsfit |> confint(level = .95)
-
-sea_control |> 
-  ggplot(aes(x = time, y = bod)) +
-    geom_jitter(alpha = .1) +
-    geom_line(aes(y = predict(nlsfit)), linewidth = 1, color = "blue")
-```
-
-```{r}
-boots <- bootstraps(sea_control, times = 1000, apparent = TRUE)
-
-fit_nls_on_bootstrap <- function(split) {
-  nls(
-    bod ~ limit / (1 + exp(-k * (time - half_time))),
-    data = analysis(split),
-    start = list(half_time = 0, k = .1, limit = 100)
-  )
-}
-
-boot_models <-
-  boots %>% 
-  mutate(model = map(splits, fit_nls_on_bootstrap),
-         coef_info = map(model, tidy))
-
-boot_coefs <- 
-  boot_models %>% 
-  unnest(coef_info)
-
-percentile_intervals <- int_pctl(boot_models, coef_info)
-percentile_intervals
-```
-
-```{r}
-ggplot(boot_coefs, aes(estimate)) +
-  geom_histogram(bins = 30) +
-  facet_wrap( ~ term, scales = "free") +
-  geom_vline(aes(xintercept = .lower), data = percentile_intervals, col = "blue") +
-  geom_vline(aes(xintercept = .upper), data = percentile_intervals, col = "blue")
-```
-
-```{r}
-boot_aug <-
-  boot_models %>%
-  sample_n(200) %>%
-  mutate(augmented = map(model, augment)) %>%
-  unnest(augmented)
-
-ggplot(boot_aug, aes(time, bod)) +
-  geom_line(aes(y = .fitted, group = id), alpha = .2, col = "blue") +
-  geom_point()
-```
-
-# Visualizations
-
-# Habitat characterization
 
 ::: {#fig-habitat-characterization-reactors}
 ```{r}
 pressures |> 
-  filter(treatment == "Control") |> 
-  ggplot(aes(x = time, y = bod, color = habitat)) +
-  geom_line(aes(group = reactor)) +
-  scale_linetype_manual(values = c("dashed", "solid")) +
-  labs(x = "Time (days)", y = "Oxygen consumption (mg O₂/L)") +
+  filter(time %% 1 == 0) |> 
+  filter(treatment == "control") |> 
+  ggplot(aes(x = time, y = bod, color = habitat, group = reactor)) +
+  geom_line(aes(linetype = habitat)) +
+  geom_point(aes(shape = habitat), size = 2) +
+  scale_linetype_manual(labels = labels_habitat, values = c("dashed", "solid")) +
+  scale_color_discrete(labels = labels_habitat) +
+  scale_shape_manual(labels = labels_habitat, values = c(1, 17)) +
+  labs(x = "Time (days)", y = "Oxygen consumption (mg/L)") +
   theme_classic() +
   theme(
     legend.position = "inside",
     legend.position.inside = c(.1, .9),
-    legend.box.background = element_rect(color = "black"),
+    legend.background = element_rect(color = "black"),
     legend.title = element_blank()
   )
 ```
-
 Oxygen evolution inside untreated reactors.
-
 :::
 
+::: {#fig-treatments}
+```{r}
+pressures |>
+  filter(time %% 5 == 0) |> 
+  filter(treatment != "blank") |> 
+  ggplot(aes(x = time, y = bod, shape = treatment, color = treatment)) +
+  geom_line(
+    aes(linetype = treatment),
+    stat = "summary", fun = mean,
+    position = position_dodge(width = 3),
+    show.legend = F
+  ) +
+  geom_pointrange(
+    stat = "summary", fun.data = mean_se,
+    position = position_dodge(width = 3)
+  ) +
+  facet_wrap(~ habitat, scales = "free_y", labeller = as_labeller(labels_habitat)) +
+  scale_shape_manual(labels = labels_treatment, values = c(0, 16, 1)) +
+  scale_color_discrete(labels = labels_treatment) +
+  scale_linetype_manual(values = c("dotted", "solid", "dashed")) +
+  labs(x = "Time (days)", y = "Oxygen consumption (mg/L)") +
+  theme_classic() +
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(.12, .8),
+    legend.background = element_rect(color = "black"),
+    legend.title = element_blank()
+  )
+```
+Summary evolution of biological oxygen demand for each treatment. Points represent reactor averages and bars standard error range.
+:::
 
-::: {#fig-habitat-characterization-summary}
+```{r}
+pressures |>
+  filter(time %% 1 == 0) |> 
+  filter(treatment != "blank") |> 
+  ggplot(aes(x = time, y = bod, color = treatment, linetype = treatment)) +
+  geom_line(aes(group = reactor)) +
+  facet_wrap(~ habitat, scales = "free_y", labeller = as_labeller(labels_habitat)) +
+  scale_linetype_manual(labels = labels_treatment, values = c("dashed", "solid", "dotted"), name = NULL) +
+  scale_color_discrete(labels = labels_treatment, name = NULL) +
+  labs(x = "Time (days)", y = "Oxygen consumption (mg/L)") +
+  theme_classic() +
+  theme(legend.position = "inside", legend.background = element_rect(color = "black"), legend.position.inside = c(.1, .8))
+```
+
 ```{r}
 pressures |> 
-  filter(treatment == "Control") |> 
-  filter(!outliers) |> 
-  ggplot(aes(x = time, y = bod, color = habitat)) +
-  geom_point() +
-  labs(x = "Time (days)", y = "Oxygen consumption (mg O₂/L)") +
-  theme_classic() +
-  theme(
-    legend.position = "inside",
-    legend.position.inside = c(.1, .9),
-    legend.box.background = element_rect(color = "black"),
-    legend.title = element_blank()
-  )
-```
-
-Summary of oxygen evolution for lake (n = 3) and sea (n = 4) benthic habitats. Daily averages are mapped to points and ranges between minimum and maximum.
-
-:::
-
-## Option 3: median daly measures with min and max bars
-
-```{r}
-daily_pressures |> 
-  filter(treatment == "Control") |> 
+  filter(time %% 1 == 0) |> 
+  filter(treatment == "control") |> 
   ggplot(aes(x = time, y = bod)) +
   geom_pointrange(
     aes(shape = habitat),
     stat = "summary",
     position = position_dodge(width = 1),
-    fun.min = min,
-    fun.max = max,
-    fun = mean
-    ) +
+    fun.data = mean_se
+  ) +
   scale_shape_manual(values = c(1, 16)) +
   scale_linetype_manual(values = c("dotted", "solid")) +
-  labs(x = "Time (days)", y = "Oxygen consumption (mg O₂/L)") +
+  labs(x = "Time (days)", y = "Oxygen consumption (mg/L)") +
   theme_classic() +
   theme(
     legend.position = "inside",
@@ -287,145 +183,5 @@ daily_pressures |>
     legend.title = element_blank()
   )
 ```
-
-## Option 4: plotting each reactor with daily summaries
-
-```{r}
-daily_pressures |> 
-  filter(treatment == "Control") |> 
-  ggplot(aes(x = time, y = bod, group = reactor)) +
-  geom_point(aes(shape = habitat), size = 2) +
-  geom_line(aes(linetype = habitat)) +
-  scale_linetype_manual(values = c("dotted", "solid")) +
-  scale_shape_manual(values = c(1, 17)) +
-  labs(x = "Time (days)", y = "Oxygen consumption (mg O₂/L)") +
-  theme_classic() +
-  theme(
-    legend.position = "inside",
-    legend.position.inside = c(.1, .9),
-    legend.box.background = element_rect(color = "black"),
-    legend.title = element_blank()
-  )
-```
-
-
-# Figure 2: Treatment reactor evolution
-
-## Option 1: ploting each reactor and lines by treatment
-
-### Sea
-
-```{r}
-daily_pressures |> 
-  filter(habitat == "Sea") |> 
-  ggplot(aes(x = time, y = bod, color = treatment, linetype = treatment)) +
-  geom_line(aes(group = reactor)) +
-  facet_wrap(~ habitat) +
-  scale_linetype_manual(values = c("dashed", "solid", "dotted")) +
-  labs(x = "Time (days)", y = "Oxygen consumption (mg O₂/L)") +
-  theme_classic() +
-  theme(legend.position = "inside", legend.title = element_blank(), legend.position.inside = c(.1, .8))
-```
-
-### Lake
-
-```{r}
-daily_pressures |> 
-  filter(habitat == "Lake") |> 
-  ggplot(aes(x = time, y = bod, color = treatment, linetype = treatment)) +
-  geom_line(aes(group = reactor)) +
-  facet_wrap(~ habitat) +
-  scale_linetype_manual(values = c("dashed", "solid", "dotted")) +
-  labs(x = "Time (days)", y = "Oxygen consumption (mg O₂/L)") +
-  theme_classic() +
-  theme(legend.position = "inside", legend.title = element_blank(), legend.position.inside = c(.1, .8))
-```
-
-
-## Option 2: summary of treatment mean and error bar
-
-### Sea
-
-```{r}
-daily_pressures |> 
-  filter(habitat == "Sea") |> 
-  ggplot(aes(x = time, y = bod)) +
-  geom_point(aes(shape = treatment, ), stat = "summary", fun = mean) +
-  geom_errorbar(aes(linetype = treatment), stat = "summary", fun.data = mean_se) +
-  facet_wrap(~ habitat, ncol = 1, scales = "free") +
-  scale_shape_manual(values = c(0, 16, 1)) +
-  scale_linetype_manual(values = c("dotted", "solid", "dashed")) +
-  labs(x = "Time (days)", y = "Oxygen consumption (mg O₂/L)") +
-  theme_classic() +
-  theme(
-    legend.position = "inside",
-    legend.position.inside = c(.1, .8),
-    legend.box.background = element_rect(color = "black"),
-    legend.title = element_blank()
-  )
-```
-
-### Lake
-
-```{r}
-daily_pressures |> 
-  filter(habitat == "Lake") |> 
-  ggplot(aes(x = time, y = bod)) +
-  geom_point(aes(shape = treatment, ), stat = "summary", fun = mean) +
-  geom_errorbar(aes(linetype = treatment), stat = "summary", fun.data = mean_se) +
-  facet_wrap(~ habitat, ncol = 1, scales = "free") +
-  scale_shape_manual(values = c(1, 19, 0)) +
-  scale_linetype_manual(values = c("dotted", "solid", "dashed")) +
-  labs(x = "Time (days)", y = "Oxygen consumption (mg O₂/L)") +
-  theme_classic() +
-  theme(
-    legend.position = "inside",
-    legend.position.inside = c(.1, .8),
-    legend.box.background = element_rect(color = "black"),
-    legend.title = element_blank()
-  )
-```
-
-# Table 1: Biodegradation as % of +C
-
-```{r}
-daily_pressures |> 
-  filter(time == 30) |> 
-  group_by(habitat, treatment) |> 
-  summarize(
-    mean_bod = mean(bod) |> round(2),
-    sd_bod = sd(bod) |> round(2),
-    .groups = "drop"
-  ) |> gt()
-```
-
-
-```{r}
-daily_pressures |>
-  filter(treatment == "Plastic") |> 
-  filter(time == 30) |> 
-  mutate(
-    biodeg = habitat |> case_match(
-      "Sea" ~ (bod - 39.15) / (80.69 - 39.15),
-      "Lake" ~ (bod - 109.31) / (226.25 - 109.31)
-    ) |> round(3)
-  ) |> 
-  mutate(
-    biodeg = if_else(biodeg < 0, 0, biodeg),
-    biodegradability =
-      case_when(
-        biodeg |> between(0, .05) ~ "Non-biodegradable",
-        biodeg |> between(.05, .20) ~ "Slightly biodegradable",
-        biodeg |> between(.20, .60) ~ "Moderatedly biodegradable"
-        )
-  ) |>
-  select(reactor, biodeg, biodegradability) |> 
-  gt()
-```
-
-
-```{r}
-```
-
 
 
