@@ -2,13 +2,22 @@ project:
   type: book
 
 book:
-  title: "Thesis"
-  author: "Vera Gómez-Limón Gallardo"
+  title: "Degree in Marine Sciences final Thesis"
+  output-file: "thesis"
+  subtitle: "Bioplastics as a possible solution to plastic pollution in the ocean"
+  author:
+    name: "Vera Gómez-Limón Gallardo"
+    email: "vera.gomez101@alu.ulpgc.es"
   date: last-modified
   chapters:
     - index.qmd
     - abstract.qmd
     - intro.qmd
+    - methodology.qmd
+    - results.qmd
+    - discussion.qmd
+    - conclusions.qmd
+    - acknowledgements.qmd
     - references.qmd
 
 bibliography: references.bib
@@ -20,5 +29,6 @@ format:
     documentclass: scrreprt
   docx: default
 
-
+execute: 
+  freeze: auto
 

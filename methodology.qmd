@@ -1,0 +1,44 @@
+# Materials and Methods
+
+## Sampling locations
+
+**La Breña**
+
+-   37°49'54,772199''N
+-   5°2'14,253294''W
+
+**Los Boliches**
+
+SignA <https://signa.ign.es/signa/>
+
+## BOD Calculation
+
+BOD was calculated using the formula:
+
+$BOD=\frac{M_{O_2}}{RT_m}\left(\frac{V_t-V_h}{V_h}+\alpha{}\frac{T_m}{T_0}\right)\Delta{}p_{O_2}$
+
+where
+
+-   $M_{O_2}$ is oxygen gas molecular weight in $mg\cdot{}mol^{-1}$
+-   $R$ is the gas constant in $L\cdot{}hPa\cdot{}mol^{-1}\cdot{}K^{-1}$
+-   $T_m$ is the sample temperature in $K$
+-   $T_0$ is the reference temperature in $K$
+-   $\alpha$ is the Bunsen absorption coefficient
+-   $V_t$ is reactor volume in $mL$
+-   $V_h$ is habitat volume in $mL$
+
+
+## Modelling
+
+A logistic regression model will be fited to the measured curves using the equation proposed by :
+
+$BOD_t=BOD_L\ (1-e^{-kt})$
+
+@mason2006 Other formula
+
+where
+
+-   $BOD_t$ is biological oxygen demand in $mg\ O_2\ L^{-1}$
+-   $t_{½}$ is the half-degradation time in days.
+-   $BOD_L$ is the limit BOD in $mg\ O_2\ L^{-1}$
+-   $b$ is the logistic growth rate.
