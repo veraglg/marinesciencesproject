@@ -1,3 +1,11 @@
 # Introduction
 
+## The environmental risk of plastic waste {.unnumbered}
 
+Throughout Earth's most recent geological history, the development of human agriculture, civilization and eventual industrialization was made possible by the remarkably stable planetary conditions of the Holocene epoch ---the past 10,000 years. Planetary stability is currently threatened by our global civilization based on capitalistic economic growth, which disrupts the biogeochemical processes enabling the self regulation of the environment. When @rockstrom2009 proposed a safe operating space for humanity, they argued that disruptions induced by biodiversity loss, climate change, nutrient cycle overloading and chemical pollution, might reach beyond a certain threshold. This boundary trespassing would irreversibly shift the environmental conditions of the Holocene into a less habitable state. @richardson2023 recently evidenced that six out of nine of these planetary boundaries are already transgressed, including the boundary for plastic waste. We cannot speak of a safe operating space for novel entities like plastic, @persson2022 submitted that plastics are the of highest concern since production and wasting outpace the capacity for environmental assessment and monitoring.
+
+Plastic persist in the environment and consequently accumulate everywhere we look. @turner2020 studied Lego blocks washed up on the beach and estimated their residence time in the sea between hundreds to thousands of years. Abrasion, photo-oxidation and fouling can physically degrade plastic items into microscopic particles with increased biological penetrability and toxicity. @macleod2021 argued that engineered remediation strategies are unlikely to succeed in preventing irreversible damage, they stated that it remains a scientific challenge to quantify the damage of plastic due to the far reaching consequences of interactions with carbon and nutrient cycles, habitat disruption, ecotoxicity and social degradation.
+
+## Consequences of plastic in the ocean {.unnumbered}
+
+This is particularly the case in the global ocean.

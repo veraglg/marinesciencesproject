@@ -13,11 +13,11 @@ book:
     - index.qmd
     - abstract.qmd
     - intro.qmd
-    - methodology.qmd
+    - methods.qmd
     - results.qmd
     - discussion.qmd
     - conclusions.qmd
-    - acknowledgements.qmd
+    - thanks.qmd
     - references.qmd
 
 bibliography: references.bib
@@ -31,4 +31,5 @@ format:
 
 execute: 
   freeze: auto
+  echo: false
 
