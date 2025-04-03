@@ -1,10 +1,8 @@
-# Preface {.unnumbered}
-
-## Academic information
+# Academic information {.unnumbered .unlisted}
 
 **Thesis**
 
--   Title: Are compostable biobased plastics a solution to plastic pollution?
+-   Title: Are bioplastics a solution to plastic pollution in the ocean? An experimental approach to the potential biodegradability of compostable plastic bags in fresh and saltwater beach environments
 
 -   Studies: Degree in Marine Sciences
 

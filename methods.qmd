@@ -1,34 +1,50 @@
 # Materials and Methods
 
-## Testing materials
+## Theoretical principle: Oxygen demand as a proxy for biodegradation
 
-Compostable plastic bags were provided by @deiss2025 in the context of the @soplas2024, the material is commercially available under the trademark name ecovio^Ⓡ^ [@basf2025] and is made by blending PLA and PBAT polymers at variable proportions. PLA is synthesized from renewable feedstocks such as corn and sugar cane while PBAT has a nonrenewable fossil origin, resulting in a 50% renewable based material with a certified compostability under the European standard EN 13432 [@eubp2023]. Experimental test samples were prepared cutting the plastic film into discs of 20 mm diameter,
+Oxygen demand is a widely used parameter in the quantification of biodegradation because it enables for the rapid assessment of microbial activity during the process. The present study approaches compostable plastic biodegradation in only 30 days by incubating the material in a reactor medium already pre-exposed to environmental conditions. Some authors consider biodegradation by physically evaluating the post-incubation polymer [@pelegrini2016]. These approaches usually require incubation for long periods of time, for the purpose of fast assessment the physical properties of the materials were not evaluated.
 
-<!-- Ecovio films from a commercially available carrier bag [@deiss2025] were used in order to test their potential biodegradability. Ecovio is a bioplastic certified as a compostable polymer with 50% bio-based content . This material is made from blending polylactide (PLA) and polybutylene adipate terephthalate (PBAT), PLA is synthesized from renewable feedstocks such as corn and sugar cane while PBAT has a nonrenewable fossil origin. -->
+### Recreating the open environment
 
-<!-- The present study adapts the test method of film biodegradation on the sandy sublittoral zone from @tosin2012. Briefly, the method consists in simulating environmental conditions found in the sublittoral region, in the case of the sea, and the near shore submerged benthic habitat for lake. The simulated habitat contains a two phased testing medium, a column of sea water and marine sediment (sea habitat) and a lake water and lake sediment for the lake habitat. The test material is preferably a film. -->
+The test medium recreated the natural environment on the submerged sediment at the near beach zone inside a sealed reactor. The two-phase approach (sediment and water column) was suggested by @tosin2012 in an attempt to simulate the conditions of a plastic item that has sunk to the bottom of the sea floor, the present study substitutes the preparation of a synthetic aqueous solution with field samples instead, the reason for this adaptation is to accurately resemble the open environment while maintaining simplicity. In this study, reactors consisted of 1 L glass vessels sealed using the OxiTop^Ⓡ^ Control system. The head of the measuring device is equipped with a highly sensitive pressure gauge capable of measuring the pressure evolution inside the reactor. A cup holds a strongly alkaline solution of NaOH in contact with the aerial phase to trap the CO~2~ produced by microbial activity. Testing materials were placed on the sediment bed using a pair of tweezers and bioplastic films were rigorously cleared of bubbles adhering to the surface to prevent the specimen from rising afloat. Relative positions of elements inside the reactor can be elucidated in @fig-reactors.
 
-<!-- Filter paper was chosen for the purpose of a positive control. -->
+### Biochemical reaction chain
 
-## Environmental sample collection
+Plastic biodegradation, sometimes also referred as mineralization, is a complex biochemical process involving the conversion of the organic constituents of the polymer through microbial activity to carbon dioxide (CO~2~), new microbial biomass, water and mineral salts in the presence of oxygen gas (O~2~) as schematically summarized in the equation:
 
-Sediment and water samples were collected from two different aquatic natural environments in Andalusia, Spain. One location was a the fresh water lake of La Breña (37°49'55.20''N, 5°2'12.84''W), in Cordoba, and the other at the Mediterranean coast of Los Boliches Beach (36°32'52.44''N, 4°36'54.72''W), in Malaga. Spots were chosen close to the shore at an approximate water depth of 1 meter, special care was taken when collecting the sediment samples inside 3L plastic bags to reliably avoid rocks and other objects that could interfere in the homogeneity of the sediment as far as possible. The filling of water was carried out using 5L plastic containers once submerged close to the bottom in order to avoid catching floating debris. Once the amount was sufficient, the samples were sealed and refrigerated as soon as possible with the aim of minimizing bacterial activity while in storage.
+$$
+\ce{Plastic + O2(g) ->[Microbes] Biomass + CO2(g) + Minerals}
+$$
 
-## Experimental procedure
+Consequently, the biodegradation process is measurable by analyzing the amount of O~2~ consumed or inversely the amount of CO~2~ produced. The reactor is designed to trap the produced CO~2~ as an insoluble precipitate inside a strongly alkaline solution of NaOH following the reaction:
 
-Following the collection of the environment, pilot test were carried out in order to validate the sinking of the test polymers at the bottom of the reactor. It was hard at first to place the plastic due to air bubbles adhering to the surface, this could be solved by thoroughly loking for bubbles using a pair of tweezers.
+$$
+\ce{CO2(aq) + 2Na^+(aq) + 2OH- + H2O -> Na2CO3(solid) + 2H2O}
+$$
 
-The experiment consisted in 30 sealed gas reactors using OxiTop Control measuring heads which were placed inside an incubator for 30 days. over composes of a transparent glass jar was performed 30 reactor jars using OxiTop Control measuring head. Homogeneity between reactors was intended, the were filled first with dirt and then with water. Polymers were placed last using a pair of tweezers. We observed that plastic disks were more likely to rise afloat when tinny air bubbles adhered to their surface, special care was taken to remove these bubbles so the plastics disks could stay laying on the bed. We also considered spreading the disks over the sea bed, so they would not fall over one another. This could easily be done in the sea habitat, were water transparency was high. The minutes after filling, lake habitat turbidity was so high that the bottom could not be seen when looking form above, this was due to the suspension of fine particles and a settling time of some hours was needed in order to see the bottom.
+Therefore pressure inside the reactor falls due to the sequestration of CO~2~ and this measurable difference is translated into oxygen demand as detailed in @sec-stats.
 
-The alkaline solution of KOH was prepared using KOH pellets, the small vasitos were filled using a probeta. The jar taps were placed adding a fine layer of sealing greases provided by the manufactured. Four metal clips agarraban el invento en equidistancia. OxiTop measuring heads were first calibrated using a jeringilla and the batery life was checked before the incubation. Finally the OxiTop measuring heads were tighted screewed. Some of the heads were damagaded, after visual inspection of the material, decidimos utilizar las cabezas más evidentemente dañadas para los blancos \[foto grieta\]. Once all the reactos were ready. Once the reactors were ready, they were transported in a wheeled trolley to the incubation chamber, which was previously working so the temperature was already stable at 25ºC. The reactors were randomly placed in the middle self of the incubator. This was intended para que ningun grupo experimental tuviese una vinculación a una parte concreta de la incubadora, que podría estar más fría o más caliente. A grid of 4 rows of 10 was achieved, the remaining 4 reactors were placed in the lower shelf. All of them blank reactors. The incubation first measurement was triggered at this moment and then the door was closed.
+## Experimental methods
 
-Reactors were routinely check every weekday at around 8 am by the same operator, una servidora. We controlled the progress of the experiment by visualizing the available reactor data curves one by one, this procedure enabled us to dectect possible sealing failures in the process, which could have been otherwise detected lately at the end of the experiment, but this would have implied a loss of precious time. Fortunately, only one blank reactor was damaged.
+### Testing materials
 
-The final day of the incubation, reactors were dissampled and the data were extracted into sepparated .xlsx files for each reactor. A unified dataset .csv was build with R using the tidiverse core following tidy practices form (hadley, tidying). Then the reactors were opened and the polymer dics inspected for visual signs of biodegradation. None evident sign was evident for the plastics, the paper was black and could easily deshacerse. Upon closer inspection, some tiny pores could be observed for some plastic disks, which could be linked to biodegradation.
+Compostable plastic bags were provided by @deiss2025 in the context of the @soplas2024, the material is commercially available under the trademark name ecovio^Ⓡ^ [@basf2025] and is made by blending PLA and PBAT polymers at variable proportions. PLA is synthesized from renewable feedstocks such as corn and sugar cane while PBAT has a nonrenewable fossil origin, resulting in a 50% renewable-based material with certified compostability under the European standard EN 13432 [@eubp2023]. Laboratory-grade filter paper was used as positive control test material as suggested by @tosin2012, paper consists of cellulose which is a commonly occurring polymer known to be biodegradable in all kinds of aerobic environments including freshwater and saltwater [@royer2023]. The purpose of testing paper is to compare the measured respirometrical response of a known biodegradable material with that of the compostable plastic subject to the assessment. A recent study by @beiras2023 demonstrated that compostable plastic bags show similar rates of biodegradation disregarding the degree of grinding. Here, the plastic films (20 µm thick) were cut into disk shapes of 20 mm diameter which stand for an easily replicable and standardized testing unit, the same procedure was adopted to a sheet of filter paper. To avoid contaminating the samples with room microbes, manipulation was done using sterilized tweezers.
 
-## Biological oxygen demand as a proxy for biodegradation
+### Environmental sample collection
 
-## Computational methods
+Sediment and water samples were collected from 2 beaches of both freshwater and seawater environments in Andalusia, Spain. Sampled beaches are recognized under Blue Flag certification by the Foundation for Environmental Education [@adeac2024], the focus of the study is to assess potential biodegradation in beaches under pressure from plastic pollution threfore the Blue Flag offers a criteria for high occupation indicating a plastic littering hotspot. Firstly, La Breña Reservoir is a freshwater body located in Almodóvar del Río, Córdoba (37°49'55.20''N, 5°2'12.84''W) which offers a paramount prepositional environment. Freshwater and sediment collection was done close to the shore at a water depth of 1 m to ensure the microbial community living in the sediment is fully adapted to submerged conditions. Organic elemnts such as wood pieces were avoided during sampling in order to obtain a homogeneous detrital sediment. Secondly, Los Boliches Beach is located at the Mediterranean coast of Fuengirola, Málaga (36°32'52.44''N, 4°36'54.72''W) which is highly urbanized and dedicated to tourism. Sampling was conducted at further distance to the shore at 2 m depth during mid-tide targeting the suborbital zone. Samples were directly refrigerated after collection to minimize bacterial activity during storage.
+
+### Preliminary tests
+
+Preliminary tests were conducted before ultimate incubation to guarantee satisfactory results. Plastic testing units went through a sinking test to confirm films would remain laying on the sediment bed, a polymer density higher than 1 g cm^-3^ results in negative buoyancy however small air bubbles adhering to the surface of the plastic made it difficult to sink, to solve the issue thorough clearing was applied using fine tweezers. Additionally, a 15-day pilot incubation was attempted to estimate the number of disks needed for a significant respiromentical response, 6 disks per reactor was the optimal amount. Once preliminary results were discussed a mature experiment could be designed. The assessment included 3 incubation treatments for both freshwater and saltwater, reactors either contained compostable plastic, filter paper or no polymer, the former being the control for positive mineralization response and the latter the negative control where no response is expected. Tests were replicated into 4 separate reactors resulting in a total size of 24 reactors which was large enough to minimize noise after applying statistical methods. Moreover 6 empty reactors were simultaneously incubated to calibrate our measurements and obtain standardized results.
+
+### Incubation procedure
+
+Initially, 100 g of moist sediment were placed inside empty vessels followed by 200 mL of water from the corresponding sample. Marks were taken at the fill level to measure the volume later on. Fine particles from the lake sediment were slightly problematic as they tend to resuspended after pouring rising turbidity, the equilibrium was reached after a brief period of stillness. At that point, testing materials could be deposited on the sediment floor. The films were distributed evenly using a pair of long tweezers, avoiding overlapping to maximize contact area with the surrounding medium. Meanwhile, a 1 mol L\^-1\^ sodium hydroxide (NaOH) solution was prepared from solid pellets, then each cup was filled with 50 mL. OxiTop^Ⓡ^ gauges were checked for sufficient battery life beforehand, they were also calibrated by a pneumatic test following the instructions provided by the manufacturer [@wtw2006]. Once the lids were ready reactors were individually closed using 4 metal clips equidistantly arranged, adding a fine layer of grease at the border tire for extra sealing. Finally, pressure gauges were tightly screwed on top and reactors were randomly placed inside the incubator chamber. Extreme care was taken to avoid the strongly alkaline solution from spilling onto the medium which would kill the microorganism.
+
+The incubator chamber kept the test at a constant temperature of 25°C in the dark, measurements were routinely checked every day until the end of the 30-day period. This was done to facilitate early failure detection which could cost much time if not addressed on time. At the end of the test, reactors were dismantled and testing materials were recovered for visual inspection. Medium volumes were determined by filling the vessels with water to the previously mentioned marks and pouring the amount into a graduated cylinder. Eventually, data could be extracted using vendor-provided software into individual spreadsheet files for each test. For tidiness, a unified comma-separated values (CSV) file was assembled following tidy practices suggested in @hadley2025.
+
+## Statistical methods {#sec-stats}
 
 ### Pressure adjustment {.unnumbered}
 
@@ -39,14 +55,14 @@ Reactor B27 lost pressure early in the experiment and dropped to zero, this beha
 Our goal is to measure differences in pressure due to oxygen consumption ---or CO~2~ production---, so we neutralized the effect of temperature by adjusting the pressure difference with the formula:
 
 $$
-\Delta{}p_{O_2} = \Delta{}p - \Delta{}\overline{p}_{blanks}
+\Delta{}p_{O_2} = \Delta{}p - \Delta{}\overline{p}_{0}
 $$ {#eq-adj}
 
-Were $p_{O_2}$ is the pressure difference driven by oxygen consumption, $p$ is the relative pressure of the reactors containing benthic habitats, and $\overline{p}_{blanks}$ is the average relative pressure measured in empty reactors ---excluding the failed reactor.
+Were $p_{O_2}$ is the pressure difference driven by oxygen consumption, $p$ is the relative pressure of the reactors containing benthic habitats, and $\overline{p}_{0}$ is the average relative pressure measured in empty reactors ---excluding the failed reactor.
 
-### BOD computation {.unnumbered}
+### BOD calculation {.unnumbered}
 
-BOD was calculated using the formula from the OxiTop Control operating manual [@wtw2006], the following equation established the relation between our measured variable, pressure difference, and biological oxygen demand (BOD).
+BOD was calculated using the formula from the OxiTop^Ⓡ^ Control operating manual [@wtw2006], the following equation established the relation between our measured variable, pressure difference, and biological oxygen demand (BOD).
 
 $$
 BOD=\frac{M_{O_2}}{RT_m}\left(\frac{V_t-V_h}{V_h}+\alpha{}\frac{T_m}{T_0}\right)\Delta{}p_{O_2}
@@ -54,7 +70,7 @@ $$ {#eq-bod}
 
 where $M_{O_2}$ is oxygen gas molecular weight in mg O~2~ mol^-1^, $R$ is the gas constant in L hPa mol^-1^ K^-1^, $T_m$ is the sample temperature in K, $T_0$ is the reference temperature at 273.15 K (0 °C), $\alpha$ is the Bunsen absorption coefficient, $V_t$ is reactor volume in mL, $V_h$ is habitat volume, also in mL.
 
-### Curve modelling {.unnumbered}
+### Modelling BOD curves {.unnumbered}
 
 Follwing the computation, a regression model was fitted to the BOD curves using an single exponential equation similar to the proposed by @metcalf1991.
 
@@ -64,7 +80,7 @@ $$ {#eq-single-exp}
 
 where $BOD_t$ is biological oxygen demand in mg of O~2~ L^-1^, $BOD_u$ is the theoretical ultimate BOD and corresponded to the value of the horizontal asymptote in mg O~2~ L^-1^, $k$ is the rate costant in days^-1^ which accounts for the speed of the degradation process.
 
-Additionally, in order to compare a more accurate approach as evidenced by @mason2006, a more complex regression using a double exponential formula was also conducted.
+Additionally, to compare a more accurate approach as evidenced by @mason2006, a more complex regression using a double exponential formula was also conducted.
 
 $$
 BOD_t=BOD_{u1}(1-e^{-k_1t})+BOD_{u2}(1-e^{-k_2t})
