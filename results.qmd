@@ -1,20 +1,12 @@
 # Results
 
-After collecting the habitat samples, the incubation was set up using 30 reactor jars with OxiTop Control measuring heads. Homogeneity between reactors was intended, the were filled first with dirt and then with water. Polymers were placed last using a pair of tweezers. We observed that plastic disks were more likely to rise afloat when tinny air bubbles adhered to their surface, special care was taken to remove these bubbles so the plastics disks could stay laying on the bed. We also considered spreading the disks over the sea bed, so they would not fall over one another. This could easily be done in the sea habitat, were water transparency was high. The minutes after filling, lake habitat turbidity was so high that the bottom could not be seen when looking form above, this was due to the suspension of fine particles and a settling time of some hours was needed in order to see the bottom.
-
-The alkaline solution of KOH was prepared using KOH pellets, the small vasitos were filled using a probeta. The jar taps were placed adding a fine layer of sealing greases provided by the manufactured. Four metal clips agarraban el invento en equidistancia. OxiTop measuring heads were first calibrated using a jeringilla and the batery life was checked before the incubation. Finally the OxiTop measuring heads were tighted screewed. Some of the heads were damagaded, after visual inspection of the material, decidimos utilizar las cabezas más evidentemente dañadas para los blancos [foto grieta]. Once all the reactos were ready. Once the reactors were ready, they were transported in a wheeled trolley to the incubation chamber, which was previously working so the temperature was already stable at 25ºC. The reactors were randomly placed in the middle self of the incubator. This was intended para que ningun grupo experimental tuviese una vinculación a una parte concreta de la incubadora, que podría estar más fría o más caliente. A grid of 4 rows of 10 was achieved, the remaining 4 reactors were placed in the lower shelf. All of them blank reactors. The incubation first measurement was triggered at this moment and then the door was closed.
-
-Reactors were routinely check every weekday at around 8 am by the same operator, una servidora. We controlled the progress of the experiment by visualizing the available reactor data curves one by one, this procedure enabled us to dectect possible sealing failures in the process, which could have been otherwise detected lately at the end of the experiment, but this would have implied a loss of precious time. Fortunately, only one blank reactor was damaged.
-
-The final day of the incubation, reactors were dissampled and the data were extracted into sepparated .xlsx files for each reactor. A unified dataset .csv was build with R using the tidiverse core following tidy practices form (hadley, tidying). Then the reactors were opened and the polymer dics inspected for visual signs of biodegradation. None evident sign was evident for the plastics, the paper was black and could easily deshacerse. Upon closer inspection, some tiny pores could be observed for some plastic disks, which could be linked to biodegradation.
-
-## Visual inspection {.unnumbered}
+## Visual inspection
 
 ![Polymer disks after 30 day in sea incubation. Top row: Plastic. Bottom row: Paper.](_images/loupe-sea.jpg){#fig-result-sea}
 
 ![Polymer disks after 30 day lake incubation. Top row: Plastic. Bottom row: Paper.](_images/loupe-lake.jpg){#fig-result-lake}
 
-## Data set structure {.unnumbered}
+## Data set structure
 
 ```{r}
 #| label: setup
@@ -114,18 +106,6 @@ pressures |>
   labs(x = "Time (days)", y = "Pressure difference (hPa)")
 ```
 
-## Pressure adjustment {.unnumbered}
-
-Differences in pressure are adjusted offsetting from the mean value in the empty reactors---also called blanks. During the first couple of days, all blanks rose to approximately 9 hPa over the starting pressure (@fig-blanks). The response is likely due to warming air inside the reactor, because the incubator chamber was at 25°C, which was slightly above room temperature.
-
-Reactor B27 lost pressure early in the experiment and dropped to zero, this behavior implies evident sealing defects and the reactor was not considered for the analysis.
-
-Our goal is to measure differences in pressure due to oxygen consumption ---or CO~2~ production---, so we neutralized the effect of temperature by adjusting the pressure difference with the formula:
-
-$p_{OD} = p - \overline{p}_{blanks}$
-
-Were $p_{OD}$ is the pressure difference driven by oxygen consumption, $p$ is the relative pressure of the reactors containing benthic habitats, and $\overline{p}_{blanks}$ is the average relative pressure measured in empty reactors ---excluding the failed reactor.
-
 ```{r}
 #| label: fig-blanks
 #| fig-cap: Pressure difference evolution inside empty reactors.
@@ -147,6 +127,21 @@ pressures |>
   ) +
   labs(x = "Time (days)", y = "Pressure difference (hPa)")
 ```
+## Habitat characterization
+
+This section aims to compare oxygen demand between the aquatic environment recreated in the experiment. For purposes of characterization of baseline conditions, only data from reactors not containing specimens —negative controls in section 4.2— are evaluated. It is important to note that the conditions recreated in the laboratory are not intended to represent the whole aquatic environments. They resemble the local conditions from the geographic locations in which water and sediment were collected, in this case the Playa de los Boliches and Playa del Pantano de la Breña, for the sea and water environments, respectively.
+BOD in benthic habitats is affected by multiple factors including temperature, microbial community, nutrient concentration, dissolved organic matter (DOM) and particulate organic matter (POM). Incubation temperature remained at 25 ºC, which is higher that environmental conditions. This unrealistic temperature was set to accelerate BOD, which increased the change of measuring significative differences within the reduced experiment duration of 30 days. Microbial communities were naturally occurring, contained in the unfiltered water and sediment from the respective samples. Nutrient concentration was conserved from the field samples. It’s important to note that from field sampling to experimental setup slight variations happened in the storing facility, however they were minimized as storing temperature of 7 ºC.
+BOD30 remained below 60 mg O2 L-1 in the sea habitat while the lake was higher than 90 mg O2 L-1. This significative difference evidences a higher microbial activity in fresh water over sea water.
+
+```{r}
+pressures |> 
+  filter(treatment == "control") |> 
+  ggplot(aes(x = time, y = bod, color = habitat, group = reactor)) +
+  geom_line()
+```
+
+
+## BOD
 
 ```{r}
 #| label: fig-summary
@@ -165,6 +160,7 @@ pressures |>
     legend.position = "inside", legend.position.inside = c(.1, .8)
   )
 ```
+## Curves
 
 ```{r}
 #| label: fig-curves
@@ -184,7 +180,7 @@ pressures |>
 
 [^results-1]: Regression curves calculated with the R function `ggplot2::geom_smooth(method = "loess", formula = y ~ x)` for visualization purposes only.
 
-## Modelling {.unnumbered}
+## Modelling
 
 ```{r}
 #| label: fitting
