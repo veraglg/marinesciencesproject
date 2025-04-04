@@ -1,12 +1,12 @@
 # Materials and Methods
 
-## Theoretical principle: Oxygen demand as a proxy for biodegradation
+## Theoretical principle: Biological oxygen demand as a proxy for biodegradation
 
-Oxygen demand is a widely used parameter in the quantification of biodegradation because it enables for the rapid assessment of microbial activity during the process. The present study approaches compostable plastic biodegradation in only 30 days by incubating the material in a reactor medium already pre-exposed to environmental conditions. Some authors consider biodegradation by physically evaluating the post-incubation polymer [@pelegrini2016]. These approaches usually require incubation for long periods of time, for the purpose of fast assessment the physical properties of the materials were not evaluated.
+Biological oxygen demand (BOD) is a widely used parameter in the quantification of biodegradation because it enables for the rapid assessment of microbial activity during the process. The present study approaches compostable plastic biodegradation in only 30 days by incubating the material in a reactor medium already pre-exposed to environmental conditions. Some authors consider biodegradation by physically evaluating the post-incubation polymer [@pelegrini2016]. These approaches usually require incubation for long periods of time, for the purpose of fast assessment the physical properties of the materials were not evaluated.
 
 ### Recreating the open environment
 
-The test medium recreated the natural environment on the submerged sediment at the near beach zone inside a sealed reactor. The two-phase approach (sediment and water column) was suggested by @tosin2012 in an attempt to simulate the conditions of a plastic item that has sunk to the bottom of the sea floor, the present study substitutes the preparation of a synthetic aqueous solution with field samples instead, the reason for this adaptation is to accurately resemble the open environment while maintaining simplicity. In this study, reactors consisted of 1 L glass vessels sealed using the OxiTop^Ⓡ^ Control system. The head of the measuring device is equipped with a highly sensitive pressure gauge capable of measuring the pressure evolution inside the reactor. A cup holds a strongly alkaline solution of NaOH in contact with the aerial phase to trap the CO~2~ produced by microbial activity. Testing materials were placed on the sediment bed using a pair of tweezers and bioplastic films were rigorously cleared of bubbles adhering to the surface to prevent the specimen from rising afloat. Relative positions of elements inside the reactor can be elucidated in @fig-reactors.
+The test medium recreated the natural environment on the submerged sediment at the near beach zone inside a sealed reactor. The two-phase approach (sediment and water column) was suggested by @tosin2012 in an attempt to simulate the conditions of a plastic item that has sunk to the bottom of the sea floor, the present study substitutes the preparation of a synthetic aqueous solution with field samples instead, the reason for this adaptation is to accurately resemble the open environment while maintaining simplicity. In this study, reactors consisted of 1 L glass vessels sealed using the OxiTop^Ⓡ^ Control system. The head of the measuring device is equipped with a highly sensitive pressure gauge capable of measuring the pressure evolution inside the reactor. A cup holds a strongly alkaline solution of NaOH in contact with the aerial phase to trap the CO~2~ produced by microbial activity. Testing materials were placed on the sediment bed using a pair of tweezers and bioplastic films were rigorously cleared of bubbles adhering to the surface to prevent the specimen from rising afloat.
 
 ### Biochemical reaction chain
 
@@ -24,11 +24,11 @@ $$
 
 Therefore pressure inside the reactor falls due to the sequestration of CO~2~ and this measurable difference is translated into oxygen demand as detailed in @sec-stats.
 
-## Experimental methods
+## Experimental methods {#sec-experimental-methods}
 
 ### Testing materials
 
-Compostable plastic bags were provided by @deiss2025 in the context of the @soplas2024, the material is commercially available under the trademark name ecovio^Ⓡ^ [@basf2025] and is made by blending PLA and PBAT polymers at variable proportions. PLA is synthesized from renewable feedstocks such as corn and sugar cane while PBAT has a nonrenewable fossil origin, resulting in a 50% renewable-based material with certified compostability under the European standard EN 13432 [@eubp2023]. Laboratory-grade filter paper was used as positive control test material as suggested by @tosin2012, paper consists of cellulose which is a commonly occurring polymer known to be biodegradable in all kinds of aerobic environments including freshwater and saltwater [@royer2023]. The purpose of testing paper is to compare the measured respirometrical response of a known biodegradable material with that of the compostable plastic subject to the assessment. A recent study by @beiras2023 demonstrated that compostable plastic bags show similar rates of biodegradation disregarding the degree of grinding. Here, the plastic films (20 µm thick) were cut into disk shapes of 20 mm diameter which stand for an easily replicable and standardized testing unit, the same procedure was adopted to a sheet of filter paper. To avoid contaminating the samples with room microbes, manipulation was done using sterilized tweezers.
+Compostable plastic bags were provided by @deiss2025 in the context of the @soplas2024, the material is commercially available under the trademark name ecovio^Ⓡ^ [@basf2025] and is made by blending PLA and PBAT polymers at variable proportions. PLA is synthesized from renewable feedstocks such as corn and sugar cane while PBAT has a nonrenewable fossil origin, resulting in a 50% renewable-based material with certified compostability under the European standard EN 13432 [@eubp2023]. Laboratory-grade filter paper was used as positive control test material as suggested by @tosin2012, paper consists of cellulose which is a commonly occurring polymer known to be biodegradable in all kinds of aerobic environments including freshwater and saltwater [@royer2023]. The purpose of testing paper is to compare the measured respirometrical response of a known biodegradable material with that of the compostable plastic subject to the assessment. A recent study by @beiras2023 demonstrated that compostable plastic bags show similar rates of biodegradation disregarding the degree of grinding. Here, the plastic films (20 µm thick) were cut into disk shapes of 20 mm diameter which stand for a standardized testing unit easy to replicate, the same procedure was adopted with a sheet of filter paper. To avoid contaminating the samples with room microbes, manipulation was done using sterilized tweezers.
 
 ### Environmental sample collection
 
@@ -40,50 +40,44 @@ Preliminary tests were conducted before ultimate incubation to guarantee satisfa
 
 ### Incubation procedure
 
-Initially, 100 g of moist sediment were placed inside empty vessels followed by 200 mL of water from the corresponding sample. Marks were taken at the fill level to measure the volume later on. Fine particles from the lake sediment were slightly problematic as they tend to resuspended after pouring rising turbidity, the equilibrium was reached after a brief period of stillness. At that point, testing materials could be deposited on the sediment floor. The films were distributed evenly using a pair of long tweezers, avoiding overlapping to maximize contact area with the surrounding medium. Meanwhile, a 1 mol L\^-1\^ sodium hydroxide (NaOH) solution was prepared from solid pellets, then each cup was filled with 50 mL. OxiTop^Ⓡ^ gauges were checked for sufficient battery life beforehand, they were also calibrated by a pneumatic test following the instructions provided by the manufacturer [@wtw2006]. Once the lids were ready reactors were individually closed using 4 metal clips equidistantly arranged, adding a fine layer of grease at the border tire for extra sealing. Finally, pressure gauges were tightly screwed on top and reactors were randomly placed inside the incubator chamber. Extreme care was taken to avoid the strongly alkaline solution from spilling onto the medium which would kill the microorganism.
+Initially, 100 g of moist sediment were placed inside empty vessels followed by 200 mL of water from the corresponding sample. Marks were taken at the fill level to measure the volume later on. Fine particles from the lake sediment were slightly problematic as they tend to resuspended after pouring rising turbidity, the equilibrium was reached after a brief period of stillness. At that point, testing materials could be deposited on the sediment floor. The films were distributed evenly using a pair of long tweezers, avoiding overlapping to maximize contact area with the surrounding medium. Meanwhile, a 1 mol L^-1^ sodium hydroxide (NaOH) solution was prepared from solid pellets, then each cup was filled with 50 mL. OxiTop^Ⓡ^ gauges were checked for sufficient battery life beforehand, they were also calibrated by a pneumatic test following the instructions provided by the manufacturer [@wtw2006]. Once the lids were ready reactors were individually closed using 4 metal clips equidistantly arranged, adding a fine layer of grease at the border tire for extra sealing. Finally, pressure gauges were tightly screwed on top and reactors were randomly placed inside the incubator chamber. Extreme care was taken to avoid the strongly alkaline solution from spilling onto the medium which would kill the microorganism.
 
-The incubator chamber kept the test at a constant temperature of 25°C in the dark, measurements were routinely checked every day until the end of the 30-day period. This was done to facilitate early failure detection which could cost much time if not addressed on time. At the end of the test, reactors were dismantled and testing materials were recovered for visual inspection. Medium volumes were determined by filling the vessels with water to the previously mentioned marks and pouring the amount into a graduated cylinder. Eventually, data could be extracted using vendor-provided software into individual spreadsheet files for each test. For tidiness, a unified comma-separated values (CSV) file was assembled following tidy practices suggested in @hadley2025.
+The incubator chamber kept the test at a constant temperature of 25°C in the dark, measurements were routinely checked every day until the end of the 30-day period. This was done to facilitate early failure detection which could cost much time if not addressed on time. At the end of the test, reactors were dismantled and testing materials were recovered for visual inspection. Medium volumes were determined by filling the vessels with water to the previously mentioned marks and pouring the amount into a graduated cylinder. Eventually, data could be extracted using vendor-provided software into individual spreadsheet files for each test. For tidiness, a unified comma-separated values (CSV) file was assembled following tidy practices suggested by @hadley2025.
 
 ## Statistical methods {#sec-stats}
 
-### Pressure adjustment {.unnumbered}
+### Pressure adjustment
 
-Differences in pressure are adjusted offsetting from the mean value in the empty reactors---also called blanks. During the first couple of days, all blanks rose to approximately 9 hPa over the starting pressure (@fig-blanks). The response is likely due to warming air inside the reactor, because the incubator chamber was at 25°C, which was slightly above room temperature.
-
-Reactor B27 lost pressure early in the experiment and dropped to zero, this behavior implies evident sealing defects and the reactor was not considered for the analysis.
-
-Our goal is to measure differences in pressure due to oxygen consumption ---or CO~2~ production---, so we neutralized the effect of temperature by adjusting the pressure difference with the formula:
+According to the law of ideal gases, air pressure inside a rigid container only varies by two factors: variations in the number of gas molecules (i.e. oxygen consumption) and temperature. To accurately assess biodegradation the effect of temperature must be subtracted, this was accomplished by adjusting test data using the average pressure variation inside empty reactors where no biochemical reaction took place. The adjustment was defined by @eq-adj where $\Delta{}p_{O_2}$ is the pressure variation due to oxygen consumption, $\Delta{}p$ is the measured pressure variation inside the test reactors, and $\Delta{}\overline{p}_{0}$ is the average measured inside empty reactors. A failed reactor was excluded from the average for reasons explained in @sec-results.
 
 $$
 \Delta{}p_{O_2} = \Delta{}p - \Delta{}\overline{p}_{0}
 $$ {#eq-adj}
 
-Were $p_{O_2}$ is the pressure difference driven by oxygen consumption, $p$ is the relative pressure of the reactors containing benthic habitats, and $\overline{p}_{0}$ is the average relative pressure measured in empty reactors ---excluding the failed reactor.
+### Biological oxygen demand calculation
 
-### BOD calculation {.unnumbered}
-
-BOD was calculated using the formula from the OxiTop^Ⓡ^ Control operating manual [@wtw2006], the following equation established the relation between our measured variable, pressure difference, and biological oxygen demand (BOD).
+BOD was calculated using the @eq-bod from the OxiTop^Ⓡ^ Control operating manual [@wtw2006] where $M_{O_2}$ is oxygen gas molecular weight (mg O~2~ mol^-1^), $R$ is the gas constant (L hPa mol^-1^ K^-1^), $T$ is temperature (K), $T_0$ is the reference temperature of 273.15 K (0 °C), $\alpha$ is the Bunsen absorption coefficient, $V_t$ is the total volume of the vessel (mL), and $V_m$ is the volume occupied by the two-phased medium (mL).
 
 $$
-BOD=\frac{M_{O_2}}{RT_m}\left(\frac{V_t-V_h}{V_h}+\alpha{}\frac{T_m}{T_0}\right)\Delta{}p_{O_2}
+BOD=\frac{M_{O_2}}{RT}\left(\frac{V_t-V_m}{V_m}+\alpha{}\frac{T}{T_0}\right)\Delta{}p_{O_2}
 $$ {#eq-bod}
 
-where $M_{O_2}$ is oxygen gas molecular weight in mg O~2~ mol^-1^, $R$ is the gas constant in L hPa mol^-1^ K^-1^, $T_m$ is the sample temperature in K, $T_0$ is the reference temperature at 273.15 K (0 °C), $\alpha$ is the Bunsen absorption coefficient, $V_t$ is reactor volume in mL, $V_h$ is habitat volume, also in mL.
+@eq-bod-simple is a particularized version of the previous equation derived by computing a new empirical constant $K$ using experimentally set parameters ($K$ = 3.692927 mg O~2~ L^-1^ hPa^-1^). This allowed for a constant proportion between the adjusted pressure variation and BOD.
 
-### Modelling BOD curves {.unnumbered}
+$$
+BOD=K\ \Delta{}p_{O_2}
+$$ {#eq-bod-simple}
 
-Follwing the computation, a regression model was fitted to the BOD curves using an single exponential equation similar to the proposed by @metcalf1991.
+### Non-linear modelling
+
+As pointed out by @sullivan2010, BOD data has historically been fit to a first-order kinetic model defined by @eq-single-exp where $BOD_t$ is biological oxygen demand at any time (mg of O~2~ L^-1^), $BOD_u$ is the ultimate BOD (mg of O~2~ L^-1^) which corresponds to the horizontal asymptote, and $k$ is the first-order biodegradation rate (days^-1^).
 
 $$
 BOD_t=BOD_u\ (1-e^{-kt})
 $$ {#eq-single-exp}
 
-where $BOD_t$ is biological oxygen demand in mg of O~2~ L^-1^, $BOD_u$ is the theoretical ultimate BOD and corresponded to the value of the horizontal asymptote in mg O~2~ L^-1^, $k$ is the rate costant in days^-1^ which accounts for the speed of the degradation process.
-
-Additionally, to compare a more accurate approach as evidenced by @mason2006, a more complex regression using a double exponential formula was also conducted.
+However, it has long been recognized that a single exponential model does not accurately fit BOD curves [@hewitt1975]. Alternatively, a double exponential model offers a more robust approach to biodegradation kinetics [@mason2006] because it considers both labile and refractory components degradation at different rates. This more complex relation is established in @eq-double-exp where $BOD_{u1}$ and $BOD_{u2}$ correspond to the ultimate BOD of the labile and refractory components, respectively; the same distinction is made for both first-order biodegradation rates $k_1$ and $k_2$.
 
 $$
 BOD_t=BOD_{u1}(1-e^{-k_1t})+BOD_{u2}(1-e^{-k_2t})
 $$ {#eq-double-exp}
-
-where $BOD_t$ is biological oxygen demand in mg of O~2~ L^-1^. $BOD_u$ is the theoretical ultimate BOD in $mg\ O_2\ L^{-1}$, $b$ is the logistic growth rate.

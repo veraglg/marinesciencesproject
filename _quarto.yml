@@ -5,15 +5,13 @@ project:
     port: 4200
 
 book:
-  output-file: "thesis"
+  output-file: "book"
   title: "Degree in Marine Sciences Final Thesis"
   subtitle: |
     Are bioplastics a solution to plastic pollution in the ocean?
     An experimental approach to the potential biodegradability of
     compostable plastic bags in freshwater and saltwater beach environments
-  author:
-    name: "Vera Gómez-Limón Gallardo"
-    email: "vera.gomez101@alu.ulpgc.es"
+  author: "Vera Gómez-Limón Gallardo"
   date: last-modified
   chapters:
     - index.qmd
@@ -26,10 +24,9 @@ book:
     - thanks.qmd
     - references.qmd
 
-bibliography: _refs.bib
+bibliography: references.bib
 
 format:
-  html: default
   pdf:
     include-in-header: 
      - text: |
