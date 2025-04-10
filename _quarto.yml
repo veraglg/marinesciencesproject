@@ -6,16 +6,15 @@ project:
 
 book:
   output-file: "bachelor-thesis"
-  title: "Degree in Marine Sciences Bachelor Thesis"
-  subtitle: |
-    Are bioplastics a solution to plastic pollution in the ocean?
-    An experimental approach to the potential biodegradability of
-    compostable plastic bags in freshwater and saltwater beach environments
-  author: "Vera Gómez-Limón Gallardo"
-  date: last-modified
+  # title: "Degree in Marine Sciences Bachelor Thesis"
+  # subtitle: |
+  #   Are bioplastics a solution to plastic pollution in the ocean?
+  #   An experimental approach to the potential biodegradability of
+  #   compostable plastic bags in freshwater and saltwater beach environments
+  # author: "Vera Gómez-Limón Gallardo"
+  # date: last-modified
   chapters:
     - index.qmd
-    - abstract.qmd
     - intro.qmd
     - methods.qmd
     # - results.qmd
@@ -28,9 +27,21 @@ bibliography: references.bib
 
 format:
   pdf:
+    documentclass: scrbook
+    classoption: ["oneside", "open=any"]
+    number-sections: true
+    template-partials:
+      - "titlepage/before-body.tex"
+      - "titlepage/_titlepage.tex" 
+      - "titlepage/academic-info.tex"
     include-in-header: 
-     - text: |
-        \usepackage[version=4,arrows=pgf-filled,textfontname=sffamily,mathfontname=mathsf]{mhchem}
+      - "titlepage/in-header.tex"
+
+# format:
+#   pdf:
+#     include-in-header: 
+#      - text: |
+#         \usepackage[version=4,arrows=pgf-filled,textfontname=sffamily,mathfontname=mathsf]{mhchem}
 
 execute: 
   freeze: auto
