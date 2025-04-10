@@ -1,4 +1,4 @@
-reactor,habitat,treatment,time,pressure
+reactor,medium,test,time,pressure
 S01,sea,control,0,0
 S01,sea,control,120,5
 S01,sea,control,240,5

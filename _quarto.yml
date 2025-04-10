@@ -17,7 +17,7 @@ book:
     - index.qmd
     - intro.qmd
     - methods.qmd
-    # - results.qmd
+    - results.qmd
     # - discussion.qmd
     # - conclusion.qmd
     # - thanks.qmd
@@ -44,6 +44,6 @@ format:
 #         \usepackage[version=4,arrows=pgf-filled,textfontname=sffamily,mathfontname=mathsf]{mhchem}
 
 execute: 
-  freeze: auto
+  # freeze: auto
   echo: false
 
