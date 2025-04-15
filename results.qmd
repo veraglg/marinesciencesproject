@@ -1,12 +1,15 @@
+
 # Results {#sec-results}
 
-## Visual inspection
+## No visual signs of biodegradation for recovered plastic
 
-<!-- ![Polymer disks after 30 day in sea incubation. Top row: Plastic. Bottom row: Paper.](_images/loupe-sea.jpg){#fig-result-sea} -->
+Biodegradation of compostable plastic was assessed by closely inspecting the recovered materials using a magnifying glass after a 30-day incubation in freshwater and seawater benthic conditions. Overall, compostable plastics remained unchanged compared to the pristine material for both aquatic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between ecovio^Ⓡ^ and conventional filter-paper recovered materials can be observed in @fig-visual. The breakdown of cellulose was far more severe in the freshwater environment compared to seawater. Paper disks inside the freshwater reactors underwent a strong mineralization process evidenced by a blackish hue, brittleness and fragmentation of the material, some of which broke apart during recovery attemps. On the other hand, filter-paper recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to freshwater.
 
-<!-- ![Polymer disks after 30 day lake incubation. Top row: Plastic. Bottom row: Paper.](_images/loupe-lake.jpg){#fig-result-lake} -->
+![No visual signs of biodegradation for recovered materials after incubation. For each picture, plastic material at the top rows and paper at the bottom. A: Lake environment. B: Sea environment.](images/results-visual.jpg){#fig-visual}
 
-## Data set structure
+Exceptionally, some individual samples from the freshwater environment showed minor signs of disintegration which might be due to biological degradation of the polymer. In line with the hypothesis suggested by @tosin2012, this unusual results may be explained by the presence of finely adapted mycelial organisms (i.e. fungi and actinomycetes) that are able to produce enzymes capable of breaking complex chemical bonds such as those found in lining. However, the infrequency of these results requires further research on the exact organisms and processes involved in the biodegradation of compostable materials in La Breña Reservoir.
+
+## Plastic oxygen demand remained close to baseline for the whole incubation period
 
 ```{r}
 #| label: setup
@@ -14,26 +17,28 @@
 
 library(tidyverse)
 library(ggrepel)
-library(tidymodels)
 library(gt)
 
 data <- read_rds("data/bod.rds")
 fits <- read_rds("data/fits.rds")
 
-labels_medium <-
-  c(
-    lake     = "Lake",
-    sea      = "Sea",
-    blank    = "Empty reactors"
-  )
-labels_test <- 
-  c(
-    paper    = "Paper",
-    plastic  = "Plastic",
-    control  = "Control",
-    blank    = "Blank"
-  )
+labels_medium <- c(
+  lake     = "Lake",
+  sea      = "Sea",
+  blank    = "Empty reactors"
+)
+
+labels_test <- c(
+  paper    = "Paper",
+  plastic  = "Plastic",
+  control  = "Control",
+  blank    = "Blank"
+)
 ```
+
+Biological oxygen demand (BOD) is generally used as a proxy for biodegradation of organic materials and allows for a fast testing of novel polymers (@beiras2023). Based on the principles described in @sec-methods-proxy a quantitative evaluation of polymer mineralization was conducted. Generally, plastic tests remained close to the baseline from control reactors while paper tests performed a fast increase in oxygen demand since the start of the incubation. In @table the mean BOD value and standard deviation for all tests is summarized at 5, 15 and 30 days of incubation. Although 5 days were not enough to distinguish between any of the test, after 15 days the oxygen demand for the positive control (filter-paper) was evidently higher than those of plastic and negative control test for both aquatic environments; this trend became abysmal after 30 days.
+
+## Data set structure
 
 The OxiTop Control system measured pressure differences inside the reactor since the beginning of the incubation (@fig-pressures).
 
@@ -96,19 +101,26 @@ data |>
   ) +
   labs(x = "Time (days)", y = "Pressure difference (hPa)")
 ```
+
 ## medium characterization
 
 <!-- This section aims to compare oxygen demand between the aquatic environment recreated in the experiment. For purposes of characterization of baseline conditions, only data from reactors not containing specimens —negative controls in section 4.2— are evaluated. It is important to note that the conditions recreated in the laboratory are not intended to represent the whole aquatic environments. They resemble the local conditions from the geographic locations in which water and sediment were collected, in this case the Playa de los Boliches and Playa del Pantano de la Breña, for the sea and water environments, respectively. -->
+
 <!-- BOD in benthic mediums is affected by multiple factors including temperature, microbial community, nutrient concentration, dissolved organic matter (DOM) and particulate organic matter (POM). Incubation temperature remained at 25 ºC, which is higher that environmental conditions. This unrealistic temperature was set to accelerate BOD, which increased the change of measuring significative differences within the reduced experiment duration of 30 days. Microbial communities were naturally occurring, contained in the unfiltered water and sediment from the respective samples. Nutrient concentration was conserved from the field samples. It’s important to note that from field sampling to experimental setup slight variations happened in the storing facility, however they were minimized as storing temperature of 7 ºC. -->
+
 <!-- BOD30 remained below 60 mg O2 L-1 in the sea medium while the lake was higher than 90 mg O2 L-1. This significative difference evidences a higher microbial activity in fresh water over sea water. -->
 
 <!-- ```{r} -->
-<!-- data |> -->
-<!--   filter(test == "control") |> -->
-<!--   ggplot(aes(x = time, y = bod, color = medium, group = reactor)) + -->
-<!--   geom_line() -->
-<!-- ``` -->
 
+<!-- data |> -->
+
+<!--   filter(test == "control") |> -->
+
+<!--   ggplot(aes(x = time, y = bod, color = medium, group = reactor)) + -->
+
+<!--   geom_line() -->
+
+<!-- ``` -->
 
 ## BOD
 
@@ -117,18 +129,18 @@ data |>
 #| fig-cap: Biological oxygen demand evolution summary. Columns represent mean values and error bars the standard error.
 
 data |> 
-  filter(medium != "blank", time %% 5 == 0, time > 0) |> 
-  ggplot(aes(x = time, y = bod, fill = test)) +
+  filter(medium != "blank", time %in% c(5, 15, 30), time > 0) |> 
+  ggplot(aes(x = as.factor(time), y = bod, fill = test)) +
   geom_bar(stat = "summary", position = "dodge", fun = mean) +
   geom_errorbar(stat = "summary", position = "dodge", fun.data = mean_se) +
   facet_wrap(~ medium, scale = "free_y", labeller = as_labeller(labels_medium)) +
-  scale_x_continuous(breaks = seq(5, 30, 5))  +
   scale_fill_discrete(labels = labels_test, name = NULL) +
   labs(x = "Time (days)", y = "Oxygen demand (mg/L)") +
   theme(
     legend.position = "inside", legend.position.inside = c(.1, .8)
   )
 ```
+
 ## Curves
 
 ```{r}
@@ -147,8 +159,6 @@ data |>
   theme(legend.position = "inside", legend.position.inside = c(0.1, .8))
 ```
 
-[^results-1]: Regression curves calculated with the R function `ggplot2::geom_smooth(method = "loess", formula = y ~ x)` for visualization purposes only.
-
 ## Modelling
 
 ```{r}
@@ -158,7 +168,6 @@ data |>
 #   geom_point() +
 #   facet_grid(medium ~ term, scales = "free")
 ```
-
 
 ```{r}
 # fits |> 
@@ -182,7 +191,6 @@ data |>
 #     ) +
 #   facet_grid(medium ~ test, scales = "free_y")
 ```
-
 
 ```{r}
 #| label: eg-reactors
@@ -238,5 +246,3 @@ eg_reactors |> unnest(data) |>
   ) +
   labs(x = "Time (days)", y = "Oxygen demand (mg/L)")
 ```
-
-

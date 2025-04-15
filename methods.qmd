@@ -1,6 +1,6 @@
 # Materials and Methods
 
-## Theoretical principle: Biological oxygen demand as a proxy for biodegradation
+## Theoretical principle: Biological oxygen demand as a proxy for biodegradation {#sec-methods-proxy}
 
 Biological oxygen demand (BOD) is a widely used parameter in the quantification of biodegradation because it enables for the rapid assessment of microbial activity during the process. The present study approaches compostable plastic biodegradation in only 30 days by incubating the material in a reactor medium already pre-exposed to environmental conditions. Some authors consider biodegradation by physically evaluating the post-incubation polymer [@pelegrini2016]. These approaches usually require incubation for long periods of time, for the purpose of fast assessment the physical properties of the materials were not evaluated.
 
@@ -83,3 +83,5 @@ However, it has long been recognized that a single exponential model does not ac
 $$
 BOD_t=BOD_{u1}(1-e^{-k_1t})+BOD_{u2}(1-e^{-k_2t})
 $$ {#eq-double-exp}
+
+Non-linear models were fitted using the R package `nls.multstart` version 2.0.0 developed openly by @padfield2025. This package allows for multiple start parameters and automatically selects the best fitting option. Computations were carried out using a conventional laptop computer taking less than 1 minute of processing time.

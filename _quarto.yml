@@ -1,6 +1,7 @@
 project:
   type: book
-  output-dir: _book
+  output-dir: _thesis
+  execute-dir: project
   preview: 
     port: 4200
 
@@ -30,11 +31,11 @@ format:
     classoption: ["oneside", "open=any"]
     number-sections: true
     template-partials:
-      - "titlepage/before-body.tex"
-      - "titlepage/_titlepage.tex" 
-      - "titlepage/academic-info.tex"
+      - "latex/before-body.tex"
+      - "latex/titlepage.tex" 
+      - "latex/academic-info.tex"
     include-in-header: 
-      - "titlepage/in-header.tex"
+      - "latex/in-header.tex"
 
 # format:
 #   pdf:
