@@ -44,6 +44,8 @@ Initially, 100 g of moist sediment were placed inside empty vessels followed by 
 
 The incubator chamber kept the test at a constant temperature of 25°C in the dark, measurements were routinely checked every day until the end of the 30-day period. This was done to facilitate early failure detection which could cost much time if not addressed on time. At the end of the test, reactors were dismantled and testing materials were recovered for visual inspection. Medium volumes were determined by filling the vessels with water to the previously mentioned marks and pouring the amount into a graduated cylinder. Eventually, data could be extracted using vendor-provided software into individual spreadsheet files for each test. For tidiness, a unified comma-separated values (CSV) file was assembled following tidy practices suggested by @hadley2025.
 
+![Materials were tested inside reactors recreating the benthic aquatic environment. A: Test material disks of 20 mm diameter. B: Six paper disks placed at the sediment bed of a reactor simulating the sea environment. c: Loaded reactors randomly placed inside the incubation chamber just before the start of the experiment.](images/methods-1.jpg)
+
 ## Statistical methods {#sec-stats}
 
 ### Pressure adjustment
