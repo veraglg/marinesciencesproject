@@ -19,9 +19,58 @@ blanks <- data |>
     .by = time
   )
 
+fig_pressures <- data |> 
+  ggplot(aes(x = time, y = pressure, group = reactor)) +
+  geom_hline(yintercept = 0, linewidth = 2, color = "white") +
+  geom_line(alpha = .5) +
+  annotate(
+    geom = "segment",
+    arrow = arrow(type = "open", length = unit(.1, "inch")),
+    x    = 10, y    = -30,
+    xend = 14, yend = -11
+  ) +
+  annotate(
+    geom = "segment",
+    arrow = arrow(type = "open", length = unit(.1, "inch")),
+    x    = 10, y    = -30,
+    xend = 15, yend = -15
+  ) +
+  annotate(
+    geom = "segment",
+    arrow = arrow(type = "open", length = unit(.1, "inch")),
+    x    = 10, y    = -30,
+    xend = 16, yend = -22
+  ) +
+  annotate(
+    geom = "label", label = "Reactors\n(n = 30)", size = 3,
+    x = 10, y = -30
+  ) +
+  labs(x = "Time (days)", y = "Pressure difference (hPa)")
+
+ggsave("supplementary/fig-pressures.png", fig_pressures)
+
+fig_blanks <- data |> 
+  filter(test == "blank") |> 
+  ggplot(aes(x = time, y = pressure, group = reactor)) +
+  geom_hline(yintercept = 0, linewidth = 2, color = "white") +
+  geom_line(linewidth = 1, alpha = .5) +
+  annotate(
+    geom = "segment", arrow = arrow(type = "open", length = unit(.1, "inch")),
+    x    = 10, y    = 6,
+    xend =  3, yend = 4
+  ) +
+  annotate(
+    geom = "label", label = "Failed reactor", size = 3,
+    x = 10, y = 6
+  ) +
+  labs(x = "Time (days)", y = "Pressure difference (hPa)")
+
+ggsave("supplementary/fig-blanks.png", fig_blanks)
+
 data <- data |> 
   left_join(blanks, by = join_by(time)) |> 
-  mutate(adj_pressure = pressure - blk_pressure)
+  mutate(adj_pressure = pressure - blk_pressure) |> 
+  filter(test != "blank")
 
 tm <- 25 + 273.15 # sample temperature in Kelvin
 t0 <- 273.15 # reference temperature in Kelvin

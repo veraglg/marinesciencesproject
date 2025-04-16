@@ -1,21 +1,11 @@
-
 # Results {#sec-results}
-
-## No visual signs of biodegradation for recovered plastic
-
-Biodegradation of compostable plastic was assessed by closely inspecting the recovered materials using a magnifying glass after a 30-day incubation in freshwater and seawater benthic conditions. Overall, compostable plastics remained unchanged compared to the pristine material for both aquatic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between ecovio^Ⓡ^ and conventional filter-paper recovered materials can be observed in @fig-visual. The breakdown of cellulose was far more severe in the freshwater environment compared to seawater. Paper disks inside the freshwater reactors underwent a strong mineralization process evidenced by a blackish hue, brittleness and fragmentation of the material, some of which broke apart during recovery attemps. On the other hand, filter-paper recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to freshwater.
-
-![No visual signs of biodegradation for recovered materials after incubation. For each picture, plastic material at the top rows and paper at the bottom. A: Lake environment. B: Sea environment.](images/results-visual.jpg){#fig-visual}
-
-Exceptionally, some individual samples from the freshwater environment showed minor signs of disintegration which might be due to biological degradation of the polymer. In line with the hypothesis suggested by @tosin2012, this unusual results may be explained by the presence of finely adapted mycelial organisms (i.e. fungi and actinomycetes) that are able to produce enzymes capable of breaking complex chemical bonds such as those found in lining. However, the infrequency of these results requires further research on the exact organisms and processes involved in the biodegradation of compostable materials in La Breña Reservoir.
-
-## Plastic oxygen demand remained close to baseline for the whole incubation period
 
 ```{r}
 #| label: setup
 #| include: false
 
 library(tidyverse)
+library(infer)
 library(ggrepel)
 library(gt)
 
@@ -36,71 +26,78 @@ labels_test <- c(
 )
 ```
 
-Biological oxygen demand (BOD) is generally used as a proxy for biodegradation of organic materials and allows for a fast testing of novel polymers (@beiras2023). Based on the principles described in @sec-methods-proxy a quantitative evaluation of polymer mineralization was conducted. Generally, plastic tests remained close to the baseline from control reactors while paper tests performed a fast increase in oxygen demand since the start of the incubation. In @table the mean BOD value and standard deviation for all tests is summarized at 5, 15 and 30 days of incubation. Although 5 days were not enough to distinguish between any of the test, after 15 days the oxygen demand for the positive control (filter-paper) was evidently higher than those of plastic and negative control test for both aquatic environments; this trend became abysmal after 30 days.
+## No visual signs of biodegradation for recovered plastic
 
-## Data set structure
+Biodegradation of compostable plastic was assessed by closely inspecting the recovered materials using a magnifying glass after a 30-day incubation in freshwater and seawater benthic conditions. Overall, compostable plastics remained unchanged compared to the pristine material for both aquatic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between ecovio\textregistered \space and conventional filter-paper recovered materials can be observed in @fig-visual. The breakdown of cellulose was far more severe in the freshwater environment compared to seawater. Paper disks inside the freshwater reactors underwent a strong mineralization process evidenced by a blackish hue, brittleness and fragmentation of the material, some of which broke apart during recovery attemps. On the other hand, filter-paper recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to freshwater.
 
-The OxiTop Control system measured pressure differences inside the reactor since the beginning of the incubation (@fig-pressures).
+![No visual signs of biodegradation for recovered materials after incubation. For each picture, plastic material at the top rows and paper at the bottom. A: Lake environment. B: Sea environment.](images/results-visual.jpg){#fig-visual}
 
-Differences in pressure are adjusted offsetting from the mean value in the empty reactors---also called blanks. During the first couple of days, all blanks rose to approximately 9 hPa over the starting pressure (@fig-blanks). The response is likely due to warming air inside the reactor, because the incubator chamber was at 25°C, which was slightly above room temperature.
+Exceptionally, some individual samples from the freshwater environment showed minor signs of disintegration which might be due to biological degradation of the polymer. In line with the hypothesis suggested by @tosin2012, this unusual results may be explained by the presence of finely adapted mycelial organisms (i.e. fungi and actinomycetes) that are able to produce enzymes capable of breaking complex chemical bonds such as those found in lining. However, the infrequency of these results requires further research on the exact organisms and processes involved in the biodegradation of compostable materials in La Breña Reservoir.
 
-Reactor B27 lost pressure early in the experiment and dropped to zero, this behavior implies evident sealing defects and the reactor was not considered for the analysis.
+## Plastic test revealed no respirometrical response throughout the incubation period
+
+Biological oxygen demand (BOD) is generally used as a proxy for biodegradation of organic materials and allows for a fast testing of novel polymers (@beiras2023). Based on the principles described in @sec-methods-proxy a quantitative evaluation of polymer mineralization was conducted. Generally, plastic tests remained close to baseline from control reactors test while paper tests performed a fast BOD increase since the start of the incubation. In @tbl-summary the mean and standard deviation of BOD after 30 days of incubation at 25 \textdegree C (BOD~30~) is summarized. Seawater test were more homogeneous compared to freshwater which showed higher variability between tests, indicating a relatively more diverse microbial community in this environment. No significant difference was detected between plastic and control tests for freshwater (t-test, p-value = 0.72) and seawater (t-test, p-value = 0.56) environments. A positive respirometrical response for paper test became evident after 15 days whereas negative controls and plastic test stayed virtually the same as illustrated in @fig-summary. This data correlates well with the visual appearance of the recovered materials where almost no sign of plastic biodegradation was observed.
 
 ```{r}
-#| label: fig-pressures
-#| fig-cap: Pressure difference evolution during the incubation. Lines represent individual reactor jars measures.
+#| label: tbl-summary
+#| tbl-cap: BOD~30~ summary table for freshwater and seawater environments by test material.
 
-data |> 
-  # filter(time %% 1 == 0) |> 
-  ggplot(aes(x = time, y = pressure, group = reactor)) +
-  geom_hline(yintercept = 0, linewidth = 2, color = "white") +
-  geom_line(alpha = .5) +
-  annotate(
-    geom = "segment",
-    arrow = arrow(type = "open", length = unit(.1, "inch")),
-    x    = 10, y    = -30,
-    xend = 14, yend = -11
-  ) +
-  annotate(
-    geom = "segment",
-    arrow = arrow(type = "open", length = unit(.1, "inch")),
-    x    = 10, y    = -30,
-    xend = 15, yend = -15
-  ) +
-  annotate(
-    geom = "segment",
-    arrow = arrow(type = "open", length = unit(.1, "inch")),
-    x    = 10, y    = -30,
-    xend = 16, yend = -22
-  ) +
-    annotate(
-    geom = "label", label = "Reactors\n(n = 30)", size = 5,
-    x = 10, y = -30
-  ) +
-  labs(x = "Time (days)", y = "Pressure difference (hPa)")
+tbl_summary <- data |> 
+  filter(time == 30) |> 
+  group_by(medium, test) |> 
+  summarize(mean = mean(bod), sd = sd(bod), .groups = "drop") |> 
+  pivot_wider(names_from = "medium", values_from = c(mean, sd),
+              names_glue = "{medium}_{.value}") |> 
+  mutate(across(where(is.numeric), \(x) round(x, 2))) |> 
+  mutate(test = fct_recode(test,
+                           "Paper" = "paper",
+                           "Plastic" = "plastic",
+                           "Control" = "control"))
+
+gt(tbl_summary, rowname_col = "test") |> 
+  tab_spanner("Lake", starts_with("lake")) |> 
+  tab_spanner("Sea", starts_with("sea")) |> 
+  tab_spanner(md("BOD~30~ (mg O~2~/L)"), everything()) |> 
+  cols_label(
+    lake_mean = "mean", sea_mean = "mean",
+    lake_sd = "std. deviation", sea_sd = "std. deviaton"
+  )
 ```
 
 ```{r}
-#| label: fig-blanks
-#| fig-cap: Pressure difference evolution inside empty reactors.
+#| label: fig-summary
+#| fig-cap: Summary BOD curves for each environment. Mean values and standar errors are represented.
 
-data |> 
-  filter(test == "blank") |> 
-  ggplot(aes(x = time, y = pressure, group = reactor)) +
-  geom_hline(yintercept = 0, linewidth = 2, color = "white") +
-  geom_line(linewidth = 1, alpha = .5) +
-  facet_wrap(~ medium, labeller = as_labeller(labels_medium)) +
-  annotate(
-    geom = "segment", arrow = arrow(type = "open", length = unit(.1, "inch")),
-    x    = 10, y    = 6,
-    xend =  3, yend = 4
-  ) +
-  annotate(
-    geom = "label", label = "Failed reactor", size = 5,
-    x = 10, y = 6
-  ) +
-  labs(x = "Time (days)", y = "Pressure difference (hPa)")
+data |> filter(time %% 5 == 0) |>
+  ggplot(aes(x = time, y = bod, color = test)) +
+  geom_point(aes(shape = test), stat = "summary", fun = mean) +
+  geom_errorbar(stat = "summary", fun.data = mean_se, width = 2.5) +
+  geom_line(aes(linetype = test), stat = "summary", fun = mean) +
+  facet_wrap(~ medium, scales = "free_y",
+             labeller = as_labeller(labels_medium)) +
+  scale_color_discrete(name = NULL, labels = labels_test) +
+  scale_linetype_manual(name = NULL, labels = labels_test,
+                        values = c("dotted", "solid", "dashed")) +
+  scale_shape_manual(name = NULL, labels = labels_test, values = c(0, 16, 1)) +
+  labs(x = "Time (days)", y = "BOD (mg/L)") +
+  theme_classic() +
+  theme(legend.position = "inside", legend.position.inside = c(.1, .8),
+        legend.background = element_rect(color = "black")
+  )
 ```
+
+```{r}
+#| label: t-tests
+#| include: false
+
+t.test(bod ~ test, data |> 
+  filter(time == 30, medium == "lake", test %in% c("plastic", "control")))
+
+t.test(bod ~ test, data |> 
+  filter(time == 30, medium == "sea", test %in% c("plastic", "control")))
+```
+
+
 
 ## medium characterization
 
@@ -124,22 +121,7 @@ data |>
 
 ## BOD
 
-```{r}
-#| label: fig-summary
-#| fig-cap: Biological oxygen demand evolution summary. Columns represent mean values and error bars the standard error.
 
-data |> 
-  filter(medium != "blank", time %in% c(5, 15, 30), time > 0) |> 
-  ggplot(aes(x = as.factor(time), y = bod, fill = test)) +
-  geom_bar(stat = "summary", position = "dodge", fun = mean) +
-  geom_errorbar(stat = "summary", position = "dodge", fun.data = mean_se) +
-  facet_wrap(~ medium, scale = "free_y", labeller = as_labeller(labels_medium)) +
-  scale_fill_discrete(labels = labels_test, name = NULL) +
-  labs(x = "Time (days)", y = "Oxygen demand (mg/L)") +
-  theme(
-    legend.position = "inside", legend.position.inside = c(.1, .8)
-  )
-```
 
 ## Curves
 
