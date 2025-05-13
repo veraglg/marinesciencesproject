@@ -24,25 +24,27 @@ labels_test <- c(
   control  = "Control",
   blank    = "Blank"
 )
+
+no_conv <- fits |> unnest(metrics) |> filter(!isConv) |> pull(reactor)
 ```
 
 ## No visual signs of biodegradation for recovered plastic
 
-Biodegradation of compostable plastic was assessed by closely inspecting the recovered materials using a magnifying glass after a 30-day incubation in freshwater and seawater benthic conditions. Overall, compostable plastics remained unchanged compared to the pristine material for both aquatic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between ecovio\textregistered \space and conventional filter-paper recovered materials can be observed in @fig-visual. The breakdown of cellulose was far more severe in the freshwater environment compared to seawater. Paper disks inside the freshwater reactors underwent a strong mineralization process evidenced by a blackish hue, brittleness and fragmentation of the material, some of which broke apart during recovery attemps. On the other hand, filter-paper recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to freshwater.
+Biodegradation of compostable plastic was assessed by closely inspecting the recovered materials using a magnifying glass after a 30-day incubation in freshwater and seawater benthic conditions. Overall, compostable plastics remained unchanged compared to the pristine material for both aquatic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between Ecovio\textregistered \space and conventional filter-paper recovered materials can be observed in @fig-visual. The breakdown of cellulose was far more severe in the freshwater environment compared to seawater. Paper disks inside the freshwater reactors underwent a strong mineralization process evidenced by a blackish hue, brittleness and fragmentation of the material, some of which broke apart during recovery attemps. On the other hand, filter-paper recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to freshwater.
 
-![No visual signs of biodegradation for recovered materials after incubation. For each picture, plastic material at the top rows and paper at the bottom. A: Lake environment. B: Sea environment.](images/results-visual.jpg){#fig-visual}
+![No visual signs of biodegradation for recovered materials after incubation. For each picture, plastic material at the top rows and paper at the bottom. A: Lake environment. B: Sea environment.](images/results-visual.jpg){#fig-visual width="80%"}
 
 Exceptionally, some individual samples from the freshwater environment showed minor signs of disintegration which might be due to biological degradation of the polymer. In line with the hypothesis suggested by @tosin2012, this unusual results may be explained by the presence of finely adapted mycelial organisms (i.e. fungi and actinomycetes) that are able to produce enzymes capable of breaking complex chemical bonds such as those found in lining. However, the infrequency of these results requires further research on the exact organisms and processes involved in the biodegradation of compostable materials in La Breña Reservoir.
 
 ## Plastic test revealed no respirometrical response throughout the incubation period
 
-Biological oxygen demand (BOD) is generally used as a proxy for biodegradation of organic materials and allows for a fast testing of novel polymers (@beiras2023). Based on the principles described in @sec-methods-proxy a quantitative evaluation of polymer mineralization was conducted. Generally, plastic tests remained close to baseline from control reactors test while paper tests performed a fast BOD increase since the start of the incubation. In @tbl-summary the mean and standard deviation of BOD after 30 days of incubation at 25 \textdegree C (BOD~30~) is summarized. Seawater test were more homogeneous compared to freshwater which showed higher variability between tests, indicating a relatively more diverse microbial community in this environment. No significant difference was detected between plastic and control tests for freshwater (t-test, p-value = 0.72) and seawater (t-test, p-value = 0.56) environments. A positive respirometrical response for paper test became evident after 15 days whereas negative controls and plastic test stayed virtually the same as illustrated in @fig-summary. This data correlates well with the visual appearance of the recovered materials where almost no sign of plastic biodegradation was observed.
+Biological oxygen demand (BOD) is generally used as a proxy for biodegradation of organic materials and allows for a fast testing of novel polymers (@beiras2023). Based on the principles described in @sec-methods-proxy a quantitative evaluation of polymer mineralization was conducted. Generally, plastic tests remained close to baseline from control reactors test while paper tests performed a fast BOD increase since the start of the incubation. In @tbl-bod30 the mean and standard deviation of BOD after 30 days of incubation at 25 \textdegree C (BOD~30~) is summarized. Seawater test were more homogeneous compared to freshwater which showed higher variability between tests, indicating a relatively more diverse microbial community in this environment. No significant difference was detected between plastic and control tests for freshwater (t-test, p-value = 0.72) and seawater (t-test, p-value = 0.56) environments. A positive respirometrical response for paper test became evident after 15 days whereas negative controls and plastic test stayed virtually the same as illustrated in @fig-bod30. This data correlates well with the visual appearance of the recovered materials where almost no sign of plastic biodegradation was observed.
 
 ```{r}
-#| label: tbl-summary
+#| label: tbl-bod30
 #| tbl-cap: BOD~30~ summary table for freshwater and seawater environments by test material.
 
-tbl_summary <- data |> 
+tbl_bod30 <- data |> 
   filter(time == 30) |> 
   group_by(medium, test) |> 
   summarize(mean = mean(bod), sd = sd(bod), .groups = "drop") |> 
@@ -54,18 +56,18 @@ tbl_summary <- data |>
                            "Plastic" = "plastic",
                            "Control" = "control"))
 
-gt(tbl_summary, rowname_col = "test") |> 
+gt(tbl_bod30, rowname_col = "test") |> 
   tab_spanner("Lake", starts_with("lake")) |> 
   tab_spanner("Sea", starts_with("sea")) |> 
   tab_spanner(md("BOD~30~ (mg O~2~/L)"), everything()) |> 
   cols_label(
     lake_mean = "mean", sea_mean = "mean",
-    lake_sd = "std. deviation", sea_sd = "std. deviaton"
+    lake_sd = "std. dev.", sea_sd = "std. dev."
   )
 ```
 
 ```{r}
-#| label: fig-summary
+#| label: fig-bod30
 #| fig-cap: Summary BOD curves for each environment. Mean values and standar errors are represented.
 
 data |> filter(time %% 5 == 0) |>
@@ -97,9 +99,217 @@ t.test(bod ~ test, data |>
   filter(time == 30, medium == "sea", test %in% c("plastic", "control")))
 ```
 
+## Non-linear models with higher complexity fit observed data more accurately
+
+@fig-fits illustrates the comparative performance of SEM and DEM in fitting biodegradation curves. DEM approximates empirical measurements more accurately than SEM, as seen by the modelled curves over the observed data from a plastic-incubated sea reactor. This improved fit is quantitatively supported by a lower Akaike Information Criterion (AIC) value, which is about 33% lower than that of the single exponential model, indicating higher model accuracy and a better representation of the underlying biodegradation processes.
+
+Furthermore, the analysis highlights the complex nature of biodegradation kinetics, where DEM effectively decomposes the BOD response into two distinct components: a labile fraction that degrades rapidly and a refractory fraction that degrades more slowly [@mason2006]. This approach captures the heterogeneity of organic matter within the sample, thereby providing a more nuanced understanding of the system's biodegradability. The model fitting results, summarized in Table 3.2, reveal that the ultimate BOD values vary between different materials and environments, with sea environments exhibiting lower BOD levels compared to lakes, reflecting differences in biodegradation potential.
+
+However, the modeling process encountered limitations, particularly in reactors incubated with cellulose. In these cases, parameter estimation failed, which is likely attributable to excessive organic matter loading which hampered model convergence. Overall, the results underscore the importance of employing advanced nonlinear models, such as the double exponential, to more accurately characterize biodegradation kinetics, particularly when dealing with heterogeneous organic substrates and complex biological interactions.
+
+<!-- Ultimate biochemical oxygen demand (BOD) is typically estimated by fitting observed BOD data to a nonlinear model, which provides robust evidence for the biodegradability of polymers [@beiras2023]. Traditionally, a single exponential model based on a first-order decay equation has been employed to characterize BOD kinetics; however, this approach has been criticized for its limited accuracy in representing the complexity of real biodegradation processes [@hewitt1975]. Recent advancements in wastewater analysis have led to the adoption of a double exponential model that accounts for substrate heterogeneity within the sample [@mason2006]. Specifically, this model decomposes the BOD response into two components: a labile organic fraction represented by the first exponential term, and a refractory fraction represented by the second term. The sum of these two terms reflects the ultimate biodegradability of the polymer under study. This dual-component approach improves the fit to experimental data and better captures the differential biodegradation rates of distinct organic matter fractions. -->
+
+<!-- @fig-fits presents the fitting performance of each model applied to the degradation curve of a sea reactor incubated with Ecovio\textregistered . The double exponential model demonstrates a closer resemblance to the empirical data compared to the single exponential model. This observation is quantitatively supported by the Akaike Information Criterion (AIC), a metric that balances model fit and complexity; the double exponential model exhibited an overall AIC value approximately 33% lower than that of the single exponential model, indicating a substantially better fit [@mason2006]. Nevertheless, certain limitations were encountered in the modeling approach. In some cases, parameter estimation failed for reactors incubated with cellulose, which is likely attributed to excessive organic matter loading within those reactors, thereby complicating model convergence. -->
+
+```{r}
+#| label: aic
+#| include: false
+
+fits |> unnest(metrics) |> 
+  filter(model != "linear", isConv) |> 
+  group_by(model) |> 
+  summarize(mean = mean(AIC), sd = sd(AIC), n = n()) |> 
+  mutate(conv_rate = n/24)
+```
+
+```{r}
+#| label: tbl-bodl
+#| tbl-cap: Ultimate BOD summary derived from a double exponential model. Note the number n of successfully converging fits.
+
+tbl_bodl <- fits |> unnest(params) |> 
+  filter(model == "DEM", !reactor %in% no_conv) |> 
+  select(reactor, medium, test, term, estimate) |> 
+  pivot_wider(names_from = term, values_from = estimate) |> 
+  group_by(medium, test) |> 
+  summarize(
+    mean = mean(l1) + mean(l2),
+    sd = sqrt(sd(l1)^2+sd(l2)^2),
+    n = n(),
+    .groups = "drop"
+  ) |> 
+  pivot_wider(names_from = "medium", values_from = c(mean, sd, n),
+              names_glue = "{medium}_{.value}") |> 
+  mutate(across(where(is.numeric), \(x) round(x, 2))) |> 
+  mutate(test = fct_recode(test,
+                           "Paper" = "paper",
+                           "Plastic" = "plastic",
+                           "Control" = "control"))
+
+tbl_bodl |> gt(rowname_col = "test") |> 
+  tab_spanner("Lake", starts_with("lake")) |> 
+  tab_spanner("Sea", starts_with("sea")) |> 
+  tab_spanner(md("BOD~L~ (mg O~2~/L)"), everything()) |> 
+  cols_label(
+    lake_mean = "mean", sea_mean = "mean",
+    lake_sd = "std. dev.", sea_sd = "std. dev.",
+    lake_n = "n", sea_n = "n"
+  ) |> 
+  sub_missing()
+```
+
+```{r}
+#| label: fig-fits
+#| fig-cap: Observed data from a plastic-incubated sea reactor fitted using two non-linear models.
+
+fits_s05 <- fits |> filter(reactor == "S05")
+
+params <- fits_s05 |> unnest(params) |>
+  select(reactor, term, estimate) |>
+  pivot_wider(names_from = term, values_from = estimate) |> 
+  mutate(
+    across(starts_with("l"), \(l) round(l, 0)),
+    across(starts_with("k"), \(k) round(k, 2))
+  )
+
+fits_s05 |> unnest(data) |> 
+  ggplot(aes(x = time, y = bod)) +
+  geom_point(alpha = .1) +
+  geom_line(
+    data = fits_s05 |> unnest(preds),
+    aes(y = .fitted, color = model, linetype = model),
+    linewidth = 1
+  ) +
+  scale_color_manual(
+    values = c("SEM" = "red", "DEM" = "blue"),
+    labels = c(
+      "SEM" = bquote(BOD[t]==.(params$l)*(1-e^{.(params$k)*t})),
+      "DEM" = bquote(BOD[t]==.(params$l1)*(1-e^{.(params$k1)*t})+
+                                    .(params$l2)*(1-e^{.(params$k2)*t}))
+    )
+  ) +
+  scale_linetype_manual(
+    values = c("SEM" = "dashed", "DEM" = "solid"),
+    labels = c(
+      "SEM" = bquote(BOD[t]==.(params$l)*(1-e^{.(params$k)*t})),
+      "DEM" = bquote(BOD[t]==.(params$l1)*(1-e^{.(params$k1)*t})+
+                                    .(params$l2)*(1-e^{.(params$k2)*t}))
+    )
+  ) +
+  labs(x = "Time (days)", y = "BOD (mg/L)") +
+  theme_classic() +
+  theme(legend.position = "bottom", legend.title = element_blank())
+```
 
 
-## medium characterization
+<!-- # ```{r} -->
+
+<!-- # #| label: eg-reactors -->
+
+<!-- # #| include: false -->
+
+<!-- #  -->
+
+<!-- # eg_reactors <- fits |> filter(reactor %in% c("S05", "L17"), model != "linear") -->
+
+<!-- #  -->
+
+<!-- # eg_reactors |> unnest(params) |> -->
+
+<!-- #   select(reactor, term, estimate) |> -->
+
+<!-- #   pivot_wider(names_from = term, values_from = estimate) |>  -->
+
+<!-- #   mutate( -->
+
+<!-- #     across(starts_with("l"), \(l) round(l, 0)), -->
+
+<!-- #     across(starts_with("k"), \(k) round(k, 2)) -->
+
+<!-- #   ) -->
+
+<!-- #  -->
+
+<!-- # labels <-  -->
+
+<!-- #   tribble( -->
+
+<!-- #     ~ reactor, ~ model, ~ label, -->
+
+<!-- #     "S05", "SEM", "BOD[t]==42*(1-e^{-0.14*t})", -->
+
+<!-- #     "S05", "DEM", "BOD[t]==15*(1-e^{-5.22*t})+46*(1-e^{-0.03*t})", -->
+
+<!-- #     "L17", "SEM", "BOD[t]==69*(1-e^{-0.10*t})", -->
+
+<!-- #     "L17", "DEM", "BOD[t]==22*(1-e^{-5.10*t})+117*(1-e^{-0.02*t})" -->
+
+<!-- #   ) -->
+
+<!-- #  -->
+
+<!-- # label_fits <- eg_reactors |> unnest(preds) |>  -->
+
+<!-- #   filter(time == 29) |>  -->
+
+<!-- #   select(reactor, model, time, .fitted) |> -->
+
+<!-- #   left_join(labels) -->
+
+<!-- # ``` -->
+
+<!-- #  -->
+
+<!-- # ```{r} -->
+
+<!-- # #| label: fig-fits -->
+
+<!-- # #| fig-cap: Model fits representation over the original data. Curves form plastic incubated reactors. -->
+
+<!-- #  -->
+
+<!-- # eg_reactors |> unnest(data) |>  -->
+
+<!-- #   ggplot(aes(x = time, y = bod)) + -->
+
+<!-- #   geom_point(alpha = .1) + -->
+
+<!-- #   geom_line( -->
+
+<!-- #     data = unnest(eg_reactors, preds), -->
+
+<!-- #     aes(y = .fitted, color = model), show.legend = F, -->
+
+<!-- #     linewidth = 1, -->
+
+<!-- #   ) + -->
+
+<!-- #   geom_label_repel( -->
+
+<!-- #     data = label_fits, aes(y = .fitted, label = label, color = model), -->
+
+<!-- #     parse = T, show.legend = F, -->
+
+<!-- #     size = 3, -->
+
+<!-- #     nudge_x = -30, -->
+
+<!-- #     nudge_y = 10 -->
+
+<!-- #   ) + -->
+
+<!-- #   facet_wrap( -->
+
+<!-- #     ~ reactor, scales = "free_y", -->
+
+<!-- #     labeller = as_labeller(c(L17 = "Lake - Plastic", S05 = "Sea - Plastic")) -->
+
+<!-- #   ) + -->
+
+<!-- #   labs(x = "Time (days)", y = "Oxygen demand (mg/L)") -->
+
+<!-- # ``` -->
+
+<!-- ## medium characterization -->
 
 <!-- This section aims to compare oxygen demand between the aquatic environment recreated in the experiment. For purposes of characterization of baseline conditions, only data from reactors not containing specimens —negative controls in section 4.2— are evaluated. It is important to note that the conditions recreated in the laboratory are not intended to represent the whole aquatic environments. They resemble the local conditions from the geographic locations in which water and sediment were collected, in this case the Playa de los Boliches and Playa del Pantano de la Breña, for the sea and water environments, respectively. -->
 
@@ -119,112 +329,94 @@ t.test(bod ~ test, data |>
 
 <!-- ``` -->
 
-## BOD
+<!-- ## BOD -->
 
+<!-- ## Curves -->
 
+<!-- ```{r} -->
 
-## Curves
+<!-- #| label: fig-curves -->
 
-```{r}
-#| label: fig-curves
-#| fig-cap: Smoothed summary BOD curves using local polynomial regression fitting[^results-1].
+<!-- #| fig-cap: Smoothed summary BOD curves using local polynomial regression fitting[^results-1]. -->
 
-data |>
-  filter(test != "blank") |> 
-  ggplot(aes(x = time, y = bod, color = test)) +
-  geom_smooth(method = "loess", formula = y ~ x, se = FALSE) +
-  scale_color_discrete(name = NULL, labels = labels_test) +
-  facet_wrap(
-    ~ medium, scales = "free_y", labeller = as_labeller(labels_medium)
-  ) +
-  labs(x = "Time (days)", y = "Oxygen demand (mg/L)") +
-  theme(legend.position = "inside", legend.position.inside = c(0.1, .8))
-```
+<!-- data |> -->
 
-## Modelling
+<!--   filter(test != "blank") |>  -->
 
-```{r}
-# fits |> unnest(params) |> 
-#   filter(model == "double_exp", p.value < 0.01) |> 
-#   ggplot(aes(x = estimate, y = reactor, color = test)) +
-#   geom_point() +
-#   facet_grid(medium ~ term, scales = "free")
-```
+<!--   ggplot(aes(x = time, y = bod, color = test)) + -->
 
-```{r}
-# fits |> 
-#   unnest(data) |> 
-#   ggplot(aes(x = time, y = bod)) +
-#   geom_point() +
-#   geom_line(
-#     data = unnest(fits, preds) |> filter(model == "linear"),
-#     aes(y = .fitted, color = model, group = reactor),
-#     color = "blue"
-#     ) +
-#   geom_line(
-#     data = unnest(fits, preds) |> filter(model == "double_exp"),
-#     aes(y = .fitted, color = model, group = reactor),
-#     color = "red"
-#     ) +
-#   geom_line(
-#     data = unnest(fits, preds) |> filter(model == "single_exp"),
-#     aes(y = .fitted, color = model, group = reactor),
-#     color = "green"
-#     ) +
-#   facet_grid(medium ~ test, scales = "free_y")
-```
+<!--   geom_smooth(method = "loess", formula = y ~ x, se = FALSE) + -->
 
-```{r}
-#| label: eg-reactors
-#| include: false
+<!--   scale_color_discrete(name = NULL, labels = labels_test) + -->
 
-eg_reactors <- fits |> filter(reactor %in% c("S05", "L17"), model != "linear")
+<!--   facet_wrap( -->
 
-eg_reactors |> unnest(params) |>
-  select(reactor, term, estimate) |>
-  pivot_wider(names_from = term, values_from = estimate) |> 
-  mutate(
-    across(starts_with("l"), \(l) round(l, 0)),
-    across(starts_with("k"), \(k) round(k, 2))
-  )
+<!--     ~ medium, scales = "free_y", labeller = as_labeller(labels_medium) -->
 
-labels <- 
-  tribble(
-    ~ reactor, ~ model, ~ label,
-    "S05", "single_exp", "BOD[t]==42*(1-e^{-0.14*t})",
-    "S05", "double_exp", "BOD[t]==15*(1-e^{-5.22*t})+46*(1-e^{-0.03*t})",
-    "L17", "single_exp", "BOD[t]==69*(1-e^{-0.10*t})",
-    "L17", "double_exp", "BOD[t]==22*(1-e^{-5.10*t})+117*(1-e^{-0.02*t})"
-  )
+<!--   ) + -->
 
-label_fits <- eg_reactors |> unnest(preds) |> 
-  filter(time == 29) |> 
-  select(reactor, model, time, .fitted) |>
-  left_join(labels)
-```
+<!--   labs(x = "Time (days)", y = "Oxygen demand (mg/L)") + -->
 
-```{r}
-#| label: fig-fits
-#| fig-cap: Model fits representation over the original data. Curves form plastic incubated reactors.
+<!--   theme(legend.position = "inside", legend.position.inside = c(0.1, .8)) -->
 
-eg_reactors |> unnest(data) |> 
-  ggplot(aes(x = time, y = bod)) +
-  geom_point(alpha = .1) +
-  geom_line(
-    data = unnest(eg_reactors, preds),
-    aes(y = .fitted, color = model), show.legend = F,
-    linewidth = 1,
-  ) +
-  geom_label_repel(
-    data = label_fits, aes(y = .fitted, label = label, color = model),
-    parse = T, show.legend = F,
-    size = 3,
-    nudge_x = -30,
-    nudge_y = 10
-  ) +
-  facet_wrap(
-    ~ reactor, scales = "free_y",
-    labeller = as_labeller(c(L17 = "Lake - Plastic", S05 = "Sea - Plastic"))
-  ) +
-  labs(x = "Time (days)", y = "Oxygen demand (mg/L)")
-```
+<!-- ``` -->
+
+<!-- ## Modelling -->
+
+<!-- # ```{r} -->
+
+<!-- # # fits |> unnest(params) |>  -->
+
+<!-- # #   filter(model == "DEM", p.value < 0.01) |>  -->
+
+<!-- # #   ggplot(aes(x = estimate, y = reactor, color = test)) + -->
+
+<!-- # #   geom_point() + -->
+
+<!-- # #   facet_grid(medium ~ term, scales = "free") -->
+
+<!-- # ``` -->
+
+<!-- # ```{r} -->
+
+<!-- # # fits |>  -->
+
+<!-- # #   unnest(data) |>  -->
+
+<!-- # #   ggplot(aes(x = time, y = bod)) + -->
+
+<!-- # #   geom_point() + -->
+
+<!-- # #   geom_line( -->
+
+<!-- # #     data = unnest(fits, preds) |> filter(model == "linear"), -->
+
+<!-- # #     aes(y = .fitted, color = model, group = reactor), -->
+
+<!-- # #     color = "blue" -->
+
+<!-- # #     ) + -->
+
+<!-- # #   geom_line( -->
+
+<!-- # #     data = unnest(fits, preds) |> filter(model == "DEM"), -->
+
+<!-- # #     aes(y = .fitted, color = model, group = reactor), -->
+
+<!-- # #     color = "red" -->
+
+<!-- # #     ) + -->
+
+<!-- # #   geom_line( -->
+
+<!-- # #     data = unnest(fits, preds) |> filter(model == "SEM"), -->
+
+<!-- # #     aes(y = .fitted, color = model, group = reactor), -->
+
+<!-- # #     color = "green" -->
+
+<!-- # #     ) + -->
+
+<!-- # #   facet_grid(medium ~ test, scales = "free_y") -->
+
+<!-- # ``` -->

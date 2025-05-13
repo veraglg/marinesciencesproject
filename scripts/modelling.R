@@ -11,8 +11,7 @@ fits <- data |>
   nest() |> 
   ungroup() |> 
   mutate(
-    linear = map(data, ~ lm(bod ~ time, data = .x)),
-    single_exp = map(data, ~ nls_multstart(
+    SEM = map(data, ~ nls_multstart(
       bod ~ l * (1 - exp(-k * time)),
       data = .x,
       iter = 250,
@@ -22,7 +21,7 @@ fits <- data |>
       supp_errors = "Y",
       
     )),
-    double_exp = map(data, ~ nls_multstart(
+    DEM = map(data, ~ nls_multstart(
       bod ~ l1 * (1 - exp(-k1 * time)) + l2 * (1 - exp(-k2 * time)),
       data = .x,
       iter = 250,
@@ -35,7 +34,7 @@ fits <- data |>
 
 fits <- fits |> 
   pivot_longer(
-    c(linear, single_exp, double_exp),
+    c(SEM, DEM),
     names_to = "model", values_to = "fit"
   ) |> 
   mutate(

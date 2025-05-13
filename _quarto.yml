@@ -18,7 +18,7 @@ book:
     - intro.qmd
     - methods.qmd
     - results.qmd
-    # - discussion.qmd
+    - discussion.qmd
     # - conclusion.qmd
     # - thanks.qmd
     - references.qmd
@@ -29,6 +29,12 @@ format:
   pdf:
     documentclass: scrbook
     classoption: ["oneside", "open=any"]
+    geometry:
+      - left=3.0cm
+      - right=3.0cm
+      - top=3.5cm
+      - bottom=3.5cm
+    
     number-sections: true
     template-partials:
       - "latex/before-body.tex"
@@ -37,13 +43,6 @@ format:
     include-in-header: 
       - "latex/in-header.tex"
 
-# format:
-#   pdf:
-#     include-in-header: 
-#      - text: |
-#         \usepackage[version=4,arrows=pgf-filled,textfontname=sffamily,mathfontname=mathsf]{mhchem}
-
 execute: 
-  # freeze: auto
   echo: false
 
