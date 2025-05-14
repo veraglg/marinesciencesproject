@@ -10,18 +10,18 @@ book:
   title: "Are bioplastics a solution to plastic pollution in the ocean?"
   subtitle: |
     An experimental approach to the potential biodegradability of
-    compostable plastic bags in freshwater and saltwater benthic environments
+    Ecovio\textregistered \ in lake and marine benthic environments
   author: "Vera Gómez-Limón Gallardo"
   date: last-modified
   chapters:
     - index.qmd
-    - intro.qmd
-    - methods.qmd
-    - results.qmd
-    - discussion.qmd
-    # - conclusion.qmd
-    # - thanks.qmd
-    - references.qmd
+    - 1-intro.qmd
+    - 2-methods.qmd
+    - 3-results.qmd
+    - 4-discussion.qmd
+    - 5-conclusion.qmd
+    - 6-thanks.qmd
+    - 7-references.qmd
 
 bibliography: references.bib
 
