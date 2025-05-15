@@ -9,8 +9,8 @@ book:
   output-file: "bachelor-thesis"
   title: "Are bioplastics a solution to plastic pollution in the ocean?"
   subtitle: |
-    An experimental approach to the potential biodegradability of
-    Ecovio\textregistered \ in lake and marine benthic environments
+    Laboratory testing of Ecovio\textregistered\ compostable plastic
+    biodegradation in lake and marine benthic environments
   author: "Vera Gómez-Limón Gallardo"
   date: last-modified
   chapters:
