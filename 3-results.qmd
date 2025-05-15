@@ -51,7 +51,7 @@ Exceptionally, some individual samples from the freshwater environment showed mi
 
 ![No visual signs of biodegradation for recovered materials after incubation. For each picture, Ecovio\textregistered\ at the top and cellulose at the bottom. A: Lake environment. B: Marine environment.](images/results-visual.jpg){#fig-visual width="80%"}
 
-## Ecovio\textregistered\ test revealed a negative response for every environment
+## Ecovio\textregistered\ BOD test revealed a negative response for every environment
 
 BOD is generally used as a proxy for biodegradation of organic materials and allows fast testing of novel polymers (@beiras2023). Based on the principles described in @sec-methods-proxy, a quantitative evaluation of polymer mineralization was conducted. Generally, plastic tests remained close to the baseline established by negative control tests, while positive control tests ---those incubated with cellulose--- performed a fast BOD increase since the start of the incubation. In @tbl-bod the minimum, median, and maximum BOD after 30 days (BOD~30~) is represented. Marine tests varied over a narrower range compared to freshwater, which showed higher result heterogeneity, indicating a relatively more diverse microbial community in this environment. No significant difference was detected between plastic and control tests for lake (t-test, p-value = 0.72) and marine (t-test, p-value = 0.56) environments. A positive respirometrical response for positive control tests became evident after 10 days for the lake environment and 20 days for the marine environment, as illustrated in @fig-bod. Almost identical results where obtained by @tosin2012 for another EN 13432 certified compostable plastic. Whereas negative control and plastic tests stayed virtually the same throughout the whole testing period, indicating minimal biodegradation. This data correlates well with the visual appearance of the recovered materials, where almost no sign of plastic biodegradation was observed for both environments.
 
@@ -199,5 +199,6 @@ fits_s05 |> unnest(data) |>
   ) +
   labs(x = "Time (days)", y = "BOD (mg/L)") +
   theme_minimal() +
-  theme(legend.position = "bottom", legend.title = element_blank())
+  theme(legend.position = "inside", legend.position.inside = c(.7, .2),
+        legend.title = element_blank())
 ```
