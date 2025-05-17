@@ -1,5 +1,7 @@
 # Materials and Methods
 
+![Preparation of the test recreating the benthic environment. A: Test material disks of 20 mm diameter. B: Six paper disks placed at the sediment bed of a reactor simulating the sea environment. c: Loaded reactors randomly placed inside the incubation chamber just before the start of the experiment.](images/methods.jpg){#fig-methods width="80%" fig-pos=h}
+
 ## Biological oxygen demand as a proxy for biodegradation {#sec-methods-proxy}
 
 Plastic biodegradation, sometimes also referred to as mineralization, is a complex biochemical process that converts polymer organic constituents into new microbial biomass and inorganic matter through microbial activity [@eu2021]. Here, aerobic biodegradation is considered, which implies the production of carbon dioxide (CO~2~) in the presence of oxygen gas (O~2~) following the process:
@@ -50,9 +52,7 @@ Initially, 100 g of moist sediment were placed inside empty vessels followed by 
 
 The incubator chamber kept the test at a constant temperature of 25 \textdegree C in the dark, measurements were routinely checked every day until the end of the 30-day period. This was done to facilitate early failure detection which could cost much time if not addressed on time. At the end of the test, reactors were dismantled, next testing materials were recovered for visual inspection. Medium volumes were determined by filling the vessels with water to the previously mentioned marks and pouring the amount into a graduated cylinder. Eventually, data could be extracted using vendor-provided software into individual spreadsheet files for each test. For tidiness, a unified comma-separated values (CSV) file was assembled following tidy practices suggested by @hadley2025.
 
-![Materials were tested inside reactors recreating the benthic environment. A: Test material disks of 20 mm diameter. B: Six paper disks placed at the sediment bed of a reactor simulating the sea environment. c: Loaded reactors randomly placed inside the incubation chamber just before the start of the experiment.](images/methods.jpg){#fig-methods width="80%"}
-
-## Models for ultimate biodegradability
+## Nonlinear models for ultimate biodegradability
 
 As pointed out by @sullivan2010, BOD data has historically been fit to a single exponential model (SEM) defined by @eq-single-exp where $BOD_t$ is biological oxygen demand at any time (mg of O~2~ L^-1^), $BOD_u$ is the ultimate BOD (mg of O~2~ L^-1^) which corresponds to the horizontal asymptote, and $k$ is the first-order biodegradation rate (days^-1^).
 

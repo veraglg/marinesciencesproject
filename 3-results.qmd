@@ -1,5 +1,7 @@
 # Results {#sec-results}
 
+![Recovered testing materials ---Ecovio\textregistered\ and cellulose--- after 30-days inside a simulated benthic environment. For each picture, Ecovio\textregistered\ at the top and cellulose at the bottom. A: Lake environment. B: Marine environment.](images/results-visual.jpg){#fig-visual width="80%" fig-pos=h}
+
 ```{r}
 #| label: setup
 #| include: false
@@ -45,11 +47,9 @@ safe_max <- function(x) {
 
 ## No visual signs of biodegradation for recovered Ecovio\textregistered
 
-Biodegradation of compostable plastic was assessed by closely inspecting the recovered materials using a magnifying glass after a 30-day incubation in lake and marine benthic conditions. Overall, compostable plastics remained unchanged compared to the pristine material for both benthic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between Ecovio\textregistered\ and conventional filter-paper recovered materials can be observed in @fig-visual. The breakdown of cellulose was far more severe in lake compared to marine, indicating faster biodegradation in the former environment. Paper disks inside the freshwater reactors underwent a strong mineralization process evidenced by a blackish hue, brittleness and fragmentation of the material, some of which broke apart during recovery attemps. On the other hand, filter-paper recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to freshwater.
+Biodegradation of compostable plastic was assessed by closely inspecting the recovered materials using a magnifying glass after a 30-day incubation in lake and marine benthic conditions. Overall, compostable plastics remained unchanged compared to the pristine material for both benthic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Similar results were obtained in the open environment by @royer2023, where they recovered PLA textile fibers after 196 days in the sea floor. Differences between Ecovio\textregistered\ and conventional filter-paper recovered materials can be observed in @fig-visual. The breakdown of cellulose was far more severe in lake compared to marine, indicating faster biodegradation in the former environment. Paper disks inside the freshwater reactors underwent a strong mineralization process evidenced by a blackish hue, brittleness and fragmentation of the material, some of which broke apart during recovery attempts. On the other hand, filter-paper recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to freshwater.
 
-Exceptionally, some individual samples from the freshwater environment showed minor signs of disintegration which might be due to biological degradation of the polymer. In line with the hypothesis suggested by @tosin2012, this unusual results may be explained by the presence of finely adapted mycelial organisms (i.e. fungi and actinomycetes) that are able to produce enzymes capable of breaking complex chemical bonds such as those found in lining. However, the infrequency of these results requires further research on the exact organisms and processes involved in the biodegradation of compostable materials in La Breña Reservoir.
-
-![No visual signs of biodegradation for recovered materials after incubation. For each picture, Ecovio\textregistered\ at the top and cellulose at the bottom. A: Lake environment. B: Marine environment.](images/results-visual.jpg){#fig-visual width="80%"}
+Exceptionally, some individual samples from the freshwater environment showed minor signs of disintegration which might be due to biological degradation of the polymer. In line with the hypothesis suggested by @tosin2012, this unusual results may be explained by the presence of finely adapted mycelial organisms (i.e. fungi and actinomycetes) that are able to produce enzymes capable of breaking complex chemical bonds such as those found in lining. However, the infrequency of these results requires further research on the exact organisms and processes involved in the biodegradation of compostable materials at La Breña Reservoir.
 
 ## Ecovio\textregistered\ BOD test revealed a negative response for every environment
 
@@ -121,16 +121,16 @@ Furthermore, the analysis highlights the complex nature of biodegradation kineti
 #| label: aic
 #| include: false
 
-fits |> unnest(metrics) |> 
-  filter(model != "linear", isConv) |> 
+fits |> unnest(metrics) |> filter(model != "linear", isConv) |> 
   group_by(model) |> 
-  summarize(mean = mean(AIC), sd = sd(AIC), n = n()) |> 
-  mutate(conv_rate = n/24)
+  summarize(min = min(AIC), median = mean(AIC), max = max(AIC), n = n()) |> 
+  mutate(conv_rate = n/24, .keep = "unused") |> 
+  gt()
 ```
 
 ```{r}
 #| label: tbl-bodl
-#| tbl-cap: Ultimate BOD summary derived from DEM parameters. Note the number of successfully converging models (Conv.)
+#| tbl-cap: Ultimate BOD summary derived from DEM parameters. Note the number of successfully converging models (Conv.).
 
 fits |> unnest(params) |> filter(model == "DEM") |> 
   select(reactor, medium, test, term, estimate) |>

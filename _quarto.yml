@@ -7,10 +7,10 @@ project:
 
 book:
   output-file: "bachelor-thesis"
-  title: "Are bioplastics a solution to plastic pollution in the ocean?"
+  title: "Are «bioplastics» a solution to plastic pollution in the ocean?"
   subtitle: |
     Laboratory testing of Ecovio\textregistered\ compostable plastic
-    biodegradation in lake and marine benthic environments
+    potential biodegradation in lake and marine benthic environments
   author: "Vera Gómez-Limón Gallardo"
   date: last-modified
   chapters:
@@ -20,8 +20,7 @@ book:
     - 3-results.qmd
     - 4-discussion.qmd
     - 5-conclusion.qmd
-    - 6-thanks.qmd
-    - 7-references.qmd
+    - references.qmd
 
 bibliography: references.bib
 
