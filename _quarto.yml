@@ -1,6 +1,6 @@
 project:
   type: book
-  output-dir: _thesis
+  output-dir: _book
   execute-dir: project
   preview: 
     port: 4200
