@@ -33,8 +33,9 @@ format:
       - right=3.0cm
       - top=3.5cm
       - bottom=3.5cm
-    
+    fig-pos: ht
     number-sections: true
+    colorlinks: true
     template-partials:
       - "latex/before-body.tex"
       - "latex/titlepage.tex" 

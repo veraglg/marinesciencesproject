@@ -1,7 +1,5 @@
 # Results {#sec-results}
 
-![Recovered testing materials ---Ecovio\textregistered\ and cellulose--- after 30-days inside a simulated benthic environment. For each picture, Ecovio\textregistered\ at the top and cellulose at the bottom. A: Lake environment. B: Marine environment.](images/results-visual.jpg){#fig-visual width="80%" fig-pos=h}
-
 ```{r}
 #| label: setup
 #| include: false
@@ -45,15 +43,36 @@ safe_max <- function(x) {
 }
 ```
 
-## No visual signs of biodegradation for recovered Ecovio\textregistered
+## No visual signs of biodegradation for recovered Ecovio\textregistered\ {.unnumbered}
 
-Biodegradation of compostable plastic was assessed by closely inspecting the recovered materials using a magnifying glass after a 30-day incubation in lake and marine benthic conditions. Overall, compostable plastics remained unchanged compared to the new material for both benthic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Similar results were obtained in the open environment by @royer2023, where they recovered PLA textile fibers after 196 days in the sea floor. Differences between Ecovio\textregistered\ and conventional filter-paper recovered materials can be observed in @fig-visual. The breakdown of cellulose was far more severe in lake compared to marine, indicating faster biodegradation in the former environment. Paper disks inside lake benthic conditions underwent a strong degradation process evidenced by a blackish hue, brittleness and fragmentation of the material, some of which broke apart during recovery attempts. On the other hand, filter-paper recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to freshwater. The smoothness of plastic film surfaces like that of Ecovio\textregistered\ has been pointed out as a limitation to biofilm formation and biodegradation [@dang2007].
+Overall, compostable plastics remained unchanged compared to the new material for both benthic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between Ecovio\textregistered\ and conventional filter-paper recovered materials can be observed in @fig-visual. Cellulose broke down much more severely in lake than in the marine environment, suggesting that biodegradation occurs more quickly in the former. A blackish hue and brittleness were signs of a severe degradation process, some paper disks broke apart during recovery efforts. On the other hand, cellulose recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to lake. Exceptionally, some individual Ecovio\textregistered\ disks recovered from the freshwater environment showed small holes which might be due to biological degradation of the polymer.
 
-Exceptionally, some individual Ecovio\textregistered\ disks recovered from the freshwater environment showed minor signs of disintegration which might be due to biological degradation of the polymer. In line with the hypothesis suggested by @tosin2012, this unusual results may be explained by the presence of finely adapted mycelial organisms (i.e. fungi and actinomycetes) that are able to produce enzymes capable of breaking complex chemical bonds such as those found in lignin [@gulis2017]. However, the infrequency of these results requires further research on the exact organisms and processes involved in the biodegradation of compostable materials at La Breña Reservoir.
+![Recovered testing materials ---Ecovio\textregistered\ and cellulose--- after 30-days inside a simulated benthic environment. For each picture, Ecovio\textregistered\ at the top and cellulose at the bottom. A: Lake environment. B: Marine environment.](images/results-visual.jpg){#fig-visual}
 
-## Ecovio\textregistered\ BOD test revealed a negative response for every environment
+## Negative result of Ecovio\textregistered\ BOD tests for every environment {.unnumbered}
 
-BOD is generally used as a proxy for biodegradation of organic materials and allows fast testing of novel polymers [@beiras2023]. Based on the principles described in @sec-methods-proxy, a quantitative evaluation of polymer mineralization was conducted. Generally, plastic tests remained close to the baseline established by negative control tests, while positive control tests ---those incubated with cellulose--- performed a fast BOD increase since the start of the incubation. In @tbl-bod the minimum, median, and maximum BOD after 30 days (BOD~30~) is represented. Marine tests varied over a narrower range compared to freshwater, which showed higher heterogeneity between tests, indicating a relatively more diverse microbial community in this environment. No significant difference was detected between Ecovio\textregistered\ and control tests for lake (t-test, p-value = 0.72) and marine (t-test, p-value = 0.56) environments. A positive respirometrical response for positive control tests became evident after 10 days for the lake environment and 20 days for the marine environment, as illustrated in @fig-bod. Contrary to results obtained by @tosin2012 for another EN 13432 certified compostable plastic, Ecovio\textregistered\ showed no biochemical degradation response in the marine benthic environment. This data correlates well with the visual appearance of the recovered materials, where almost no sign of plastic biodegradation was observed for both environments.
+Generally, plastic tests remained close to the baseline established by negative control tests, while positive control tests performed a fast BOD increase since the start of the incubation. In @tbl-bod the minimum, median, and maximum BOD after 30 days (BOD~30~) is represented. Marine tests varied over a narrower range compared to lake, which showed higher heterogeneity between tests. This range indicates a relatively more diverse microbial community in lake. A positive respirometrical response for positive control tests became evident after 10 days for the lake environment and 20 days for the marine environment, as illustrated in @fig-bod.
+
+```{r}
+#| label: fig-bod
+#| fig-cap: Summary BOD curves for each environment. Points as media values and shadowed area represent minimum-maxium range.
+
+data |> filter(time %% 5 == 0) |>
+  ggplot(aes(x = time, y = bod, color = test)) +
+  geom_point(aes(shape = test), stat = "summary", fun = median) +
+  geom_ribbon(aes(fill = test), show.legend = F, alpha = .3, linetype = 0,
+              stat = "summary", fun.min = min, fun.max = max) +
+  geom_line(aes(linetype = test), stat = "summary", fun = median) +
+  facet_wrap(~ medium, scales = "free_y",
+             labeller = as_labeller(labels_medium)) +
+  scale_color_discrete(name = NULL, labels = labels_test) +
+  scale_linetype_manual(name = NULL, labels = labels_test,
+                        values = c("dotted", "solid", "dashed")) +
+  scale_shape_manual(name = NULL, labels = labels_test, values = c(0, 16, 1)) +
+  labs(x = "Time (days)", y = "BOD (mg/L)") +
+  theme_minimal() +
+  theme(legend.position = "inside", legend.position.inside = c(.15, .8))
+```
 
 ```{r}
 #| label: tbl-bod
@@ -79,39 +98,22 @@ data |> filter(time == 30) |>
   cols_align("left", test)
 ```
 
-```{r}
-#| label: fig-bod
-#| fig-cap: Summary BOD curves for each environment. Points as media values and shadowed area represent minimum-maxium range.
+<!-- No significant difference was detected between Ecovio\textregistered\ and control tests for lake (t-test, p-value = 0.72) and marine (t-test, p-value = 0.56) environments. -->
 
-data |> filter(time %% 5 == 0) |>
-  ggplot(aes(x = time, y = bod, color = test)) +
-  geom_point(aes(shape = test), stat = "summary", fun = median) +
-  geom_ribbon(aes(fill = test), show.legend = F, alpha = .3, linetype = 0,
-              stat = "summary", fun.min = min, fun.max = max) +
-  geom_line(aes(linetype = test), stat = "summary", fun = median) +
-  facet_wrap(~ medium, scales = "free_y",
-             labeller = as_labeller(labels_medium)) +
-  scale_color_discrete(name = NULL, labels = labels_test) +
-  scale_linetype_manual(name = NULL, labels = labels_test,
-                        values = c("dotted", "solid", "dashed")) +
-  scale_shape_manual(name = NULL, labels = labels_test, values = c(0, 16, 1)) +
-  labs(x = "Time (days)", y = "BOD (mg/L)") +
-  theme_minimal() +
-  theme(legend.position = "inside", legend.position.inside = c(.15, .8))
-```
+<!-- ```{r} -->
+<!-- #| label: t-tests -->
+<!-- #| include: false -->
 
-```{r}
-#| label: t-tests
-#| include: false
+<!-- t.test(bod ~ test, data |>  -->
+<!--   filter(time == 30, medium == "lake", test %in% c("plastic", "control"))) -->
 
-t.test(bod ~ test, data |> 
-  filter(time == 30, medium == "lake", test %in% c("plastic", "control")))
+<!-- t.test(bod ~ test, data |>  -->
+<!--   filter(time == 30, medium == "sea", test %in% c("plastic", "control"))) -->
+<!-- ``` -->
 
-t.test(bod ~ test, data |> 
-  filter(time == 30, medium == "sea", test %in% c("plastic", "control")))
-```
+## Nonlinear models of higher complexity fit observed data more accurately {.unnumbered}
 
-## Nonlinear models of higher complexity fit observed data more accurately
+@fig-fits illustrates the comparative performance of SEM and DEM in fitting biodegradation curves. Fitted DEM adjusts more accurately to the trend underlying the data than SEM, as evidenced by the curve's near match to data points from a plastic-incubated marine reactor. @tbl-aic displays an AIC summary for both nonlinear models. DEM had a median 33.27% lower AIC than SEM, showing a significantly higher model accuracy and an improved representation of the underlying biodegradation processes, even though they were marginally less successful at convergence.
 
 ```{r}
 #| label: tbl-aic
@@ -131,9 +133,7 @@ fits |> unnest(metrics) |> filter(model != "linear", isConv) |>
   cols_align("left", model)
 ```
 
-Ultimate BOD (BOD~L~) is typically estimated by fitting observed BOD data to a nonlinear model, which provides robust evidence for the eventual polymer biodegradation [@beiras2023]. Traditionally, a SEM based on first-order kinetic equation has been employed to characterize BOD; however, this approach has been criticized for its limited accuracy in representing the complexity of real biodegradation processes [@hewitt1975]. The study aims to provide further evidence on the improved accuracy of DEM in fitting BOD curves [@mason2006]. @fig-fits illustrates the comparative performance of SEM and DEM in fitting biodegradation curves. Fitted DEM adjusts more accurately to the trend underlying the data than SEM, as evidenced by the curve's near match to data points from a plastic-incubated marine reactor. The Akaike Information Criterion (AIC) is frequently used to assess the goodness-of-fit of nonlinear models [@bozdogan1987]. @tbl-aic displays an AIC summary for both SEM and DEM. Despite the fact that DEM were slightly less successful at convergence, more striking was that DEM had a median 33.27% lower AIC than SEM, indicating a significantly higher model accuracy and an improved representation of the underlying biodegradation processes.
-
-Furthermore, the analysis highlights the complex nature of biodegradation kinetics, where DEM effectively decomposes the BOD response into two distinct components: a labile fraction that degrades rapidly and a refractory fraction that degrades more slowly [@mason2006]. This approach captures the heterogeneity of environmental water and samples already containing organic matter [@vigiak2019]. @tbl-bodl displays BOD~L~ from DEM calculated parameters, anticipating that Ecovio\textregistered\ and negative controls will remain indistinguishable from each other in the long term. However, the modeling process encountered limitations, particularly in reactors incubated with cellulose. In these cases, parameter estimation failed, which is likely attributable to excessive organic matter loading which hampered model convergence. Overall, the results underscore the importance of employing advanced nonlinear models, such as SEM, to more accurately characterize biodegradation kinetics, particularly when dealing with heterogeneous organic substrates and complex biological interactions [@hewitt1979].
+Ultimate BOD (BOD~L~) was estimated from the parameters of the best fitting model, as summarized in @tbl-bodl. The median BOD~L~ for Ecovio\textregistered\ and negative controls are nearly identical. The substantial difference between minimum and maximum BOD~L~ indicates high background test noise, highlighting the complexity of environmental field samples.
 
 ```{r}
 #| label: tbl-bodl
