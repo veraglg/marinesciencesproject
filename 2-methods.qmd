@@ -1,6 +1,6 @@
 # Materials and Methods {#sec-methods}
 
-## Biological oxygen demand as a proxy for biodegradation {.unnumbered}
+## Biological oxygen demand as a proxy for biodegradation
 
 Plastic biodegradation, sometimes also referred to as mineralization, is a complex biochemical process that converts polymer organic constituents into new microbial biomass and inorganic matter through microbial activity [@eu2021]. Here, aerobic biodegradation is considered, which implies the production of carbon dioxide (CO~2~) in the presence of oxygen gas (O~2~) following the process:
 
@@ -40,19 +40,23 @@ $$ {#eq-bod}
 
 The test medium recreated the natural environment on the submerged sediment at the near beach zone inside a sealed reactor. The two-phase approach (sediment and water column) was suggested by @tosin2012 in an attempt to simulate the conditions of a plastic item that has sunk to the bottom of the sea floor. Conversely, this study uses field samples instead of creating a synthetic aqueous solution. The reason for this adaptation is to accurately resemble the open environment while maintaining simplicity [@tosin2012].
 
-## Ecovio\textregistered\ compostable plastic bags as testing material {.unnumbered}
+## Ecovio\textregistered\ compostable plastic bags as testing material
 
-Compostable plastic bags were provided by @deiss2025 in the context of the @soplas2024, the material is commercially available under Ecovio\textregistered\ trademark name [@basf2025] and is made by blending polylactid acid (PLA) and polybutylene adipate terephthalate (PBAT) polymers at variable proportions. PLA is synthesized from renewable feedstocks such as corn and sugar cane while PBAT has a nonrenewable fossil origin, resulting in a 50% renewable-based material with certified compostability under the European standard EN 13432 [@eubp2023]. Suggested by @tosin2012, laboratory-grade filter paper was employed as a positive control test material. Paper is composed of cellulose, a common polymer which is biodegradable in all types of aerobic conditions, including freshwater and saltwater [@nagamine2022]. According to a recent study by @beiras2023, compostable plastic bags show similar rates of biodegradation regardless of the degree of grinding. In this study, plastic films were cut into 20 mm diameter disk shapes (@fig-methods). The same process was used with a filter paper sheet [@tosin2012].
+Compostable plastic bags were provided by @deiss2025 in the context of the @soplas2024, as shown in @fig-ecovio. The material is commercially available under Ecovio\textregistered\ trademark name [@basf2025] and is made by blending polylactid acid (PLA) and polybutylene adipate terephthalate (PBAT) polymers at variable proportions. PLA is synthesized from renewable feedstocks such as corn and sugar cane while PBAT has a nonrenewable fossil origin, resulting in a 50% renewable-based material with certified compostability under the European standard EN 13432 [@eubp2023]. Suggested by @tosin2012, laboratory-grade filter paper was employed as a positive control test material. Paper is composed of cellulose, a common polymer which is biodegradable in all types of aerobic conditions, including freshwater and saltwater [@nagamine2022]. According to a recent study by @beiras2023, compostable plastic bags show similar rates of biodegradation regardless of the degree of grinding. In this study, plastic films were cut into 20 mm diameter disk shapes (@fig-methods). The same process was used with a filter paper sheet [@tosin2012].
+
+![Ecovio\textregistered\ compostable plastic bags. Vendor: DEISS.](images/ecovio-bag.jpg){#fig-ecovio width="60%"}
 
 Ecovio\textregistered\ biodegradation was tested after 30 days of exposure to a simulated benthic environment by incubating the material in a reactor medium pre-exposed to environmental conditions [@tosin2012]. Some authors also consider the effects of biodegradation by evaluating weight loss of the polymer [@lavagnolo2024], This approach requires extensive incubation for long periods of time (@tosin2012 tested up to 24 months), the present methodology saves time by only evaluating the biochemical effects of biodegradation through oxygen consumption [@lopez2022].
 
 Ecovio\textregistered\ has polymer density higher than 1 g cm^-3^ [@behera2024], which results in negative buoyancy in water. However, tiny air bubbles sticking to the surface were encountered, making it difficult to sink into the sediment. To solve the issue thorough clearing was applied using a pair of tweezers.
 
-## Test design and procedure {.unnumbered}
+## Test design and procedure
 
 Sediment and water samples were collected from 2 beaches of both freshwater and seawater environments in Andalusia, Spain. Sampled beaches are recognized under Blue Flag certification by the Foundation for Environmental Education [@adeac2024]. The focus of the study is to assess potential biodegradation in beaches under pressure from plastic pollution therefore the Blue Flag offers a criteria for high occupation indicating a plastic littering hotspot [@eea2024].
 
-Firstly, La Breña Reservoir is a freshwater body located in Almodóvar del Río, Córdoba (37\textdegree 49'55.20''N, 5\textdegree 2'12.84''W). Adapted from @tosin2012, freshwater and sediment collection was carried out near the shore at a water depth of 1 m to ensure that the microbial community living in the sediment is fully adapted to submerged conditions. Secondly, Los Boliches Beach is located at the Mediterranean coast of Fuengirola, Málaga (30\textdegree 32'52.44''N, 4\textdegree 36'54.72''W) which is highly urbanized and dedicated to tourism [@garzon2023]. Sampling was conducted at further distance to the shore at 2 m depth during mid-tide targeting the suborbital zone [@tosin2012].
+Field sampling locations are shown in @fig-map. La Breña Reservoir is a freshwater body located in Almodóvar del Río, Córdoba ($37\textdegree 49'55.20''$N, $5\textdegree 2'12.84''$W). Adapted from @tosin2012, freshwater and sediment collection was carried out near the shore at a water depth of 1 m to ensure that the microbial community living in the sediment is fully adapted to submerged conditions. Secondly, Los Boliches Beach is located at the Mediterranean coast of Fuengirola, Málaga ($30\textdegree 32'52.44''$N, $4\textdegree 36'54.72''$W) which is highly urbanized and dedicated to tourism [@garzon2023]. Sampling was conducted at further distance to the shore at 2 m depth during mid-tide targeting the suborbital zone [@tosin2012].
+
+![Map of Andalusia displaying field sampling locations.](images/map.png){#fig-map width="80%"}
 
 The assessment included 3 incubation treatments for both lake and marine environments: Ecovio\textregistered , cellulose (C+) and no polymer (C-), the former being the control for positive mineralization response and the latter the negative control where no response is expected [@tosin2012]. Tests were replicated into 4 separate reactors, resulting in a total size of 24. Additionally, 6 blank reactors were simultaneously incubated for quality assurance [@lopez2022].
 
@@ -60,11 +64,11 @@ Initially, 100 g of moist sediment were placed inside empty vessels followed by 
 
 OxiTop\textregistered\ gauges were checked for sufficient battery life beforehand, they were also calibrated by a pneumatic test following the instructions provided by the manufacturer [@wtw2006]. Four metal clips placed equally apart were used to close each reactor separately, and a thin coating of grease was applied to the border tire to prevent air exchange. Lastly, reactors were positioned inside the incubator chamber at random (@fig-methods). To prevent the NaOH solution from spilling onto the medium and killing the microorganism, special care was taken.
 
-![Preparation of the test recreating the benthic environment. A: Test material disks of 20 mm diameter. B: Six paper disks placed at the sediment bed of a reactor simulating the sea environment. c: Loaded reactors randomly placed inside the incubation chamber just before the start of the experiment.](images/methods.jpg){#fig-methods}
+![Preparation of the test recreating the benthic environment. A: Test material disks of 20 mm diameter. B: Six paper disks placed at the sediment bed of a reactor simulating the sea environment. c: Loaded reactors randomly placed inside the incubation chamber just before the start of the experiment.](images/methods.jpg){#fig-methods width="80%"}
 
 The incubator chamber maintained a constant temperature of 25 \textdegree C in the dark. Daily measurements were taken until the end of the 30-day period. After the test, the reactors were dismantled, and the testing materials were recovered for visual inspection. Using software supplied by the vendor, data was gathered and stored in separate spreadsheet files for every test. A unified comma-separated values (CSV) file was created using the tidy practices recommended by @hadley2025.
 
-## Nonlinear models for ultimate biodegradability {.unnumbered}
+## Predicting ultimate biodegradability using nonlinear models
 
 As pointed out by @sullivan2010, BOD data has historically been fit to a single exponential model (SEM) defined by @eq-single-exp where $BOD_t$ is BOD at any time (mg O~2~ L^-1^), $BOD_u$ is the ultimate BOD (mg O~2~ L^-1^) which corresponds to the horizontal asymptote, and $k$ is the first-order biodegradation rate (days^-1^).
 

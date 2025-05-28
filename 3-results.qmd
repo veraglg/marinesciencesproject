@@ -43,36 +43,13 @@ safe_max <- function(x) {
 }
 ```
 
-## No visual signs of biodegradation for recovered Ecovio\textregistered\ {.unnumbered}
+## Visual signs of biodegradation for recovered materials
 
 Overall, compostable plastics remained unchanged compared to the new material for both benthic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between Ecovio\textregistered\ and conventional filter-paper recovered materials can be observed in @fig-visual. Cellulose broke down much more severely in lake than in the marine environment, suggesting that biodegradation occurs more quickly in the former. A blackish hue and brittleness were signs of a severe degradation process, some paper disks broke apart during recovery efforts. On the other hand, cellulose recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to lake. Exceptionally, some individual Ecovio\textregistered\ disks recovered from the freshwater environment showed small holes which might be due to biological degradation of the polymer.
 
-![Recovered testing materials ---Ecovio\textregistered\ and cellulose--- after 30-days inside a simulated benthic environment. For each picture, Ecovio\textregistered\ at the top and cellulose at the bottom. A: Lake environment. B: Marine environment.](images/results-visual.jpg){#fig-visual}
+## BOD tests results
 
-## Negative result of Ecovio\textregistered\ BOD tests for every environment {.unnumbered}
-
-Generally, plastic tests remained close to the baseline established by negative control tests, while positive control tests performed a fast BOD increase since the start of the incubation. In @tbl-bod the minimum, median, and maximum BOD after 30 days (BOD~30~) is represented. Marine tests varied over a narrower range compared to lake, which showed higher heterogeneity between tests. This range indicates a relatively more diverse microbial community in lake. A positive respirometrical response for positive control tests became evident after 10 days for the lake environment and 20 days for the marine environment, as illustrated in @fig-bod.
-
-```{r}
-#| label: fig-bod
-#| fig-cap: Summary BOD curves for each environment. Points as media values and shadowed area represent minimum-maxium range.
-
-data |> filter(time %% 5 == 0) |>
-  ggplot(aes(x = time, y = bod, color = test)) +
-  geom_point(aes(shape = test), stat = "summary", fun = median) +
-  geom_ribbon(aes(fill = test), show.legend = F, alpha = .3, linetype = 0,
-              stat = "summary", fun.min = min, fun.max = max) +
-  geom_line(aes(linetype = test), stat = "summary", fun = median) +
-  facet_wrap(~ medium, scales = "free_y",
-             labeller = as_labeller(labels_medium)) +
-  scale_color_discrete(name = NULL, labels = labels_test) +
-  scale_linetype_manual(name = NULL, labels = labels_test,
-                        values = c("dotted", "solid", "dashed")) +
-  scale_shape_manual(name = NULL, labels = labels_test, values = c(0, 16, 1)) +
-  labs(x = "Time (days)", y = "BOD (mg/L)") +
-  theme_minimal() +
-  theme(legend.position = "inside", legend.position.inside = c(.15, .8))
-```
+Generally, plastic tests remained close to the baseline established by negative control tests, while positive control tests performed a fast BOD increase since the start of the incubation. In @tbl-bod the minimum, median, and maximum BOD after 30 days (BOD~30~) is represented. Marine tests varied over a narrower range compared to lake, which showed higher heterogeneity between tests. A positive respirometrical response for positive control tests became evident after 10 days for the lake environment and 20 days for the marine environment, as illustrated in @fig-bod.
 
 ```{r}
 #| label: tbl-bod
@@ -98,6 +75,10 @@ data |> filter(time == 30) |>
   cols_align("left", test)
 ```
 
+{{< pagebreak >}}
+
+![Recovered testing materials (Ecovio\textregistered\ and cellulose) after 30-days inside a simulated benthic environment. For each picture, Ecovio\textregistered\ at the top and cellulose at the bottom. A: Lake environment. B: Marine environment.](images/results-visual.jpg){#fig-visual width="80%"}
+
 <!-- No significant difference was detected between Ecovio\textregistered\ and control tests for lake (t-test, p-value = 0.72) and marine (t-test, p-value = 0.56) environments. -->
 
 <!-- ```{r} -->
@@ -111,7 +92,28 @@ data |> filter(time == 30) |>
 <!--   filter(time == 30, medium == "sea", test %in% c("plastic", "control"))) -->
 <!-- ``` -->
 
-## Nonlinear models of higher complexity fit observed data more accurately {.unnumbered}
+```{r}
+#| label: fig-bod
+#| fig-cap: Summary BOD curves for each environment. Points as media values and shadowed area represent minimum-maxium range.
+
+data |> filter(time %% 5 == 0) |>
+  ggplot(aes(x = time, y = bod, color = test)) +
+  geom_point(aes(shape = test), stat = "summary", fun = median) +
+  geom_ribbon(aes(fill = test), show.legend = F, alpha = .3, linetype = 0,
+              stat = "summary", fun.min = min, fun.max = max) +
+  geom_line(aes(linetype = test), stat = "summary", fun = median) +
+  facet_wrap(~ medium, scales = "free_y",
+             labeller = as_labeller(labels_medium)) +
+  scale_color_discrete(name = NULL, labels = labels_test) +
+  scale_linetype_manual(name = NULL, labels = labels_test,
+                        values = c("dotted", "solid", "dashed")) +
+  scale_shape_manual(name = NULL, labels = labels_test, values = c(0, 16, 1)) +
+  labs(x = "Time (days)", y = "BOD (mg/L)") +
+  theme_minimal() +
+  theme(legend.position = "inside", legend.position.inside = c(.15, .8))
+```
+
+## Nonlinear model comparison and ultimate biodegradability
 
 @fig-fits illustrates the comparative performance of SEM and DEM in fitting biodegradation curves. Fitted DEM adjusts more accurately to the trend underlying the data than SEM, as evidenced by the curve's near match to data points from a plastic-incubated marine reactor. @tbl-aic displays an AIC summary for both nonlinear models. DEM had a median 33.27% lower AIC than SEM, showing a significantly higher model accuracy and an improved representation of the underlying biodegradation processes, even though they were marginally less successful at convergence.
 
