@@ -14,4 +14,6 @@ samples |> leaflet(options = leafletOptions(zoomControl = FALSE)) |>
   setView(lat = 37, lng = -5, zoom = 6) |>
   addLegend(position = "bottomright", title = "",
             pal = pal, values = ~label, opacity = 1) |>
-  addMiniMap()
+  addMiniMap() |> 
+  addScaleBar()
+

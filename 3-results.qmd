@@ -5,11 +5,13 @@
 #| include: false
 
 library(tidyverse)
-library(infer)
 library(gt)
+
+source("scripts/functions.R")
 
 data <- read_rds("data/bod.rds")
 fits <- read_rds("data/fits.rds")
+t_tests <- read_rds("data/t-tests.rds")
 
 labels_medium <- c(
   lake     = "Lake",
@@ -25,41 +27,35 @@ labels_test <- c(
 )
 
 no_conv <- fits |> unnest(metrics) |> filter(!isConv) |> pull(reactor)
-
-safe_min <- function(x) {
-  if (all(is.na(x))) {
-    return(NA)
-  } else {
-    return(min(x, na.rm = TRUE))
-  }
-}
-
-safe_max <- function(x) {
-  if (all(is.na(x))) {
-    return(NA)
-  } else {
-    return(max(x, na.rm = TRUE))
-  }
-}
 ```
 
-## Visual signs of biodegradation for recovered materials
+## Visual inspection of recovered materials
 
 Overall, compostable plastics remained unchanged compared to the new material for both benthic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between Ecovio\textregistered\ and conventional filter-paper recovered materials can be observed in @fig-visual. Cellulose broke down much more severely in lake than in the marine environment, suggesting that biodegradation occurs more quickly in the former. A blackish hue and brittleness were signs of a severe degradation process, some paper disks broke apart during recovery efforts. On the other hand, cellulose recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to lake. Exceptionally, some individual Ecovio\textregistered\ disks recovered from the freshwater environment showed small holes which might be due to biological degradation of the polymer.
 
+{{< pagebreak >}}
+
+![Recovered testing materials (Ecovio\textregistered\ and cellulose) after 30-days inside a simulated benthic environment. For each picture, Ecovio\textregistered\ at the top and cellulose at the bottom. A: Lake environment. B: Marine environment.](images/results-visual.jpg){#fig-visual width="90%"}
+
 ## BOD tests results
 
-Generally, plastic tests remained close to the baseline established by negative control tests, while positive control tests performed a fast BOD increase since the start of the incubation. In @tbl-bod the minimum, median, and maximum BOD after 30 days (BOD~30~) is represented. Marine tests varied over a narrower range compared to lake, which showed higher heterogeneity between tests. A positive respirometrical response for positive control tests became evident after 10 days for the lake environment and 20 days for the marine environment, as illustrated in @fig-bod.
+Generally, Ecovio\textregistered\ tests exhibited BOD levels close to those observed in control (C-) tests. Conversely, positive control tests consistently demonstrated a rapid increase in BOD from the beginning of the incubation. The median BOD~30~, as well as the minimum-maximum range, are presented in 
+@tbl-bod. Notably, marine tests showed a narrower range of variation compared to lake tests, which displayed greater heterogeneity between individual tests. No statistically significant response was detected for the Ecovio\textregistered\ tests in either the lake or marine environments (t-test, 
+p-value > 0.05). Whereas, cellulose tests (C+) results were statistically significant in both environments (t-test, p-value < 0.05).
 
 ```{r}
 #| label: tbl-bod
-#| tbl-cap: BOD~30~ for freshwater and seawater environments by test material.
+#| tbl-cap: BOD~30~ for freshwater and seawater environments by test material. Two-samples t-test comparisons are between testing materials and negative control (C-).
 
 data |> filter(time == 30) |> 
   group_by(medium, test) |> 
-  summarize(min = min(bod), median = median(bod), max = max(bod),
+  summarize(median = median(bod), range = str_range(bod), 
             .groups = "drop") |> 
-  mutate(across(where(is.numeric), \(x) round(x, 2))) |> 
+  left_join(t_tests, by = join_by(medium, test)) |> 
+  mutate(
+    median = round(median, 2),
+    p.value = round(p.value, 5),
+  ) |> 
   mutate(
     medium = fct_recode(medium, "Lake" = "lake", "Marine" = "sea"),
     test = fct_recode(test,
@@ -70,27 +66,13 @@ data |> filter(time == 30) |>
   gt() |>
   cols_label(
     medium = "Env.", test = "Test",
-    min = "Min. (mg/L)", median = "Median (mg/L)", max = "Max. (mg/L)"
+    median = "Median (mg/L)", range = "[Min, Max] (mg/L)", p.value = "T-test (p-value)"
   ) |> 
-  cols_align("left", test)
+  cols_align("left", test) |> cols_align("center", range) |> 
+  sub_missing()
 ```
 
-{{< pagebreak >}}
-
-![Recovered testing materials (Ecovio\textregistered\ and cellulose) after 30-days inside a simulated benthic environment. For each picture, Ecovio\textregistered\ at the top and cellulose at the bottom. A: Lake environment. B: Marine environment.](images/results-visual.jpg){#fig-visual width="80%"}
-
-<!-- No significant difference was detected between Ecovio\textregistered\ and control tests for lake (t-test, p-value = 0.72) and marine (t-test, p-value = 0.56) environments. -->
-
-<!-- ```{r} -->
-<!-- #| label: t-tests -->
-<!-- #| include: false -->
-
-<!-- t.test(bod ~ test, data |>  -->
-<!--   filter(time == 30, medium == "lake", test %in% c("plastic", "control"))) -->
-
-<!-- t.test(bod ~ test, data |>  -->
-<!--   filter(time == 30, medium == "sea", test %in% c("plastic", "control"))) -->
-<!-- ``` -->
+@fig-bod illustrates the temporal evolution of BOD for each treatment. A positive respirometrical response was observed in the positive control tests after 10 days in the lake environment and 20 days in the marine environment. The Ecovio\textregistered\ test remained almost indistinguishable from the control (C-) tests in the lake. However, after 20 days in the marine environment, the Ecovio® maximum BOD approached that of the cellulose (C+) range, although this trend disappeared over time.
 
 ```{r}
 #| label: fig-bod
@@ -113,9 +95,9 @@ data |> filter(time %% 5 == 0) |>
   theme(legend.position = "inside", legend.position.inside = c(.15, .8))
 ```
 
-## Nonlinear model comparison and ultimate biodegradability
+## Models comparison and ultimate biodegradability
 
-@fig-fits illustrates the comparative performance of SEM and DEM in fitting biodegradation curves. Fitted DEM adjusts more accurately to the trend underlying the data than SEM, as evidenced by the curve's near match to data points from a plastic-incubated marine reactor. @tbl-aic displays an AIC summary for both nonlinear models. DEM had a median 33.27% lower AIC than SEM, showing a significantly higher model accuracy and an improved representation of the underlying biodegradation processes, even though they were marginally less successful at convergence.
+@tbl-aic displays a performance summary for SEM and DEM models. The number of observations for each curve was the same, consisting of one measurement every 30 minutes. DEM had a median 33.27% lower AIC than SEM, showing a significantly higher model accuracy and an improved representation of the underlying biodegradation processes, even though they were marginally less successful at convergence.
 
 ```{r}
 #| label: tbl-aic
@@ -123,19 +105,19 @@ data |> filter(time %% 5 == 0) |>
 
 fits |> unnest(metrics) |> filter(model != "linear", isConv) |> 
   group_by(model) |> 
-  summarize(min = min(AIC), median = mean(AIC), max = max(AIC), n = n()) |> 
+  summarize(nobs = max(nobs), median = mean(AIC), range = str_range(AIC), n = n()) |> 
   mutate(conv_rate = n/24, .keep = "unused") |> 
   gt() |> 
   cols_label(
     model = "Model",
-    min = "Min. AIC", median = "Media AIC", max = "Max. AIC",
-    conv_rate = "Conv. success rate"
+    nobs = "Curve points (n)", median = "Median (AIC)", range = "[Min, Max] (AIC)",
+    conv_rate = "Conv. rate"
   ) |> 
   fmt_percent(columns = conv_rate) |> 
-  cols_align("left", model)
+  cols_align("left", model) |> cols_align("center", range)
 ```
 
-Ultimate BOD (BOD~L~) was estimated from the parameters of the best fitting model, as summarized in @tbl-bodl. The median BOD~L~ for Ecovio\textregistered\ and negative controls are nearly identical. The substantial difference between minimum and maximum BOD~L~ indicates high background test noise, highlighting the complexity of environmental field samples.
+Ultimate BOD (BOD~L~) was estimated from the parameters of the best fitting model, as summarized in @tbl-bodl. The median BOD~L~ for Ecovio\textregistered\ and controls (C-) tests are nearly identical. The substantial difference between minimum and maximum BOD~L~ indicates high background test noise, highlighting the complexity of environmental field samples.
 
 ```{r}
 #| label: tbl-bodl
@@ -147,7 +129,7 @@ fits |> unnest(params) |> filter(model == "DEM") |>
   mutate(l = if_else(reactor %in% no_conv, NA, l1 + l2)) |> 
   group_by(medium, test) |> 
   summarize(
-    min = safe_min(l), median = median(l, na.rm = T), max = safe_max(l),
+    median = median(l, na.rm = T), range = str_range(l),
     n = sum(!reactor %in% no_conv),
     .groups = "drop"
   ) |> 
@@ -162,12 +144,13 @@ fits |> unnest(params) |> filter(model == "DEM") |>
   gt() |>
   cols_label(
     medium = "Env.", test = "Test",
-    min = "Min. (mg/L)", median = "Median (mg/L)", max = "Max. (mg/L)",
-    n = "Conv. (n)"
+    median = "Median (mg/L)", range = "[Min, Max] (mg/L)", n = "Conv. (n)"
   ) |> 
-  cols_align("left", test) |> 
+  cols_align("left", test) |> cols_align("center", range) |> 
   sub_missing()
 ```
+
+@fig-fits illustrates the comparative performance of SEM and DEM in an Ecovio\textregistered\ test simulating the marine environment. Overall, DEM demonstrated greater accuracy in adjusting to the measured BOD data, particularly at the beginning of the test. SEM degradation rate constant ($k$ = 0.14) was closer to that of the second term of DEM ($k_2$ = 0.03), which represents the most refractory components of the biodegradable organic matter. Moreover, the degradation rate constant from the labile components ($k_1$ = 5.22) was approximately 2 orders of magnitude higher than that of the second term ($k_2$ = 0.03) in the displayed SEM.
 
 ```{r}
 #| label: fig-fits

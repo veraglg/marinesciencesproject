@@ -40,11 +40,11 @@ $$ {#eq-bod}
 
 The test medium recreated the natural environment on the submerged sediment at the near beach zone inside a sealed reactor. The two-phase approach (sediment and water column) was suggested by @tosin2012 in an attempt to simulate the conditions of a plastic item that has sunk to the bottom of the sea floor. Conversely, this study uses field samples instead of creating a synthetic aqueous solution. The reason for this adaptation is to accurately resemble the open environment while maintaining simplicity [@tosin2012].
 
-## Ecovio\textregistered\ compostable plastic bags as testing material
+## Testing materials
 
 Compostable plastic bags were provided by @deiss2025 in the context of the @soplas2024, as shown in @fig-ecovio. The material is commercially available under Ecovio\textregistered\ trademark name [@basf2025] and is made by blending polylactid acid (PLA) and polybutylene adipate terephthalate (PBAT) polymers at variable proportions. PLA is synthesized from renewable feedstocks such as corn and sugar cane while PBAT has a nonrenewable fossil origin, resulting in a 50% renewable-based material with certified compostability under the European standard EN 13432 [@eubp2023]. Suggested by @tosin2012, laboratory-grade filter paper was employed as a positive control test material. Paper is composed of cellulose, a common polymer which is biodegradable in all types of aerobic conditions, including freshwater and saltwater [@nagamine2022]. According to a recent study by @beiras2023, compostable plastic bags show similar rates of biodegradation regardless of the degree of grinding. In this study, plastic films were cut into 20 mm diameter disk shapes (@fig-methods). The same process was used with a filter paper sheet [@tosin2012].
 
-![Ecovio\textregistered\ compostable plastic bags. Vendor: DEISS.](images/ecovio-bag.jpg){#fig-ecovio width="60%"}
+![Ecovio\textregistered\ compostable plastic bags. Vendor: DEISS.](images/ecovio-bag.jpg){#fig-ecovio width="90%"}
 
 Ecovio\textregistered\ biodegradation was tested after 30 days of exposure to a simulated benthic environment by incubating the material in a reactor medium pre-exposed to environmental conditions [@tosin2012]. Some authors also consider the effects of biodegradation by evaluating weight loss of the polymer [@lavagnolo2024], This approach requires extensive incubation for long periods of time (@tosin2012 tested up to 24 months), the present methodology saves time by only evaluating the biochemical effects of biodegradation through oxygen consumption [@lopez2022].
 
@@ -64,11 +64,11 @@ Initially, 100 g of moist sediment were placed inside empty vessels followed by 
 
 OxiTop\textregistered\ gauges were checked for sufficient battery life beforehand, they were also calibrated by a pneumatic test following the instructions provided by the manufacturer [@wtw2006]. Four metal clips placed equally apart were used to close each reactor separately, and a thin coating of grease was applied to the border tire to prevent air exchange. Lastly, reactors were positioned inside the incubator chamber at random (@fig-methods). To prevent the NaOH solution from spilling onto the medium and killing the microorganism, special care was taken.
 
-![Preparation of the test recreating the benthic environment. A: Test material disks of 20 mm diameter. B: Six paper disks placed at the sediment bed of a reactor simulating the sea environment. c: Loaded reactors randomly placed inside the incubation chamber just before the start of the experiment.](images/methods.jpg){#fig-methods width="80%"}
+![Preparation of the test recreating the benthic environment. A: Test material disks of 20 mm diameter. B: Six paper disks placed at the sediment bed of a reactor simulating the sea environment. c: Loaded reactors randomly placed inside the incubation chamber just before the start of the experiment.](images/methods.jpg){#fig-methods}
 
 The incubator chamber maintained a constant temperature of 25 \textdegree C in the dark. Daily measurements were taken until the end of the 30-day period. After the test, the reactors were dismantled, and the testing materials were recovered for visual inspection. Using software supplied by the vendor, data was gathered and stored in separate spreadsheet files for every test. A unified comma-separated values (CSV) file was created using the tidy practices recommended by @hadley2025.
 
-## Predicting ultimate biodegradability using nonlinear models
+## Statistical considerations
 
 As pointed out by @sullivan2010, BOD data has historically been fit to a single exponential model (SEM) defined by @eq-single-exp where $BOD_t$ is BOD at any time (mg O~2~ L^-1^), $BOD_u$ is the ultimate BOD (mg O~2~ L^-1^) which corresponds to the horizontal asymptote, and $k$ is the first-order biodegradation rate (days^-1^).
 
@@ -82,10 +82,10 @@ $$
 BOD_t=BOD_{u1}(1-e^{-k_1t})+BOD_{u2}(1-e^{-k_2t})
 $$ {#eq-double-exp}
 
-Nonlinear models were fitted using the R package `nls.multstart` version 2.0.0 developed openly by @padfield2025. This package allows for multiple start parameters and automatically selects the best fitting option based on least squares regression. The selection of the best model was based on the Akaike information criterion (AIC) as expressed in @eq-aic [@portet2020], where $N$ is the number of observations and $K$ is the number of estimated parameters, and $RSS$ is the residual sum of squares. The smaller the AIC, the better fit.
+Nonlinear models were fitted using the R package `nls.multstart` version 2.0.0 developed openly by @padfield2025. This package allows for multiple start parameters and automatically selects the best fitting option based on least squares regression. The selection of the best model was based on the Akaike information criterion (AIC) where the smaller the AIC, the better fit. The models were compared using @eq-aic, which is valid when the same data is used to estimate the parameters [@portet2020]. In @eq-aic, $N$ is the number of observations and $K$ is the number of estimated parameters, and $RSS$ is the residual sum of squares.
 
 $$
 AIC = N \ln{\frac{RSS}{N}}+2K
 $$ {#eq-aic}
 
-
+A two-sample t-test was used to determine statistically significant results from BOD tests. Reactors were grouped into testing material (e.g. Ecovio\textregistered\ ) and negative controls (C-). The null hypothesis was rejected if the calculated p-value was less than 0.05 ($\alpha$ = 0.05), demonstrating a statistically significant biodegradation response. Test were performed using R package `stats` 4.5.0 function `t.test(var.equal = TRUE)` [@r2025].
