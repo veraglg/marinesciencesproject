@@ -44,4 +44,19 @@ fits <- fits |>
     preds = map(fit, augment)
   )
 
+fig_fits <- fits |> unnest(data) |> 
+  ggplot(aes(x = time, y = bod)) +
+  geom_point(alpha = .1) +
+  geom_line(
+    data = fits |> unnest(preds),
+    aes(y = .fitted, color = model, linetype = model),
+    linewidth = 1
+  ) +
+  facet_wrap(~ reactor, scales = "free_y") +
+  labs(x = "Time (days)", y = "BOD (mg/L)") +
+  theme(legend.position = "inside", legend.position.inside = c(.9, .05),
+        legend.title = element_blank())
+
+ggsave("supplementary/fig-fits.png", fig_fits)
+
 fits |> write_rds("data/fits.rds")
