@@ -16,29 +16,13 @@ $$
 
 Therefore, pressure inside the reactor falls due to the sequestration of CO~2~ and biological oxygen demand (BOD) can be calculated from the observed pressure difference. According to the law of ideal gases, air pressure inside a rigid container only varies by two factors: variations in the number of gas molecules (i.e. oxygen consumption) and temperature [@tenny2025]. Because temperature inside the incubator chamber remains constant at 25 \textdegree C, OxiTop\textregistered\ gauges will only measure a difference in pressure due to oxygen consumption [@wtw2006].
 
-<!-- In this study, reactors consisted of 1 L glass vessels sealed using the OxiTop\textregistered\ Control system. The head of the measuring device is equipped with a highly sensitive pressure gauge capable of measuring the pressure evolution inside the reactor. A cup holds a strongly alkaline solution of NaOH in contact with the aerial phase to trap the CO~2~ produced by microbial activity.  -->
-
-<!-- To accurately assess biodegradation the effect of temperature must be subtracted, this was accomplished by adjusting test data using the average pressure variation inside empty reactors where no biochemical reaction took place. The adjustment was defined by @eq-adj where $\Delta{}p_{O_2}$ is the pressure variation due to oxygen consumption, $\Delta{}p$ is the measured pressure variation inside the test reactors, and $\Delta{}\overline{p}_{0}$ is the average measured inside empty reactors. -->
-
-<!-- $$ -->
-<!-- \Delta{}p_{O_2} = \Delta{}p - \Delta{}\overline{p}_{0} -->
-<!-- $$ {#eq-adj} -->
-
-BOD was then calculated under controlled testing conditions, including oxygen gas molecular weight $M_{O_2}$ (32000 mg O~2~ mol^-1^), ideal gas constant R (83.144 L hPa mol^-1^ K^-1^), incubation temperature $T$ (298.15 K), reference temperature $T_0$ (273.15 K = 0 \textdegree C), Bunsen absorption coefficient $\alpha$ (0.03103), total volume of the vessel $V_t$ (995 mL), and the volume occupied by the two-phased medium $V_m$ (260 mL); by following @eq-bod from the OxiTop\textregistered\ Control operating manual [@wtw2006].
-
-<!-- According to , @eq-bod directeasily computed applying controlled testing conditions including oxygen gas molecular weight $M_{O_2}$ (mg O~2~ mol^-1^), ideal gas constant R (L hPa mol^-1^ K^-1^), incubation temperature $T$ (K),  reference temperature $T_0$ at 273.15 K (0 \textdegree C), Bunsen absorption coefficient $\alpha$, total volume of the vessel $V_t$ (mL) and the volume occupied by the two-phased medium $V_m$ (mL). -->
+BOD was then calculated by following @eq-bod from the OxiTop\textregistered\ Control operating manual under controlled testing conditions [@wtw2006]. Known parameters are oxygen gas molecular weight $M_{O_2}$ (32000 mg O~2~ mol^-1^), the ideal gas constant R (83.144 L hPa mol^-1^ K^-1^), incubation temperature $T$ (298.15 K), reference temperature $T_0$ (273.15 K = 0 \textdegree C), Bunsen absorption coefficient $\alpha$ (0.03103), the total volume of the vessel $V_t$ (995 mL), and the volume occupied by the two-phased medium $V_m$ (260 mL).
 
 $$
 BOD=\frac{M_{O_2}}{RT}\left(\frac{V_t-V_m}{V_m}+\alpha\frac{T}{T_0}\right)\Delta{}p_{O_2}
 $$ {#eq-bod}
 
-<!-- @eq-bod-simple is a particularized version of the previous equation derived by computing a new empirical constant $K$ of 3.692927 (mg O~2~ L^-1^ hPa^-1^) using experimentally set parameters. This allowed for a constant proportion between the adjusted pressure variation and BOD. -->
-
-<!-- $$ -->
-<!-- BOD=K\ \Delta{}p_{O_2} -->
-<!-- $$ {#eq-bod-simple} -->
-
-The test medium recreated the natural environment on the submerged sediment at the near beach zone inside a sealed reactor. The two-phase approach (sediment and water column) was suggested by @tosin2012 in an attempt to simulate the conditions of a plastic item that has sunk to the bottom of the sea floor. Conversely, this study uses field samples instead of creating a synthetic aqueous solution. The reason for this adaptation is to accurately resemble the open environment while maintaining simplicity [@tosin2012].
+The test medium simulated the natural benthic environment found in submerged sediment near the beach zone within a sealed reactor. @tosin2012 proposed a two-phase approach (sediment and water column) to simulate the conditions of a plastic item that has sunk to the sea floor. Unlike their study, this one used field samples instead of a synthetic aqueous solution to ensure microbes were already preconditioned [@beiras2023].
 
 ## Testing materials
 
@@ -46,19 +30,19 @@ Compostable plastic bags were provided by @deiss2025 in the context of the @sopl
 
 ![Ecovio\textregistered\ compostable plastic bags. Vendor: DEISS.](images/ecovio-bag.jpg){#fig-ecovio width="90%"}
 
-Ecovio\textregistered\ biodegradation was tested after 30 days of exposure to a simulated benthic environment by incubating the material in a reactor medium pre-exposed to environmental conditions [@tosin2012]. Some authors also consider the effects of biodegradation by evaluating weight loss of the polymer [@lavagnolo2024], This approach requires extensive incubation for long periods of time (@tosin2012 tested up to 24 months), the present methodology saves time by only evaluating the biochemical effects of biodegradation through oxygen consumption [@lopez2022].
+Ecovio\textregistered\ biodegradation was tested after 30 days of exposure to a simulated benthic environment by incubating the material in a reactor medium pre-exposed to environmental conditions [@tosin2012]. Some authors also consider the effects of biodegradation by evaluating weight loss of the polymer [@lavagnolo2024]. This approach requires extensive incubation for long periods of time, e.g. @tosin2012 tested up to 24 months. The present methodology saves time by only evaluating the biochemical effects of biodegradation through oxygen consumption [@lopez2022].
 
-Ecovio\textregistered\ has polymer density higher than 1 g cm^-3^ [@behera2024], which results in negative buoyancy in water. However, tiny air bubbles sticking to the surface were encountered, making it difficult to sink into the sediment. To solve the issue thorough clearing was applied using a pair of tweezers.
+Ecovio\textregistered\ has polymer density higher than 1 g cm^-3^ [@behera2024], which results in negative buoyancy in water. HHowever, tiny air bubbles adhered to the plastic surface, making it difficult to sink into the sediment. To solve the issue thorough clearing was applied using a pair of tweezers.
 
 ## Test design and procedure
 
 Sediment and water samples were collected from 2 beaches of both freshwater and seawater environments in Andalusia, Spain. Sampled beaches are recognized under Blue Flag certification by the Foundation for Environmental Education [@adeac2024]. The focus of the study is to assess potential biodegradation in beaches under pressure from plastic pollution therefore the Blue Flag offers a criteria for high occupation indicating a plastic littering hotspot [@eea2024].
 
-Field sampling locations are shown in @fig-map. La Breña Reservoir is a freshwater body located in Almodóvar del Río, Córdoba ($37\textdegree 49'55.20''$N, $5\textdegree 2'12.84''$W). Adapted from @tosin2012, freshwater and sediment collection was carried out near the shore at a water depth of 1 m to ensure that the microbial community living in the sediment is fully adapted to submerged conditions. Secondly, Los Boliches Beach is located at the Mediterranean coast of Fuengirola, Málaga ($30\textdegree 32'52.44''$N, $4\textdegree 36'54.72''$W) which is highly urbanized and dedicated to tourism [@garzon2023]. Sampling was conducted at further distance to the shore at 2 m depth during mid-tide targeting the suborbital zone [@tosin2012].
+Field sampling locations are shown in @fig-map. La Breña Reservoir is a freshwater body located in Almodóvar del Río, Córdoba ($37\textdegree 49'55.20''$N, $5\textdegree 2'12.84''$W). Adapted from @tosin2012, freshwater and sediment collection was carried out near the shore at a water depth of 1 m to ensure that the microbial community living in the sediment is fully adapted to submerged conditions. Secondly, Los Boliches Beach is located at the Mediterranean coast of Fuengirola, Málaga ($30\textdegree 32'52.44''$N, $4\textdegree 36'54.72''$W), which is highly urbanized and dedicated to tourism [@garzon2023]. Sampling was conducted at further distance to the shore at 2 m depth during mid-tide targeting the suborbital zone [@tosin2012].
 
-![Map of Andalusia displaying field sampling locations.](images/map.png){#fig-map width="80%"}
+![Field sampling locations in Andalusia, Spain.](images/map.png){#fig-map width="80%"}
 
-The assessment included 3 incubation treatments for both lake and marine environments: Ecovio\textregistered , cellulose (C+) and no polymer (C-), the former being the control for positive mineralization response and the latter the negative control where no response is expected [@tosin2012]. Tests were replicated into 4 separate reactors, resulting in a total size of 24. Additionally, 6 blank reactors were simultaneously incubated for quality assurance [@lopez2022].
+The assessment included 3 incubation treatments for both lake and marine environments: Ecovio\textregistered , cellulose (+C) and no polymer (-C), the former being the control for positive mineralization response and the latter the negative control where no response is expected [@tosin2012]. Tests were replicated into 4 separate reactors, resulting in a total size of 24. Additionally, 6 blank reactors were simultaneously incubated for quality assurance [@lopez2022].
 
 Initially, 100 g of moist sediment were placed inside empty vessels followed by 200 mL of water from the corresponding field sample. Next, testing materials were deposited on the sediment floor using tweezers (@fig-methods). In order to maximize contact area with the surrounding medium, the disks were arranged so as to avoid overlapping. Each CO~2~ trap was filled with 50 mL of NaOH solution that had previously been prepared using solid pellets (1 mol L^-1^). 
 
@@ -66,7 +50,7 @@ OxiTop\textregistered\ gauges were checked for sufficient battery life beforehan
 
 ![Preparation of the test recreating the benthic environment. A: Test material disks of 20 mm diameter. B: Six paper disks placed at the sediment bed of a reactor simulating the sea environment. c: Loaded reactors randomly placed inside the incubation chamber just before the start of the experiment.](images/methods.jpg){#fig-methods}
 
-The incubator chamber maintained a constant temperature of 25 \textdegree C in the dark. Daily measurements were taken until the end of the 30-day period. After the test, the reactors were dismantled, and the testing materials were recovered for visual inspection. Using software supplied by the vendor, data was gathered and stored in separate spreadsheet files for every test. A unified comma-separated values (CSV) file was created using the tidy practices recommended by @hadley2025.
+The incubator chamber maintained a constant temperature of 25 \textdegree C in the dark. Daily measurements were taken until the end of the 30-day period. After the test, the reactors were dismantled, and the testing materials were recovered for visual inspection. Using software supplied by the vendor, data was gathered and stored in separate spreadsheet files for every test. A unified comma-separated values (CSV) file was created using the tidy practices recommended by @wickham2025.
 
 ## Statistical considerations
 
@@ -82,10 +66,10 @@ $$
 BOD_t=BOD_{u1}(1-e^{-k_1t})+BOD_{u2}(1-e^{-k_2t})
 $$ {#eq-double-exp}
 
-Nonlinear models were fitted using the R package `nls.multstart` version 2.0.0 developed openly by @padfield2025. This package allows for multiple start parameters and automatically selects the best fitting option based on least squares regression. The selection of the best model was based on the Akaike information criterion (AIC) where the smaller the AIC, the better fit. The models were compared using @eq-aic, which is valid when the same data is used to estimate the parameters [@portet2020]. In @eq-aic, $N$ is the number of observations and $K$ is the number of estimated parameters, and $RSS$ is the residual sum of squares.
+Nonlinear models were fitted using the R package `nls.multstart` version 2.0.0 developed openly by @padfield2025. This package allows for multiple start parameters and automatically selects the best fitting option based on least squares regression. The selection of the best model was based on the Akaike information criterion (AIC) where the smaller the AIC, the better fit. The metric can be calculated using @eq-aic, which is valid when the same data is used to estimate the parameters [@portet2020]. In @eq-aic, $N$ is the number of observations and $K$ is the number of estimated parameters, and $RSS$ is the residual sum of squares.
 
 $$
 AIC = N \ln{\frac{RSS}{N}}+2K
 $$ {#eq-aic}
 
-A two-sample t-test was used to determine statistically significant results from BOD tests. Reactors were grouped into testing material (e.g. Ecovio\textregistered\ ) and negative controls (C-). The null hypothesis was rejected if the calculated p-value was less than 0.05 ($\alpha$ = 0.05), demonstrating a statistically significant biodegradation response. Test were performed using R package `stats` 4.5.0 function `t.test(var.equal = TRUE)` [@r2025].
+A two-sample t-test was used to determine statistically significant results from BOD tests [@mcdonald2015]. Reactors were grouped into testing material (e.g. Ecovio\textregistered ) and negative controls (-C). The null hypothesis was rejected if the calculated p-value was less than 0.05 ($\alpha$ = 0.05), demonstrating a statistically significant biodegradation response. Test were performed using R package `stats` 4.5.0 function `t.test(var.equal = TRUE)` [@r2025].

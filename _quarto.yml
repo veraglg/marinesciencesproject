@@ -33,7 +33,7 @@ format:
       - right=3.0cm
       - top=3.5cm
       - bottom=3.5cm
-    fig-pos: ht
+    fig-pos: H
     number-sections: true
     colorlinks: true
     template-partials:

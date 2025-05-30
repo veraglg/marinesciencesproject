@@ -4,9 +4,9 @@ This findings into the biodegradation of Ecovio\textregistered\ within simulated
 
 ## Declaration of competing interest {.unlisted .unnumbered}
 
-There were no known competing financial interests or personal relationships that could have appeared to influence this study.
+There are no competing financial interests or personal relationships that could have influenced this study.
 
 ## Acknowledgements {.unlisted .unnumbered}
 
-This thesis would not have been possible without the invaluable guidance and support of both tutor and co-tutor. I am also deeply grateful to [Giovana Prado Fortuna Macan](https://orcid.org/0000-0002-3714-306X) for her personal mentorship during my internship at the Institute for Sustainable Agriculture (IAS-CSIC).  Lastly, I extend my sincere gratitude to CSA Can Vies for providing a supportive community and space that facilitated my writing process.
+This thesis would not have been possible without the invaluable guidance and support of both tutor and co-tutor. I am also deeply grateful to [Giovana Prado Fortuna Macan](https://orcid.org/0000-0002-3714-306X) for her personal mentorship during my internship at the Institute for Sustainable Agriculture (IAS-CSIC).  Lastly, I extend my sincere gratitude to [CSA Can Vies](https://canvies.org/) for providing a supportive community and space that facilitated my writing process.
 
