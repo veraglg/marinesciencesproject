@@ -1,0 +1,27 @@
+---
+title: "Are «bioplastics» a solution to plastic pollution in the ocean?"
+subtitle: |
+  Laboratory testing of Ecovio® compostable plastic potential
+  biodegradation in lake and marine benthic environments
+author: "Vera Gómez-Limón Gallardo"
+format:
+  revealjs:
+    embed-resources: true
+theme: default
+---
+
+# 1 Introduction
+
+---
+
+![](../images/planetary-boundaries.png){fig-align="center"}
+
+The planetary boundaries framework
+
+# 2 Materials and Methods
+
+# 3 Results
+
+# 4 Discussion
+
+# 5 Conclusion
