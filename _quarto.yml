@@ -15,12 +15,12 @@ book:
   date: last-modified
   chapters:
     - index.qmd
-    - 1-intro.qmd
-    - 2-methods.qmd
-    - 3-results.qmd
-    - 4-discussion.qmd
-    - 5-conclusion.qmd
-    - references.qmd
+    - chapters/intro.qmd
+    - chapters/methods.qmd
+    - chapters/results.qmd
+    - chapters/discussion.qmd
+    - chapters/conclusion.qmd
+    - chapters/references.qmd
 
 bibliography: references.bib
 
