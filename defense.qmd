@@ -1,27 +1,82 @@
 ---
 title: "Are «bioplastics» a solution to plastic pollution in the ocean?"
 subtitle: |
-  Laboratory testing of Ecovio® compostable plastic potential
-  biodegradation in lake and marine benthic environments
-author: "Vera Gómez-Limón Gallardo"
+  *Laboratory testing of Ecovio® compostable plastic potential
+  biodegradation in lake and marine benthic environments*
+author:
+  - name: "Vera Gómez-Limón Gallardo"
+    orcid: 0009-0005-4889-3412
+    affiliation:
+      - "Universidad de las Palmas de Gran Canaria"
+      - "JAE Intro ICU 2024 Scholarship at IAS-CSIC"
+date-format: long
+license: "CC BY-NC-SA 4.0"
+toc: true
+number-sections: true
+slide-number: true
+slide-level: 3
 format:
   revealjs:
+    footer: "Marine Sciences Bachelor Thesis"
+    transition: slide
+    logo: images/logo-ulpgc-simple.png
     embed-resources: true
 theme: default
+include-in-header:
+  - text: |
+      <style>
+      #title-slide .title {
+        font-size: 2em;
+      }
+      </style>
 ---
 
-# 1 Introduction
+# Introduction
+
+## Flooding in plastic
+
+Slide content
+
+::: footer
+Slide footer
+:::
+
+### Planetary boundaries
+
+![El mundo esta bien jodido](images/planetary-boundaries.png)
+
+
+# Materials and Methods
+
+## Field sampling
+
+```{r}
+library(leaflet)
+
+samples <- data.frame(
+  lat = c(37.8320, 36.5479),
+  lng = c(-5.0369, -4.6152),
+  popup = c("La Breña Reservoir", "Los Boliches Beach")
+)
+
+leaflet(samples) |> 
+  addProviderTiles("Esri.WorldImagery") |> 
+  addMarkers(~lng, ~lat, popup = ~popup) |> 
+  setView(lat = 37, lng = -5, zoom = 6) |>
+  addMiniMap() |> 
+  addScaleBar()
+```
 
 ---
 
-![](../images/planetary-boundaries.png){fig-align="center"}
+![](images/ecovio-bag.jpg)
 
-The planetary boundaries framework
+![](images/methods.jpg)
 
-# 2 Materials and Methods
+# Results
 
-# 3 Results
+![](images/results-visual.jpg)
 
-# 4 Discussion
+# Discussion
 
-# 5 Conclusion
+# Conclusion
