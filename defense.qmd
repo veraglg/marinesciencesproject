@@ -11,7 +11,6 @@ author:
       - "JAE Intro ICU 2024 Scholarship at IAS-CSIC"
 date-format: long
 license: "CC BY-NC-SA 4.0"
-toc: true
 number-sections: true
 slide-number: true
 slide-level: 3
@@ -21,6 +20,7 @@ format:
     transition: slide
     logo: images/logo-ulpgc-simple.png
     embed-resources: true
+    preview-links: auto
 theme: default
 include-in-header:
   - text: |
@@ -29,33 +29,135 @@ include-in-header:
         font-size: 2em;
       }
       </style>
+bibliography: references.bib
 ---
+
+## About the author {.unnumbered}
+
+- First began Marine Sciences at ULPGC in 2020
+- Granted JAE intro ICU 2024 Scholarship at IAS-CSIC (Córdoba, Spain)
+- Currently living in Barcelona through SICUE program
+- ORCiD: [0009-0005-4889-3412](https://orcid.org/0009-0005-4889-3412)
+
+## About the study {.unnumbered}
+
+- Part of SOPLAS European project at IAS-CSIC
+- Supervisors:
+    - PhD Blanca Landa del Castillo (IAS-CSIC)
+    - PhD José González Pajuelo (i-UNAT-ULPGC)
+- Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- Fully open source on [GitHub](https://github.com/vgoliga/bachelor-thesis)
+
+## Roadmap {.unnumbered}
+
+- June 2024: Background research
+- July 2024: Field sampling and preliminary tests
+- August 2024: Main tests
+- Autumn 2024: Data processing and modelling
+- Spring 2025: Thesis writing
 
 # Introduction
 
-## Flooding in plastic
+## Plastic pollution outlook {.unnumbered}
 
-Slide content
+- Ocean plastic flux: 11,000,000 Mt/y [@reddy2020]
+- Poorly reversible impact [@macleod2021]
+- Accelerating trend driven by "business as usual" [@oecd2022]
 
 ::: footer
-Slide footer
+1 Introduction
 :::
 
-### Planetary boundaries
+## Outside a safe operating space {.unnumbered}
 
-![El mundo esta bien jodido](images/planetary-boundaries.png)
+- Defined 9 planetary boundaries [@rockstrom2009]
+- 6/9 boundaries transgressed [@richardson2023]
+- Out of bounds for plastic pollution [@persson2022]
+    - Production outpaces safety assessment
+
+::: footer
+1 Introduction
+:::
+
+---
+
+:::: {.columns}
+
+::: {.column width="60%"}
+![](images/planetary-boundaries.png)
+:::
+
+::: {.column width="40%"}
+> […] it remains a scientific challenge to assess how much loading of novel entities Earth system tolerates before irreversibly shifting into a potentially less habitable state. 
+
+@richardson2023
+
+:::
+::::
+
+::: footer
+1 Introduction
+:::
+
+### Environmental persistence {.unnumbered}
+
+Plastic lacks biodegradation and accumulates in the ocean. Engineered remediation is unlikely to succeed [@macleod2021]
+
+- Plastic bags captured on video at 10,000 m deep [@jamieson2022]
+- High abundance of microplastics in Arctic deep-sea sediment [@bergmann2017]
+
+::: footer
+1 Introduction
+:::
+
+### Consequences to marine life {.unnumbered}
+
+- 17% of entangled *spp.* are IUCN Red listed
+- *Procellariiformes* highly vulnerable to poisoning
+- Invasive species rafting
+
+::: footer
+1 Introduction
+:::
+
+### Novel plastics {.unnumbered}
+
+:::: {.columns}
+
+::: {.column width="60%"}
+![](images/bioplastics-diagram.jpeg)
+:::
+
+::: {.column width="40%"}
+Umbrella term:
+
+"Bioplastics", compostable plastics, biodegradable plastics
+:::
+::::
+
+::: footer
+1 Introduction
+:::
+
+### Bioplastic biodegradation research {.unnumbered}
+
+
+### Objectives of the study {.unnumbered}
 
 
 # Materials and Methods
 
+### Biological oxygen demand
+
 ## Field sampling
 
 ```{r}
+#| echo: false
 library(leaflet)
 
 samples <- data.frame(
   lat = c(37.8320, 36.5479),
-  lng = c(-5.0369, -4.6152),
+  lng = c(-5.0369, -4.6152), 
   popup = c("La Breña Reservoir", "Los Boliches Beach")
 )
 
