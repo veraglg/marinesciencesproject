@@ -7,7 +7,7 @@ project:
 
 book:
   output-file: "bachelor-thesis"
-  title: "Are «bioplastics» a solution to plastic pollution in the ocean?"
+  title: "Are 'bioplastics' a solution to plastic pollution in the ocean?"
   subtitle: |
     Laboratory testing of Ecovio\textregistered\ compostable plastic
     potential biodegradation in lake and marine benthic environments
