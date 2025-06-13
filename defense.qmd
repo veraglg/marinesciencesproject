@@ -1,5 +1,5 @@
 ---
-title: "Are «bioplastics» a solution to plastic pollution in the ocean?"
+title: "Are 'bioplastics' a solution to plastic pollution in the ocean?"
 subtitle: |
   *Laboratory testing of Ecovio® compostable plastic potential
   biodegradation in lake and marine benthic environments*
@@ -36,7 +36,6 @@ bibliography: references.bib
 
 - First began Marine Sciences at ULPGC in 2020
 - Granted JAE intro ICU 2024 Scholarship at IAS-CSIC (Córdoba, Spain)
-- Currently living in Barcelona through SICUE program
 - ORCiD: [0009-0005-4889-3412](https://orcid.org/0009-0005-4889-3412)
 
 ## About the study {.unnumbered}
@@ -70,10 +69,11 @@ bibliography: references.bib
 
 ## Outside a safe operating space {.unnumbered}
 
+::: incremental
 - Defined 9 planetary boundaries [@rockstrom2009]
 - 6/9 boundaries transgressed [@richardson2023]
-- Out of bounds for plastic pollution [@persson2022]
-    - Production outpaces safety assessment
+- Out of bounds for plastic pollution --- production outpaces safety assessment [@persson2022]
+:::
 
 ::: footer
 1 Introduction
@@ -99,18 +99,20 @@ bibliography: references.bib
 1 Introduction
 :::
 
-### Environmental persistence {.unnumbered}
+## The main problem: environmental persistence {.unnumbered}
 
-Plastic lacks biodegradation and accumulates in the ocean. Engineered remediation is unlikely to succeed [@macleod2021]
+Plastic **is not biodegradable** and accumulates in the ocean:
 
 - Plastic bags captured on video at 10,000 m deep [@jamieson2022]
 - High abundance of microplastics in Arctic deep-sea sediment [@bergmann2017]
+
+Engineered remediation is unlikely to succeed [@macleod2021]
 
 ::: footer
 1 Introduction
 :::
 
-### Consequences to marine life {.unnumbered}
+### What are the consequences to marine life? {.unnumbered}
 
 - 17% of entangled *spp.* are IUCN Red listed
 - *Procellariiformes* highly vulnerable to poisoning
@@ -120,7 +122,7 @@ Plastic lacks biodegradation and accumulates in the ocean. Engineered remediatio
 1 Introduction
 :::
 
-### Novel plastics {.unnumbered}
+### Substituting plastic with novel polymers? {.unnumbered}
 
 :::: {.columns}
 
@@ -129,9 +131,8 @@ Plastic lacks biodegradation and accumulates in the ocean. Engineered remediatio
 :::
 
 ::: {.column width="40%"}
-Umbrella term:
-
-"Bioplastics", compostable plastics, biodegradable plastics
+- Compostable, does not mean environmentally biodegradable.
+- e.g. PLA needs 60 °C to effectively degrade
 :::
 ::::
 
@@ -139,11 +140,28 @@ Umbrella term:
 1 Introduction
 :::
 
-### Bioplastic biodegradation research {.unnumbered}
+## Are 'bioplastics' environmentally safe? {.unnumbered}
 
+::: incremental
+- Depends on polymer composition and environment --- salinity, T, microbial diversity [@lott2021]
+- Many **do not degrade** at sea, e.g. PLA [@royer2023]
+- Lack of consensus around biodegradation test methods [@lavagnolo2024]
+- Environmental research falls behind leaving a **knowledge gap** [@ribba2022]
+:::
 
-### Objectives of the study {.unnumbered}
+::: footer
+1 Introduction
+:::
 
+## Objectives of the study {.unnumbered}
+
+- Evaluate **Ecovio®** compostable plastic biodegradability
+- Propose a **fast and environmentally relevant** test method for benthic environments [@tosin2012]
+- Predicting ultimate biodegradability --- **new non-linear models** for BOD curves
+
+::: footer
+1 Introduction
+:::
 
 # Materials and Methods
 
