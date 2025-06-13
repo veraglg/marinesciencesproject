@@ -1,3 +1,7 @@
+---
+embed-resources: true
+---
+
 # Results {#sec-results}
 
 ```{r}
@@ -31,13 +35,13 @@ no_conv <- fits |> unnest(metrics) |> filter(!isConv) |> pull(reactor)
 
 ## Visual inspection of recovered materials
 
-Overall, compostable plastics remained unchanged compared to the new material for both benthic environments, they also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between Ecovio\textregistered\ and conventional filter-paper recovered materials can be observed in @fig-visual. Cellulose broke down much more severely in lake than in the marine environment, suggesting that biodegradation occurs more quickly in the former. A blackish hue and brittleness were signs of a severe degradation process, some paper disks broke apart during recovery efforts. On the other hand, cellulose recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to lake. Exceptionally, some individual Ecovio\textregistered\ disks recovered from the freshwater environment showed small holes which might be due to biological degradation of the polymer.
+Overall, compostable plastics remained unchanged compared to the pristine material for both benthic environments. They also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between Ecovio\textregistered\ and conventional filter-paper recovered materials can be observed in @fig-visual. Cellulose broke down much more severely in lake than in the marine environment, suggesting that biodegradation occurs faster in the former. A blackish hue and brittleness were signs of severe degradation, to the point that some paper disks broke apart during recovery efforts. On the other hand, cellulose recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to lake. Exceptionally, some individual Ecovio\textregistered\ disks recovered from the freshwater environment showed small holes which might be due to biological degradation of the polymer.
 
 ![Recovered testing materials after 30-days inside a simulated benthic environment. Ecovio\textregistered\ at the top and cellulose (+C) at the bottom. A: Lake. B: Sea.](/images/results-visual.jpg){#fig-visual}
 
 ## BOD tests results
 
-Generally, Ecovio\textregistered\ tests exhibited BOD levels close to those observed in control (-C) tests. Conversely, positive control tests consistently demonstrated a rapid increase in BOD from the beginning of the incubation. The median BOD~30~, as well as the minimum-maximum range, are presented in @tbl-bod. Notably, marine tests showed a narrower range of variation compared to lake tests, which displayed greater heterogeneity between individual tests. No statistically significant response was detected for the Ecovio\textregistered\ tests in either the lake or marine environments (t-test, p-value > 0.05). Whereas, cellulose tests (+C) results were statistically significant in both environments (t-test, p-value < 0.05).
+Generally, Ecovio\textregistered\ tests exhibited BOD levels close to those observed in control (-C) tests. Conversely, positive control tests consistently demonstrated a rapid increase in BOD since the beginning of the incubation. The median BOD~30~, as well as the minimum-maximum range, are presented in @tbl-bod. Notably, marine tests showed a narrower range of variation compared to lake tests, which displayed greater heterogeneity between individual tests. No statistically significant response was detected for Ecovio\textregistered\ tests in either the lake or marine environments (t-test, p-value > 0.05). Whereas, cellulose tests (+C) results were statistically significant in both environments (t-test, p-value < 0.05).
 
 ```{r}
 #| label: tbl-bod
@@ -68,11 +72,11 @@ data |> filter(time == 30) |>
   sub_missing()
 ```
 
-@fig-bod illustrates the temporal evolution of BOD for each treatment. A positive respirometrical response was observed in the positive control tests after 10 days in the lake environment and 20 days in the marine environment. The Ecovio\textregistered\ test remained almost indistinguishable from the control (-C) tests in the lake. However, after 20 days in the marine environment, the Ecovio\textregistered\ maximum BOD approached that of the cellulose (+C) range, although this trend disappeared over time.
+@fig-bod illustrates BOD evolution for each environment. A positive respirometrical response was observed in cellulose (+C) after 10 and 20 days in the lake and marine environment, respectively. Surprisingly, Ecovio\textregistered\ lake test remained consistently lower than control (-C). At sea, Ecovio\textregistered\ maximum BOD approached that of cellulose (+C) after 20 days. Although this trend stabilized and finally disappeared at day 30.
 
 ```{r}
 #| label: fig-bod
-#| fig-cap: Summary BOD curves for each environment. Points as media values and shadowed area represent minimum-maxium range.
+#| fig-cap: Summary BOD evolution for each environment and test. Points as media values and shadowed area represent minimum-maxium range.
 
 data |> filter(time %% 5 == 0) |>
   ggplot(aes(x = time, y = bod, color = test)) +
@@ -87,7 +91,7 @@ data |> filter(time %% 5 == 0) |>
                         values = c("dotted", "solid", "dashed")) +
   scale_shape_manual(name = NULL, labels = labels_test, values = c(0, 16, 1)) +
   labs(x = "Time (days)", y = "BOD (mg/L)") +
-  theme_minimal() +
+  theme_classic() +
   theme(legend.position = "inside", legend.position.inside = c(.15, .8))
 ```
 
@@ -113,7 +117,7 @@ fits |> unnest(metrics) |> filter(model != "linear", isConv) |>
   cols_align("left", model) |> cols_align("center", range)
 ```
 
-Ultimate BOD (BOD~L~) was estimated from the parameters of the best fitting model, as summarized in @tbl-bodl. The median BOD~L~ for Ecovio\textregistered\ and controls (-C) tests are nearly identical. The substantial difference between minimum and maximum BOD~L~ indicates high background test noise, which can be attributed to the complexity of environmental field samples.
+Ultimate BOD (BOD~L~) was estimated from the parameters of DEM, as summarized in @tbl-bodl. The median BOD~L~ for Ecovio\textregistered\ and controls (-C) tests are nearly identical. The substantial difference between minimum and maximum BOD~L~ indicates high background test noise, which can be attributed to the complexity of environmental field samples.
 
 ```{r}
 #| label: tbl-bodl
@@ -150,7 +154,7 @@ fits |> unnest(params) |> filter(model == "DEM") |>
 
 ```{r}
 #| label: fig-fits
-#| fig-cap: SEM and DEM biodegradation curves over the observed BOD data from a plastic-incubated sea reactor.
+#| fig-cap: SEM and DEM biodegradation curves over BOD data points from a single reactor (Ecovio\textregistered , marine)
 
 fits_s05 <- fits |> filter(reactor == "S05")
 
@@ -186,7 +190,7 @@ fits_s05 |> unnest(data) |>
     )
   ) +
   labs(x = "Time (days)", y = "BOD (mg/L)") +
-  theme_minimal() +
+  theme_classic() +
   theme(legend.position = "inside", legend.position.inside = c(.7, .2),
         legend.title = element_blank())
 ```
