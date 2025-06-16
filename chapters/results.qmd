@@ -7,30 +7,7 @@ embed-resources: true
 ```{r}
 #| label: setup
 #| include: false
-
-library(tidyverse)
-library(gt)
-
-source("scripts/functions.R")
-
-data <- read_rds("data/bod.rds")
-fits <- read_rds("data/fits.rds")
-t_tests <- read_rds("data/t-tests.rds")
-
-labels_medium <- c(
-  lake     = "Lake",
-  sea      = "Marine",
-  blank    = "Empty reactors"
-)
-
-labels_test <- c(
-  paper    = "Cellulose (+C)",
-  plastic  = "Ecovio®",
-  control  = "Control (-C)",
-  blank    = "Blank"
-)
-
-no_conv <- fits |> unnest(metrics) |> filter(!isConv) |> pull(reactor)
+source("scripts/common.R")
 ```
 
 ## Visual inspection of recovered materials
