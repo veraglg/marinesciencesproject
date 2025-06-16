@@ -4,16 +4,16 @@ subtitle: |
   *Laboratory testing of Ecovio® compostable plastic potential
   biodegradation in lake and marine benthic environments*
 author:
-  - name: "Vera Gómez-Limón Gallardo"
-    orcid: 0009-0005-4889-3412
-    affiliation:
-      - "Universidad de las Palmas de Gran Canaria"
-      - "JAE Intro ICU 2024 Scholarship at IAS-CSIC"
+  name: "Vera Gómez-Limón Gallardo"
+  orcid: 0009-0005-4889-3412
+  affiliation:
+    - "Universidad de las Palmas de Gran Canaria"
+    - "JAE Intro ICU 2024 Scholarship at IAS-CSIC"
 date-format: long
 license: "CC BY-NC-SA 4.0"
 number-sections: true
 slide-number: true
-slide-level: 3
+slide-level: 2
 format:
   revealjs:
     footer: "Marine Sciences Bachelor Thesis"
@@ -32,47 +32,52 @@ include-in-header:
 bibliography: references.bib
 ---
 
-## About the author {.unnumbered}
+```{r}
+#| label: setup
+#| include: false
+source("scripts/common.R")
+```
+
+
+#### About the author {.unnumbered}
 
 - First began Marine Sciences at ULPGC in 2020
-- Granted JAE intro ICU 2024 Scholarship at IAS-CSIC (Córdoba, Spain)
-- ORCiD: [0009-0005-4889-3412](https://orcid.org/0009-0005-4889-3412)
+- Granted JAE intro ICU 2024 Scholarship at IAS-CSIC
 
-## About the study {.unnumbered}
+#### About the study {.unnumbered}
 
-- Part of SOPLAS European project at IAS-CSIC
 - Supervisors:
-    - PhD Blanca Landa del Castillo (IAS-CSIC)
-    - PhD José González Pajuelo (i-UNAT-ULPGC)
+  - PhD Blanca Landa del Castillo (IAS-CSIC)
+  - PhD José González Pajuelo (i-UNAT-ULPGC)
 - Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 - Fully open source on [GitHub](https://github.com/vgoliga/bachelor-thesis)
 
-## Roadmap {.unnumbered}
+<!-- #### Roadmap {.unnumbered} -->
 
-- June 2024: Background research
-- July 2024: Field sampling and preliminary tests
-- August 2024: Main tests
-- Autumn 2024: Data processing and modelling
-- Spring 2025: Thesis writing
+<!-- - June 2024: Background research -->
+<!-- - July 2024: Field sampling and preliminary tests -->
+<!-- - August 2024: Main tests -->
+<!-- - Autumn 2024: Data processing and modelling -->
+<!-- - Spring 2025: Thesis writing -->
 
 # Introduction
-
-## Plastic pollution outlook {.unnumbered}
-
-- Ocean plastic flux: 11,000,000 Mt/y [@reddy2020]
-- Poorly reversible impact [@macleod2021]
-- Accelerating trend driven by "business as usual" [@oecd2022]
-
-::: footer
-1 Introduction
-:::
-
-## Outside a safe operating space {.unnumbered}
+## Plastic pollution
+### How big is the problem? {.unnumbered}
 
 ::: incremental
-- Defined 9 planetary boundaries [@rockstrom2009]
-- 6/9 boundaries transgressed [@richardson2023]
-- Out of bounds for plastic pollution --- production outpaces safety assessment [@persson2022]
+- Ocean plastic flux: **11,000,000 Mt/y** [@reddy2020]
+- **Poorly reversible** impact [@macleod2021]
+- Accelerating trend driven by **'business as usual'** [@oecd2022]
+:::
+
+---
+
+### Where is the limit? {.unnumbered}
+
+::: incremental
+- Defined **9 planetary boundaries** [@rockstrom2009]
+- **6/9** boundaries transgressed [@richardson2023]
+- Out of bounds for plastic pollution --- production **outpaces safety assessment** [@persson2022]
 :::
 
 ::: footer
@@ -81,48 +86,52 @@ bibliography: references.bib
 
 ---
 
-:::: {.columns}
+![](images/planetary-boundaries.png){.absolute top=0 left=0 width="650"}
 
-::: {.column width="60%"}
-![](images/planetary-boundaries.png)
+::: {.absolute bottom=0 right=0 width="400"}
+How much can Earth system **tolerate** before shifting into a **less habitable state?**
+
+[@richardson2023]
 :::
-
-::: {.column width="40%"}
-> […] it remains a scientific challenge to assess how much loading of novel entities Earth system tolerates before irreversibly shifting into a potentially less habitable state. 
-
-@richardson2023
-
-:::
-::::
 
 ::: footer
 1 Introduction
 :::
 
-## The main problem: environmental persistence {.unnumbered}
+---
 
-Plastic **is not biodegradable** and accumulates in the ocean:
+### Why is plastic so threatening? {.unnumbered}
 
-- Plastic bags captured on video at 10,000 m deep [@jamieson2022]
-- High abundance of microplastics in Arctic deep-sea sediment [@bergmann2017]
+Plastic **is persistent** and **quickly accumulates** in the ocean.
 
-Engineered remediation is unlikely to succeed [@macleod2021]
+::: incremental
+- Plastic bags captured on camera at **10,000 m deep** [@jamieson2022]
+- High abundance of microplastics in **Arctic deep-sea sediment** [@bergmann2017]
+:::
+
+::: {.fragment}
+Engineered remediation is unlikely to succeed... [@macleod2021]
+:::
 
 ::: footer
 1 Introduction
 :::
+
+---
 
 ### What are the consequences to marine life? {.unnumbered}
 
-- 17% of entangled *spp.* are IUCN Red listed
-- *Procellariiformes* highly vulnerable to poisoning
-- Invasive species rafting
+::: incremental
+- 17% of entangled *spp.* are IUCN **Red listed** []
+- *Procellariiformes* **highly vulnerable** to poisoning []
+- **Invasive species** dispersion on top of plastic []
+:::
 
 ::: footer
 1 Introduction
 :::
-
-### Substituting plastic with novel polymers? {.unnumbered}
+## 'Bioplastics'
+### What are they made of? {.unnumbered}
 
 :::: {.columns}
 
@@ -140,12 +149,14 @@ Engineered remediation is unlikely to succeed [@macleod2021]
 1 Introduction
 :::
 
-## Are 'bioplastics' environmentally safe? {.unnumbered}
+---
+
+### Are they environmentally safe? {.unnumbered}
 
 ::: incremental
 - Depends on polymer composition and environment --- salinity, T, microbial diversity [@lott2021]
 - Many **do not degrade** at sea, e.g. PLA [@royer2023]
-- Lack of consensus around biodegradation test methods [@lavagnolo2024]
+- **Lack of consensus** around biodegradation test methods [@lavagnolo2024]
 - Environmental research falls behind leaving a **knowledge gap** [@ribba2022]
 :::
 
@@ -153,11 +164,13 @@ Engineered remediation is unlikely to succeed [@macleod2021]
 1 Introduction
 :::
 
-## Objectives of the study {.unnumbered}
+## Objectives of the study
 
+::: incremental
 - Evaluate **Ecovio®** compostable plastic biodegradability
 - Propose a **fast and environmentally relevant** test method for benthic environments [@tosin2012]
 - Predicting ultimate biodegradability --- **new non-linear models** for BOD curves
+:::
 
 ::: footer
 1 Introduction
@@ -165,7 +178,49 @@ Engineered remediation is unlikely to succeed [@macleod2021]
 
 # Materials and Methods
 
-### Biological oxygen demand
+## Measuring principle
+### How does biodegradation happen? {.unnumbered}
+
+::: {.fragment}
+$$
+\require{mhchem}
+\ce{Plastic + O2(g) ->[Decomposers] Biomass + CO2 ^ + Minerals}
+$$
+:::
+
+### How to quatify O~2~ consumption? {.unnumbered .fragment}
+
+::: {.fragment}
+
+$$\ce{CO2(aq) + 2Na^+ + 2OH^- + H2O \\-> Na2CO3v + 2H2O}$$
+:::
+
+::: {.fragment}
+Biodegradation becomes a **pressure measurement**
+
+$$PV = nRT$$
+:::
+
+::: footer
+2 Materials and Methods
+:::
+
+---
+
+### OxiTop® Control
+
+
+::: footer
+2 Materials and Methods
+:::
+
+## Testing materials
+
+![](images/ecovio-bag.jpg){.absolute top=100 left=0 width="600"}
+
+::: footer
+2 Materials and Methods
+:::
 
 ## Field sampling
 
@@ -187,16 +242,116 @@ leaflet(samples) |>
   addScaleBar()
 ```
 
----
+::: footer
+2 Materials and Methods
+:::
 
-![](images/ecovio-bag.jpg)
-
-![](images/methods.jpg)
+<!-- ![](images/methods.jpg) -->
 
 # Results
 
-![](images/results-visual.jpg)
+## Visual inspection {background-color="#43464B"}
+### Did recovered materials show visual signs of biodegradation? {.unnumbered}
+
+::: {layout-ncol=2}
+
+![Lake](images/visual-lake.jpg){width="500"}
+
+![Marine](images/visual-sea.jpg){width="500"}
+
+:::
+
+::: footer
+3 Results
+:::
+
+## BOD test results
+
+::: panel-tabset
+
+### Graph
+
+```{r}
+data |> filter(time %% 5 == 0) |>
+  ggplot(aes(x = time, y = bod, color = test)) +
+  geom_point(aes(shape = test), stat = "summary", fun = median) +
+  geom_ribbon(aes(fill = test), show.legend = F, alpha = .3, linetype = 0,
+              stat = "summary", fun.min = min, fun.max = max) +
+  geom_line(aes(linetype = test), stat = "summary", fun = median) +
+  facet_wrap(~ medium, scales = "free_y",
+             labeller = as_labeller(labels_medium)) +
+  scale_color_discrete(name = NULL, labels = labels_test) +
+  scale_linetype_manual(name = NULL, labels = labels_test,
+                        values = c("dotted", "solid", "dashed")) +
+  scale_shape_manual(name = NULL, labels = labels_test, values = c(0, 16, 1)) +
+  labs(x = "Time (days)", y = "BOD (mg/L)") +
+  theme(legend.position = "inside", legend.position.inside = c(.15, .8))
+```
+
+### Table
+
+```{r}
+data |> filter(time == 30) |> 
+  group_by(medium, test) |> 
+  summarize(median = median(bod), range = str_range(bod), 
+            .groups = "drop") |> 
+  left_join(t_tests, by = join_by(medium, test)) |> 
+  mutate(
+    median = round(median, 2),
+    p.value = round(p.value, 5),
+  ) |> 
+  mutate(
+    medium = fct_recode(medium, "Lake" = "lake", "Marine" = "sea"),
+    test = fct_recode(test,
+                           "Cellulose (+C)" = "paper",
+                           "Ecovio®" = "plastic",
+                           "Control (-C)" = "control")
+  ) |>
+  gt() |>
+  cols_label(
+    medium = "Env.", test = "Test",
+    median = "Median (mg/L)", range = "[Min, Max] (mg/L)", p.value = "T-test (p-value)"
+  ) |> 
+  cols_align("left", test) |> cols_align("center", range) |> 
+  sub_missing()
+```
+
+
+:::
+
+::: footer
+3 Results
+:::
+
+## Non-linear modelling
+
+```{r}
+fits |> unnest(data) |> 
+  ggplot(aes(x = time, y = bod)) +
+  geom_point(alpha = .1) +
+  geom_line(
+    data = fits |> unnest(preds),
+    aes(y = .fitted, color = model, linetype = model),
+    linewidth = 1
+  ) +
+  facet_wrap(~ reactor, scales = "free_y") +
+  labs(x = "Time (days)", y = "BOD (mg/L)") +
+  theme(legend.position = "inside", legend.position.inside = c(.9, .05),
+        legend.title = element_blank())
+```
+
+::: footer
+3 Results
+:::
 
 # Discussion
 
+::: footer
+4 Discussion
+:::
+
 # Conclusion
+
+# References {.unnumbered}
+::: {#refs}
+:::
