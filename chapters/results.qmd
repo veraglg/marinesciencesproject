@@ -14,7 +14,7 @@ source("scripts/common.R")
 
 Overall, compostable plastics remained unchanged compared to the pristine material for both benthic environments. They also conserved their original transparency and flexibility after they were thoroughly cleaned. Differences between Ecovio\textregistered\ and conventional filter-paper recovered materials can be observed in @fig-visual. Cellulose broke down much more severely in lake than in the marine environment, suggesting that biodegradation occurs faster in the former. A blackish hue and brittleness were signs of severe degradation, to the point that some paper disks broke apart during recovery efforts. On the other hand, cellulose recovered from the seawater environment was significantly more preserved and only displayed a faint brownish tint, which can be attributed to a relatively less active microbial community compared to lake. Exceptionally, some individual Ecovio\textregistered\ disks recovered from the freshwater environment showed small holes which might be due to biological degradation of the polymer.
 
-![Recovered testing materials after 30-days inside a simulated benthic environment. Ecovio\textregistered\ at the top and cellulose (+C) at the bottom. A: Lake. B: Sea.](/images/results-visual.jpg){#fig-visual}
+![Recovered testing materials after 30-days inside a simulated benthic environment. Ecovio\textregistered\ at the top and cellulose (+C) at the bottom. A: Lake. B: Sea.](/images/results-visual.jpg){#fig-visual width="10.5cm"}
 
 ## BOD tests results
 
