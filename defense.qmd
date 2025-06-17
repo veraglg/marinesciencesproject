@@ -64,20 +64,17 @@ source("scripts/common.R")
 ## Plastic pollution
 ### How big is the problem? {.unnumbered}
 
-::: incremental
+::: {.fragment}
 - Ocean plastic flux: **11,000,000 Mt/y** [@reddy2020]
-- **Poorly reversible** impact [@macleod2021]
 - Accelerating trend driven by **'business as usual'** [@oecd2022]
 :::
 
----
+### Where is the limit? {.unnumbered .fragment}
 
-### Where is the limit? {.unnumbered}
-
-::: incremental
+::: {.fragment}
 - Defined **9 planetary boundaries** [@rockstrom2009]
 - **6/9** boundaries transgressed [@richardson2023]
-- Out of bounds for plastic pollution --- production **outpaces safety assessment** [@persson2022]
+- Production **outpaces safety assessment** [@persson2022]
 :::
 
 ::: footer
@@ -87,10 +84,9 @@ source("scripts/common.R")
 ---
 
 ![](images/planetary-boundaries.png){.absolute top=0 left=0 width="650"}
+![](images/beached-plastic.jpeg){.absolute top=0 right=0 width="400"}
 
 ::: {.absolute bottom=0 right=0 width="400"}
-How much can Earth system **tolerate** before shifting into a **less habitable state?**
-
 [@richardson2023]
 :::
 
@@ -98,20 +94,18 @@ How much can Earth system **tolerate** before shifting into a **less habitable s
 1 Introduction
 :::
 
+::: {.notes}
+How much can Earth system **tolerate** before shifting into a **less habitable state?**
+:::
+
 ---
 
 ### Why is plastic so threatening? {.unnumbered}
 
-Plastic **is persistent** and **quickly accumulates** in the ocean.
-
-::: incremental
-- Plastic bags captured on camera at **10,000 m deep** [@jamieson2022]
-- High abundance of microplastics in **Arctic deep-sea sediment** [@bergmann2017]
-:::
-
-::: {.fragment}
-Engineered remediation is unlikely to succeed... [@macleod2021]
-:::
+- Plastic **is persistent** and **accumulates** in the ocean.
+  - Plastic bags captured on camera at **10,000 m deep** [@jamieson2022]
+  - High abundance of microplastics in **Arctic deep-sea sediment** [@bergmann2017]
+- Engineered remediation is unlikely to succeed [@macleod2021]
 
 ::: footer
 1 Introduction
@@ -121,27 +115,32 @@ Engineered remediation is unlikely to succeed... [@macleod2021]
 
 ### What are the consequences to marine life? {.unnumbered}
 
-::: incremental
-- 17% of entangled *spp.* are IUCN **Red listed** []
-- *Procellariiformes* **highly vulnerable** to poisoning []
-- **Invasive species** dispersion on top of plastic []
+:::: {.columns}
+::: {.column width="60%"}
+- 17% of entangled *spp.* are IUCN **Red listed** [@gall2015]
+- Seabirds (*Procellariiformes*) are **highly vulnerable** to poisoning [@savoca2016]
+- **Invasive species** dispersion on top of plastic debris [@barnes2005]
 :::
+
+::: {.column width="40%"}
+![](images/albatross.jpeg)
+:::
+::::
 
 ::: footer
 1 Introduction
 :::
+
 ## 'Bioplastics'
 ### What are they made of? {.unnumbered}
 
 :::: {.columns}
-
 ::: {.column width="60%"}
 ![](images/bioplastics-diagram.jpeg)
 :::
 
 ::: {.column width="40%"}
-- Compostable, does not mean environmentally biodegradable.
-- e.g. PLA needs 60 °C to effectively degrade
+Compostable does not mean environmentally biodegradable, e.g. [@farah2016]: PLA needs **60 °C** to effectively degrade
 :::
 ::::
 
@@ -164,12 +163,12 @@ Engineered remediation is unlikely to succeed... [@macleod2021]
 1 Introduction
 :::
 
-## Objectives of the study
+## Objectives of the study {.center}
 
 ::: incremental
 - Evaluate **Ecovio®** compostable plastic biodegradability
 - Propose a **fast and environmentally relevant** test method for benthic environments [@tosin2012]
-- Predicting ultimate biodegradability --- **new non-linear models** for BOD curves
+- Predicting ultimate biodegradability fitting **non-linear models** to BOD curves
 :::
 
 ::: footer
@@ -191,15 +190,17 @@ $$
 ### How to quatify O~2~ consumption? {.unnumbered .fragment}
 
 ::: {.fragment}
-
-$$\ce{CO2(aq) + 2Na^+ + 2OH^- + H2O \\-> Na2CO3v + 2H2O}$$
+$$\ce{CO2(aq) + 2Na^+ + 2OH^- + H2O->\\ Na2CO3v + 2H2O}$$
 :::
 
-::: {.fragment}
+---
+
 Biodegradation becomes a **pressure measurement**
-
 $$PV = nRT$$
-:::
+
+### OxiTop® Control System {.unnumbered .fragment}
+
+![](images/oxitop.jpg){.absolute .fragment bottom=50 left=125 width="800"}
 
 ::: footer
 2 Materials and Methods
@@ -207,7 +208,7 @@ $$PV = nRT$$
 
 ---
 
-### OxiTop® Control
+
 
 
 ::: footer
@@ -251,7 +252,7 @@ leaflet(samples) |>
 # Results
 
 ## Visual inspection {background-color="#43464B"}
-### Did recovered materials show visual signs of biodegradation? {.unnumbered}
+### Did materials show signs of biodegradation? {.unnumbered}
 
 ::: {layout-ncol=2}
 
