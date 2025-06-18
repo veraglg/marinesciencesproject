@@ -30,6 +30,7 @@ include-in-header:
       }
       </style>
 bibliography: references.bib
+csl: apa.csl
 ---
 
 ```{r}
@@ -37,7 +38,6 @@ bibliography: references.bib
 #| include: false
 source("scripts/common.R")
 ```
-
 
 #### About the author {.unnumbered}
 
@@ -52,30 +52,26 @@ source("scripts/common.R")
 - Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 - Fully open source on [GitHub](https://github.com/vgoliga/bachelor-thesis)
 
-<!-- #### Roadmap {.unnumbered} -->
-
-<!-- - June 2024: Background research -->
-<!-- - July 2024: Field sampling and preliminary tests -->
-<!-- - August 2024: Main tests -->
-<!-- - Autumn 2024: Data processing and modelling -->
-<!-- - Spring 2025: Thesis writing -->
-
 # Introduction
 ## Plastic pollution
-### How big is the problem? {.unnumbered}
 
-::: {.fragment}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### How much plastic? {.unnumbered}
 - Ocean plastic flux: **11,000,000 Mt/y** [@reddy2020]
 - Accelerating trend driven by **'business as usual'** [@oecd2022]
 :::
 
-### Where is the limit? {.unnumbered .fragment}
-
-::: {.fragment}
+::: {.column width="50%"}
+### Where is the limit? {.unnumbered}
 - Defined **9 planetary boundaries** [@rockstrom2009]
 - **6/9** boundaries transgressed [@richardson2023]
 - Production **outpaces safety assessment** [@persson2022]
 :::
+
+::::
 
 ::: footer
 1 Introduction
@@ -84,9 +80,10 @@ source("scripts/common.R")
 ---
 
 ![](images/planetary-boundaries.png){.absolute top=0 left=0 width="650"}
-![](images/beached-plastic.jpeg){.absolute top=0 right=0 width="400"}
 
-::: {.absolute bottom=0 right=0 width="400"}
+![](images/beached-plastic.jpeg){.absolute top=0 right=0 width="350"}
+
+::: {.absolute bottom=50 right=0 width="350"}
 [@richardson2023]
 :::
 
@@ -116,7 +113,7 @@ How much can Earth system **tolerate** before shifting into a **less habitable s
 ### What are the consequences to marine life? {.unnumbered}
 
 :::: {.columns}
-::: {.column width="60%"}
+::: {.column width="55%"}
 - 17% of entangled *spp.* are IUCN **Red listed** [@gall2015]
 - Seabirds (*Procellariiformes*) are **highly vulnerable** to poisoning [@savoca2016]
 - **Invasive species** dispersion on top of plastic debris [@barnes2005]
@@ -153,7 +150,7 @@ Compostable does not mean environmentally biodegradable, e.g. [@farah2016]: PLA 
 ### Are they environmentally safe? {.unnumbered}
 
 ::: incremental
-- Depends on polymer composition and environment --- salinity, T, microbial diversity [@lott2021]
+- Depends on polymer composition, salinity, T, microbial diversity [@lott2021]
 - Many **do not degrade** at sea, e.g. PLA [@royer2023]
 - **Lack of consensus** around biodegradation test methods [@lavagnolo2024]
 - Environmental research falls behind leaving a **knowledge gap** [@ribba2022]
@@ -167,8 +164,8 @@ Compostable does not mean environmentally biodegradable, e.g. [@farah2016]: PLA 
 
 ::: incremental
 - Evaluate **Ecovio®** compostable plastic biodegradability
-- Propose a **fast and environmentally relevant** test method for benthic environments [@tosin2012]
-- Predicting ultimate biodegradability fitting **non-linear models** to BOD curves
+- Develop fast (**30 days**) BOD test method [based on @tosin2012]
+- Propose **DEM** as a novel statistical tool for BOD prediction [@mason2006]
 :::
 
 ::: footer
@@ -183,7 +180,7 @@ Compostable does not mean environmentally biodegradable, e.g. [@farah2016]: PLA 
 ::: {.fragment}
 $$
 \require{mhchem}
-\ce{Plastic + O2(g) ->[Decomposers] Biomass + CO2 ^ + Minerals}
+\ce{Plastic + O2(g) ->[Microbes] Biomass + CO2 ^ + Minerals}
 $$
 :::
 
@@ -195,21 +192,14 @@ $$\ce{CO2(aq) + 2Na^+ + 2OH^- + H2O->\\ Na2CO3v + 2H2O}$$
 
 ---
 
-Biodegradation becomes a **pressure measurement**
-$$PV = nRT$$
+Therefore, biodegradation becomes a **pressure measurement**,
+$$PV = nRT \quad (V,T) \equiv const.$$
 
-### OxiTop® Control System {.unnumbered .fragment}
+::: {.fragment}
+Using **OxiTop® Control System**
 
-![](images/oxitop.jpg){.absolute .fragment bottom=50 left=125 width="800"}
-
-::: footer
-2 Materials and Methods
+![](images/oxitop.jpg){.absolute bottom=50 left=125 width="800"}
 :::
-
----
-
-
-
 
 ::: footer
 2 Materials and Methods
@@ -217,16 +207,26 @@ $$PV = nRT$$
 
 ## Testing materials
 
-![](images/ecovio-bag.jpg){.absolute top=100 left=0 width="600"}
+Compostable plastic bag (**Ecovio®**), components:
+
+- Polylactic acid (**PLA**): **renewable** origin
+- Polybuthylene adipate terephthalate (**PBAT**): **fossil** origin
+
+![](images/ecovio-bag.jpg){.absolute bottom=50 left=0 width="650"}
+
+![](images/testing-disks.jpg){.absolute bottom=50 right=0 width="325"}
 
 ::: footer
 2 Materials and Methods
 :::
 
-## Field sampling
+## Test design and procedure
+### Where do simulated environments come from? {.unnumbered}
 
 ```{r}
+#| label: map
 #| echo: false
+
 library(leaflet)
 
 samples <- data.frame(
@@ -247,7 +247,56 @@ leaflet(samples) |>
 2 Materials and Methods
 :::
 
-<!-- ![](images/methods.jpg) -->
+---
+
+### Which is the composition of the reactor? {.unnumbered}
+
+::: {layout-ncol=2}
+
+![moist sediment (100 g) + water (200 mL)](images/simulated-benthos.jpg)
+
+![6 disks (⌀ 20 mm)](images/incubation.jpg)
+
+:::
+
+::: footer
+2 Materials and Methods
+:::
+
+## Statistical considerations
+### How was ultimate biodegradability inferred? {.unnumbered}
+
+Simple exponential model (**SEM**) [@hewitt1975]
+$$BOD_t=BOD_u\ (1-e^{-kt})$$
+
+::: {.fragment}
+Double exponential model (**DEM**) [@mason2006]
+$$BOD_t=BOD_{u1}(1-e^{-k_1t})+BOD_{u2}(1-e^{-k_2t})$$
+:::
+
+::: {.fragment}
+Parameter estimation using *R* package `nls.multstart` [@padfield2025]
+:::
+
+::: footer
+2 Materials and Methods
+:::
+
+---
+
+### How was model selection performed? {.unnumbered}
+
+Using Akaike information criterion (**AIC**) [@portet2020]
+
+$$AIC = N \ln{\frac{RSS}{N}}+2K$$
+
+::: footer
+2 Materials and Methods
+:::
+
+::: {.notes}
+number of observations $N$, residual sum of squares $RSS$, number of estimated parameters $K$
+:::
 
 # Results
 
@@ -255,11 +304,9 @@ leaflet(samples) |>
 ### Did materials show signs of biodegradation? {.unnumbered}
 
 ::: {layout-ncol=2}
-
 ![Lake](images/visual-lake.jpg){width="500"}
 
 ![Marine](images/visual-sea.jpg){width="500"}
-
 :::
 
 ::: footer
@@ -270,7 +317,7 @@ leaflet(samples) |>
 
 ::: panel-tabset
 
-### Graph
+#### Evolution
 
 ```{r}
 data |> filter(time %% 5 == 0) |>
@@ -289,7 +336,7 @@ data |> filter(time %% 5 == 0) |>
   theme(legend.position = "inside", legend.position.inside = c(.15, .8))
 ```
 
-### Table
+#### BOD
 
 ```{r}
 data |> filter(time == 30) |> 
@@ -316,8 +363,6 @@ data |> filter(time == 30) |>
   cols_align("left", test) |> cols_align("center", range) |> 
   sub_missing()
 ```
-
-
 :::
 
 ::: footer
