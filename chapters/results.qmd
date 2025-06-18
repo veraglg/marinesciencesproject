@@ -53,7 +53,8 @@ data |> filter(time == 30) |>
 
 ```{r}
 #| label: fig-bod
-#| fig-cap: Summary BOD evolution for each environment and test. Points as media values and shadowed area represent minimum-maxium range.
+#| fig-cap: BOD evolution summary. Median and min-max range represented.
+#| fig-height: 3
 
 data |> filter(time %% 5 == 0) |>
   ggplot(aes(x = time, y = bod, color = test)) +
