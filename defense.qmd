@@ -9,6 +9,7 @@ author:
   affiliation:
     - "Universidad de las Palmas de Gran Canaria"
     - "JAE Intro ICU 2024 Scholarship at IAS-CSIC"
+date: "2025-06-25"
 date-format: long
 license: "CC BY-NC-SA 4.0"
 number-sections: true
@@ -21,6 +22,7 @@ format:
     logo: images/logo-ulpgc-simple.png
     embed-resources: true
     preview-links: auto
+    incremental: true
 theme: default
 include-in-header:
   - text: |
@@ -41,36 +43,36 @@ source("scripts/common.R")
 
 #### About the author {.unnumbered}
 
+::: {.nonincremental}
 - First began Marine Sciences at ULPGC in 2020
 - Granted JAE intro ICU 2024 Scholarship at IAS-CSIC
+:::
 
-#### About the study {.unnumbered}
+#### About the study {.unnumbered .nonincremental}
 
+::: {.nonincremental}
 - Supervisors:
   - PhD Blanca Landa del Castillo (IAS-CSIC)
   - PhD José González Pajuelo (i-UNAT-ULPGC)
 - Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 - Fully open source on [GitHub](https://github.com/vgoliga/bachelor-thesis)
+:::
 
 # Introduction
 ## Plastic pollution
 
-
 :::: {.columns}
-
 ::: {.column width="50%"}
 ### How much plastic? {.unnumbered}
 - Ocean plastic flux: **11,000,000 Mt/y** [@reddy2020]
 - Accelerating trend driven by **'business as usual'** [@oecd2022]
 :::
-
 ::: {.column width="50%"}
 ### Where is the limit? {.unnumbered}
 - Defined **9 planetary boundaries** [@rockstrom2009]
 - **6/9** boundaries transgressed [@richardson2023]
 - Production **outpaces safety assessment** [@persson2022]
 :::
-
 ::::
 
 ::: footer
@@ -95,8 +97,7 @@ source("scripts/common.R")
 How much can Earth system **tolerate** before shifting into a **less habitable state?**
 :::
 
----
-
+## {.unnumbered .center}
 ### Why is plastic so threatening? {.unnumbered}
 
 - Plastic **is persistent** and **accumulates** in the ocean.
@@ -113,14 +114,15 @@ How much can Earth system **tolerate** before shifting into a **less habitable s
 ### What are the consequences to marine life? {.unnumbered}
 
 :::: {.columns}
-::: {.column width="55%"}
-- 17% of entangled *spp.* are IUCN **Red listed** [@gall2015]
-- Seabirds (*Procellariiformes*) are **highly vulnerable** to poisoning [@savoca2016]
+::: {.column width="50%"}
+- 17% of entangled *spp.* IUCN **Red listed** [@gall2015]
+- Seabirds (*Procellariiformes*) **highly vulnerable** to poisoning [@savoca2016]
 - **Invasive species** dispersion on top of plastic debris [@barnes2005]
 :::
 
-::: {.column width="40%"}
-![](images/albatross.jpeg)
+::: {.column width="50%"}
+![](images/albatross.jpeg){width="350"}
+![](images/entanglement.jpg){width="350"}
 :::
 ::::
 
@@ -129,24 +131,22 @@ How much can Earth system **tolerate** before shifting into a **less habitable s
 :::
 
 ## 'Bioplastics'
-### What are they made of? {.unnumbered}
+### What can be labelled as 'bio'? {.unnumbered}
 
-:::: {.columns}
-::: {.column width="60%"}
-![](images/bioplastics-diagram.jpeg)
-:::
+- Term used for **compostable** and/or **biobased** polymers
+- Standard **EN 13432** demands 90% biodegradation in less than 6 months [@eubp2023]
+- Biodegradation in **industrial composting** at high temperatures [60 °C @farah2016]
 
-::: {.column width="40%"}
-Compostable does not mean environmentally biodegradable, e.g. [@farah2016]: PLA needs **60 °C** to effectively degrade
+::: {layout-ncol=2}
+![](images/compostable.png){width="150"}
+![](images/biobased.jpg){width="300"}
 :::
-::::
 
 ::: footer
 1 Introduction
 :::
 
----
-
+## {.unnumbered .center}
 ### Are they environmentally safe? {.unnumbered}
 
 ::: incremental
@@ -162,11 +162,9 @@ Compostable does not mean environmentally biodegradable, e.g. [@farah2016]: PLA 
 
 ## Objectives of the study {.center}
 
-::: incremental
 - Evaluate **Ecovio®** compostable plastic biodegradability
 - Develop fast (**30 days**) BOD test method [based on @tosin2012]
 - Propose **DEM** as a novel statistical tool for BOD prediction [@mason2006]
-:::
 
 ::: footer
 1 Introduction
@@ -174,7 +172,7 @@ Compostable does not mean environmentally biodegradable, e.g. [@farah2016]: PLA 
 
 # Materials and Methods
 
-## Measuring principle
+## Measuring principle {.center}
 ### How does biodegradation happen? {.unnumbered}
 
 ::: {.fragment}
@@ -263,7 +261,13 @@ leaflet(samples) |>
 2 Materials and Methods
 :::
 
-## Statistical considerations
+## Statistical considerations {.center}
+### Which statistical test was used? {.unnumbered}
+- **Two-sample t-test** from material and control (-C) [@mcdonald2015]
+- Positive biodegradation when $\alpha < 0.05$
+- ***R*** function `stats::t.test()` [@r2025]
+
+## {.unnumbered .center}
 ### How was ultimate biodegradability inferred? {.unnumbered}
 
 Simple exponential model (**SEM**) [@hewitt1975]
@@ -275,27 +279,11 @@ $$BOD_t=BOD_{u1}(1-e^{-k_1t})+BOD_{u2}(1-e^{-k_2t})$$
 :::
 
 ::: {.fragment}
-Parameter estimation using *R* package `nls.multstart` [@padfield2025]
+Model selection using Akaike information criterion (**AIC**) [@portet2020]
 :::
 
 ::: footer
 2 Materials and Methods
-:::
-
----
-
-### How was model selection performed? {.unnumbered}
-
-Using Akaike information criterion (**AIC**) [@portet2020]
-
-$$AIC = N \ln{\frac{RSS}{N}}+2K$$
-
-::: footer
-2 Materials and Methods
-:::
-
-::: {.notes}
-number of observations $N$, residual sum of squares $RSS$, number of estimated parameters $K$
 :::
 
 # Results
@@ -315,54 +303,53 @@ number of observations $N$, residual sum of squares $RSS$, number of estimated p
 
 ## BOD test results
 
-::: panel-tabset
+::: {.panel-tabset}
 
-#### Evolution
+### Evolution
 
 ```{r}
+#| label: fig-bod
+
 data |> filter(time %% 5 == 0) |>
   ggplot(aes(x = time, y = bod, color = test)) +
   geom_point(aes(shape = test), stat = "summary", fun = median) +
   geom_ribbon(aes(fill = test), show.legend = F, alpha = .3, linetype = 0,
               stat = "summary", fun.min = min, fun.max = max) +
   geom_line(aes(linetype = test), stat = "summary", fun = median) +
-  facet_wrap(~ medium, scales = "free_y",
-             labeller = as_labeller(labels_medium)) +
-  scale_color_discrete(name = NULL, labels = labels_test) +
-  scale_linetype_manual(name = NULL, labels = labels_test,
-                        values = c("dotted", "solid", "dashed")) +
-  scale_shape_manual(name = NULL, labels = labels_test, values = c(0, 16, 1)) +
-  labs(x = "Time (days)", y = "BOD (mg/L)") +
-  theme(legend.position = "inside", legend.position.inside = c(.15, .8))
+  facet_wrap(~ medium, scales = "free_y") +
+  scale_linetype_manual(values = c("dotted", "solid", "dashed"),
+                        labels = labels_test) +
+  scale_color_discrete(labels = labels_test) +
+  scale_shape_manual(values = c(0, 16, 1), labels = labels_test) +
+  labs(x = "time (days)", y = "BOD (mg/L)") +
+  theme(legend.position = "inside", legend.position.inside = c(.15, .8),
+        legend.title = element_blank())
 ```
 
-#### BOD
+### BOD~30~ (mg O~2~ L^-1^)
 
 ```{r}
-data |> filter(time == 30) |> 
-  group_by(medium, test) |> 
-  summarize(median = median(bod), range = str_range(bod), 
+#| label: tbl-bod30
+
+options(knitr.kable.NA = "")
+
+data |> filter(time == 30) |> group_by(medium, test) |> 
+  summarize(median = median(bod), min = min(bod), max = max(bod),
             .groups = "drop") |> 
   left_join(t_tests, by = join_by(medium, test)) |> 
   mutate(
-    median = round(median, 2),
+    across(c(median, min, max), \(x) round(x, 2)),
     p.value = round(p.value, 5),
   ) |> 
   mutate(
-    medium = fct_recode(medium, "Lake" = "lake", "Marine" = "sea"),
     test = fct_recode(test,
-                           "Cellulose (+C)" = "paper",
+                           "(+C)" = "paper",
                            "Ecovio®" = "plastic",
-                           "Control (-C)" = "control")
+                           "(-C)" = "control")
   ) |>
-  gt() |>
-  cols_label(
-    medium = "Env.", test = "Test",
-    median = "Median (mg/L)", range = "[Min, Max] (mg/L)", p.value = "T-test (p-value)"
-  ) |> 
-  cols_align("left", test) |> cols_align("center", range) |> 
-  sub_missing()
+  knitr::kable()
 ```
+
 :::
 
 ::: footer
@@ -371,24 +358,126 @@ data |> filter(time == 30) |>
 
 ## Non-linear modelling
 
+::: {.panel-tabset}
+
+### Marine
+
 ```{r}
-fits |> unnest(data) |> 
-  ggplot(aes(x = time, y = bod)) +
-  geom_point(alpha = .1) +
+#| label: fig-fits-marine
+
+fits |> unnest(data) |> filter(medium == "marine") |> ggplot(aes(time, bod)) +
+  geom_line() +
   geom_line(
-    data = fits |> unnest(preds),
+    data = fits |> unnest(preds) |> filter(medium == "marine"),
     aes(y = .fitted, color = model, linetype = model),
     linewidth = 1
   ) +
-  facet_wrap(~ reactor, scales = "free_y") +
-  labs(x = "Time (days)", y = "BOD (mg/L)") +
-  theme(legend.position = "inside", legend.position.inside = c(.9, .05),
-        legend.title = element_blank())
+  facet_wrap(~ reactor, ncol = 4) +
+  labs(x = "time (days)", y = "BOD (mg/L)")
 ```
+
+### Lake
+
+```{r}
+#| label: fig-fits-lake
+
+fits |> unnest(data) |> filter(medium == "lake") |> ggplot(aes(time, bod)) +
+  geom_line() +
+  geom_line(
+    data = fits |> unnest(preds) |> filter(medium == "lake"),
+    aes(y = .fitted, color = model, linetype = model),
+    linewidth = 1
+  ) +
+  facet_wrap(~ reactor, ncol = 4) +
+  labs(x = "Time (days)", y = "BOD (mg/L)")
+```
+
+:::
 
 ::: footer
 3 Results
 :::
+
+---
+
+### How did both models performed? {.unnumbered}
+
+::: {.panel-tabset}
+
+### AIC
+
+```{r}
+#| label: fig-aic
+
+fits |> unnest(metrics) |> ggplot(aes(model, AIC, fill = isConv)) +
+  geom_boxplot(outliers = F) +
+  geom_point(position = position_jitterdodge(jitter.width = .2), alpha = .5) +
+  labs(fill = "converged")
+```
+
+### Convergence
+
+```{r}
+#| label: fig-conv
+
+fits |> unnest(metrics) |> ggplot(aes(model, fill = test)) +
+  geom_bar(aes(weight = as.numeric(isConv)), position = "dodge") +
+  facet_wrap(~ medium) +
+  scale_fill_discrete(name = NULL, labels = labels_test) +
+  labs(y = "convergence")
+```
+
+:::
+
+::: footer
+3 Results
+:::
+
+---
+
+### How do model parameters look like? {.unnumbered}
+
+```{r}
+#| label: fig-params
+
+fits_s05 <- fits |> filter(reactor == "S05")
+
+params <- fits_s05 |> unnest(params) |>
+  select(reactor, term, estimate) |>
+  pivot_wider(names_from = term, values_from = estimate) |> 
+  mutate(
+    across(starts_with("l"), \(l) round(l, 0)),
+    across(starts_with("k"), \(k) round(k, 2))
+  )
+
+fits_s05 |> unnest(data) |> 
+  ggplot(aes(x = time, y = bod)) +
+  geom_line(alpha = .5) +
+  geom_line(
+    data = fits_s05 |> unnest(preds),
+    aes(y = .fitted, color = model, linetype = model),
+    linewidth = 1
+  ) +
+  scale_color_discrete(
+    labels = c(
+      "SEM" = bquote(BOD[t]==.(params$l)*(1-e^{.(params$k)*t})),
+      "DEM" = bquote(BOD[t]==.(params$l1)*(1-e^{.(params$k1)*t})+
+                                    .(params$l2)*(1-e^{.(params$k2)*t}))
+    )
+  ) +
+  scale_linetype_manual(
+    values = c("SEM" = "dashed", "DEM" = "solid"),
+    labels = c(
+      "SEM" = bquote(BOD[t]==.(params$l)*(1-e^{.(params$k)*t})),
+      "DEM" = bquote(BOD[t]==.(params$l1)*(1-e^{.(params$k1)*t})+
+                                    .(params$l2)*(1-e^{.(params$k2)*t}))
+    )
+  ) +
+  labs(x = "Time (days)", y = "BOD (mg/L)") +
+  theme(legend.position = "inside", legend.position.inside = c(.7, .2),
+        legend.title = element_blank())
+```
+
 
 # Discussion
 
