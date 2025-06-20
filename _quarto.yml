@@ -2,15 +2,14 @@ project:
   type: book
   output-dir: .
   execute-dir: project
-  preview: 
-    port: 4200
 
 book:
   output-file: "bachelor-thesis"
   title: "Are 'bioplastics' a solution to plastic pollution in the ocean?"
   subtitle: |
-    Laboratory testing of Ecovio\textregistered\ compostable plastic
-    potential biodegradation in lake and marine benthic environments
+    Laboratory testing of Ecovio\textsuperscript{\textregistered}
+    compostable plastic potential biodegradation in lake and marine
+    benthic environments
   author: "Vera Gómez-Limón Gallardo"
   date: last-modified
   chapters:
