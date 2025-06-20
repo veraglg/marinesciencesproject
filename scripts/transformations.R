@@ -2,7 +2,7 @@ library(tidyverse)
 
 data <- read_csv("data/pressures.csv")
 
-levels_medium <- c("lake", "sea", "blank")
+levels_medium <- c("lake", "marine", "blank")
 levels_test <- c("paper", "plastic", "control", "blank")
 
 data <- data |> 

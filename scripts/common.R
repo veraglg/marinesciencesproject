@@ -5,17 +5,10 @@ data <- read_rds("data/bod.rds")
 fits <- read_rds("data/fits.rds")
 t_tests <- read_rds("data/t-tests.rds")
 
-labels_medium <- c(
-  lake     = "Lake",
-  sea      = "Marine",
-  blank    = "Empty reactors"
-)
-
 labels_test <- c(
-  paper    = "Cellulose (+C)",
-  plastic  = "Ecovio®",
-  control  = "Control (-C)",
-  blank    = "Blank"
+  paper    = "(+C)",
+  plastic  = "Ecovio",
+  control  = "(-C)"
 )
 
 no_conv <- fits |> unnest(metrics) |> filter(!isConv) |> pull(reactor)
