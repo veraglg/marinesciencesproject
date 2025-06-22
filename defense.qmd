@@ -59,7 +59,7 @@ source("scripts/common.R")
 :::
 
 # Introduction
-## Plastic pollution
+## Plastic pollution {.center}
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -207,8 +207,10 @@ Using **OxiTop® Control System**
 
 Compostable plastic bag (**Ecovio®**), components:
 
+::: {.nonincremental}
 - Polylactic acid (**PLA**): **renewable** origin
 - Polybuthylene adipate terephthalate (**PBAT**): **fossil** origin
+:::
 
 ![](images/ecovio-bag.jpg){.absolute bottom=50 left=0 width="650"}
 
@@ -263,8 +265,8 @@ leaflet(samples) |>
 
 ## Statistical considerations {.center}
 ### Which statistical test was used? {.unnumbered}
-- **Two-sample t-test** from material and control (-C) [@mcdonald2015]
-- Positive biodegradation when $\alpha < 0.05$
+- **Two-sample t-test** between testing material and control (-C) [@mcdonald2015]
+- Positive biodegradation when p-value < 0.05
 - ***R*** function `stats::t.test()` [@r2025]
 
 ## {.unnumbered .center}
@@ -308,8 +310,6 @@ Model selection using Akaike information criterion (**AIC**) [@portet2020]
 ### Evolution
 
 ```{r}
-#| label: fig-bod
-
 data |> filter(time %% 5 == 0) |>
   ggplot(aes(x = time, y = bod, color = test)) +
   geom_point(aes(shape = test), stat = "summary", fun = median) +
@@ -321,16 +321,12 @@ data |> filter(time %% 5 == 0) |>
                         labels = labels_test) +
   scale_color_discrete(labels = labels_test) +
   scale_shape_manual(values = c(0, 16, 1), labels = labels_test) +
-  labs(x = "time (days)", y = "BOD (mg/L)") +
-  theme(legend.position = "inside", legend.position.inside = c(.15, .8),
-        legend.title = element_blank())
+  labs(x = "time (days)", y = "BOD (mg/L)")
 ```
 
 ### BOD~30~ (mg O~2~ L^-1^)
 
 ```{r}
-#| label: tbl-bod30
-
 options(knitr.kable.NA = "")
 
 data |> filter(time == 30) |> group_by(medium, test) |> 
@@ -363,8 +359,6 @@ data |> filter(time == 30) |> group_by(medium, test) |>
 ### Marine
 
 ```{r}
-#| label: fig-fits-marine
-
 fits |> unnest(data) |> filter(medium == "marine") |> ggplot(aes(time, bod)) +
   geom_line() +
   geom_line(
@@ -379,8 +373,6 @@ fits |> unnest(data) |> filter(medium == "marine") |> ggplot(aes(time, bod)) +
 ### Lake
 
 ```{r}
-#| label: fig-fits-lake
-
 fits |> unnest(data) |> filter(medium == "lake") |> ggplot(aes(time, bod)) +
   geom_line() +
   geom_line(
@@ -407,8 +399,6 @@ fits |> unnest(data) |> filter(medium == "lake") |> ggplot(aes(time, bod)) +
 ### AIC
 
 ```{r}
-#| label: fig-aic
-
 fits |> unnest(metrics) |> ggplot(aes(model, AIC, fill = isConv)) +
   geom_boxplot(outliers = F) +
   geom_point(position = position_jitterdodge(jitter.width = .2), alpha = .5) +
@@ -418,13 +408,11 @@ fits |> unnest(metrics) |> ggplot(aes(model, AIC, fill = isConv)) +
 ### Convergence
 
 ```{r}
-#| label: fig-conv
-
 fits |> unnest(metrics) |> ggplot(aes(model, fill = test)) +
   geom_bar(aes(weight = as.numeric(isConv)), position = "dodge") +
   facet_wrap(~ medium) +
   scale_fill_discrete(name = NULL, labels = labels_test) +
-  labs(y = "convergence")
+  labs(y = "converging (n)")
 ```
 
 :::
@@ -438,8 +426,6 @@ fits |> unnest(metrics) |> ggplot(aes(model, fill = test)) +
 ### How do model parameters look like? {.unnumbered}
 
 ```{r}
-#| label: fig-params
-
 fits_s05 <- fits |> filter(reactor == "S05")
 
 params <- fits_s05 |> unnest(params) |>
@@ -450,8 +436,7 @@ params <- fits_s05 |> unnest(params) |>
     across(starts_with("k"), \(k) round(k, 2))
   )
 
-fits_s05 |> unnest(data) |> 
-  ggplot(aes(x = time, y = bod)) +
+fits_s05 |> unnest(data) |> ggplot(aes(time, bod)) +
   geom_line(alpha = .5) +
   geom_line(
     data = fits_s05 |> unnest(preds),
@@ -473,13 +458,19 @@ fits_s05 |> unnest(data) |>
                                     .(params$l2)*(1-e^{.(params$k2)*t}))
     )
   ) +
-  labs(x = "Time (days)", y = "BOD (mg/L)") +
-  theme(legend.position = "inside", legend.position.inside = c(.7, .2),
-        legend.title = element_blank())
+  labs(x = "time (days)", y = "BOD (mg/L)") +
+  theme(legend.title = element_blank())
 ```
 
+::: footer
+3 Results
+:::
 
 # Discussion
+
+- Correlation between visual signs and BOD tests
+- Lake environment with higher biodegradation potential than marine
+
 
 ::: footer
 4 Discussion
