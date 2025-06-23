@@ -13,12 +13,23 @@ labels_test <- c(
 
 no_conv <- fits |> unnest(metrics) |> filter(!isConv) |> pull(reactor)
 
-str_range <- function(x) {
+na_min <- function(x) {
   if (all(is.na(x)))
     return(NA)
   
-  min_val <- min(x, na.rm = T)
-  max_val <- max(x, na.rm = T)
+  min(x, na.rm = T)
+}
+
+na_max <- function(x) {
+  if (all(is.na(x)))
+    return(NA)
+  
+  max(x, na.rm = T)
+}
+
+str_range <- function(x) {
+  min_val <- na_min(x)
+  max_val <- na_max(x)
   
   sprintf("[%.2f, %.2f]\n", min_val, max_val)
 }

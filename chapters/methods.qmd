@@ -54,6 +54,8 @@ The incubator chamber maintained a constant temperature of 25 \textdegree C in t
 
 ## Statistical considerations
 
+A two-sample t-test was used to determine statistically significant results from BOD tests [@mcdonald2015]. Reactors were grouped into testing material (e.g. Ecovio\textsuperscript{\textregistered}) and negative controls (-C). The null hypothesis was rejected if the calculated p-value was less than 0.05 ($\alpha$ = 0.05), demonstrating a statistically significant biodegradation response. Test were performed using R package `stats` 4.5.0 function `t.test(var.equal = TRUE)` [@r2025].
+
 As pointed out by @sullivan2010, BOD data has historically been fit to a single exponential model (SEM) defined by @eq-single-exp where $BOD_t$ is BOD at any time (mg O~2~ L^-1^), $BOD_u$ is the ultimate BOD (mg O~2~ L^-1^) which corresponds to the horizontal asymptote, and $k$ is the first-order biodegradation rate (days^-1^).
 
 $$
@@ -71,5 +73,3 @@ Nonlinear models were fitted using the *R* package `nls.multstart` version 2.0.0
 $$
 AIC = N \ln{\frac{RSS}{N}}+2K
 $$ {#eq-aic}
-
-A two-sample t-test was used to determine statistically significant results from BOD tests [@mcdonald2015]. Reactors were grouped into testing material (e.g. Ecovio\textsuperscript{\textregistered}) and negative controls (-C). The null hypothesis was rejected if the calculated p-value was less than 0.05 ($\alpha$ = 0.05), demonstrating a statistically significant biodegradation response. Test were performed using R package `stats` 4.5.0 function `t.test(var.equal = TRUE)` [@r2025].
