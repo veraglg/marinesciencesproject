@@ -44,36 +44,46 @@ source("scripts/common.R")
 #### About the author {.unnumbered}
 
 ::: {.nonincremental}
-- First began Marine Sciences at ULPGC in 2020
-- Granted JAE intro ICU 2024 Scholarship at IAS-CSIC
+- First began Marine Sciences at ULPGC in **2020**
+- Granted **JAE intro ICU 2024** Scholarship at IAS-CSIC
 :::
 
 #### About the study {.unnumbered .nonincremental}
 
 ::: {.nonincremental}
 - Supervisors:
-  - PhD Blanca Landa del Castillo (IAS-CSIC)
-  - PhD José González Pajuelo (i-UNAT-ULPGC)
-- Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-- Fully open source on [GitHub](https://github.com/vgoliga/bachelor-thesis)
+  - **PhD Blanca B. Landa del Castillo** (IAS-CSIC)
+  - **PhD José M. González Pajuelo** (i-UNAT-ULPGC)
+- Licensed under [**CC BY-NC-SA 4.0**](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- Fully **open source** on [GitHub](https://github.com/vgoliga/bachelor-thesis)
 :::
 
 # Introduction
-## Plastic pollution {.center}
 
-:::: {.columns}
-::: {.column width="50%"}
-### How much plastic? {.unnumbered}
+## Plastic pollution {.center}
+### How much plastic reaches the ocean? {.unnumbered}
 - Ocean plastic flux: **11,000,000 Mt/y** [@reddy2020]
 - Accelerating trend driven by **'business as usual'** [@oecd2022]
-:::
-::: {.column width="50%"}
-### Where is the limit? {.unnumbered}
-- Defined **9 planetary boundaries** [@rockstrom2009]
-- **6/9** boundaries transgressed [@richardson2023]
-- Production **outpaces safety assessment** [@persson2022]
-:::
-::::
+
+### Where is the safe limit? {.unnumbered .fragment}
+- **6 out of 9** planetary boundaries transgressed [@richardson2023]
+- Plastic production **outpaces safety assessment** [@persson2022]
+
+<!-- --- -->
+
+<!-- :::: {.columns} -->
+<!-- ::: {.column width="50%"} -->
+<!-- ### How much plastic reaches the ocean? {.unnumbered} -->
+<!-- - Ocean plastic flux: **11,000,000 Mt/y** [@reddy2020] -->
+<!-- - Accelerating trend driven by **'business as usual'** [@oecd2022] -->
+<!-- ::: -->
+<!-- ::: {.column width="50%"} -->
+<!-- ### Where is the limit? {.unnumbered} -->
+<!-- - Defined **9 planetary boundaries** [@rockstrom2009] -->
+<!-- - **6/9** boundaries transgressed [@richardson2023] -->
+<!-- - Production **outpaces safety assessment** [@persson2022] -->
+<!-- ::: -->
+<!-- :::: -->
 
 ::: footer
 1 Introduction
@@ -151,7 +161,7 @@ How much can Earth system **tolerate** before shifting into a **less habitable s
 
 ::: incremental
 - Depends on polymer composition, salinity, T, microbial diversity [@lott2021]
-- Many **do not degrade** at sea, e.g. PLA [@royer2023]
+- Many **do not degrade** at sea [e.g. PLA @royer2023]
 - **Lack of consensus** around biodegradation test methods [@lavagnolo2024]
 - Environmental research falls behind leaving a **knowledge gap** [@ribba2022]
 :::
@@ -164,7 +174,7 @@ How much can Earth system **tolerate** before shifting into a **less habitable s
 
 - Evaluate **Ecovio®** compostable plastic biodegradability
 - Develop fast (**30 days**) BOD test method [based on @tosin2012]
-- Propose **DEM** as a novel statistical tool for BOD prediction [@mason2006]
+- Propose **DEM** as a more accurate model for BOD prediction [@mason2006]
 
 ::: footer
 1 Introduction
@@ -266,7 +276,7 @@ leaflet(samples) |>
 ## Statistical considerations {.center}
 ### Which statistical test was used? {.unnumbered}
 - **Two-sample t-test** between testing material and control (-C) [@mcdonald2015]
-- Positive biodegradation when p-value < 0.05
+- Positive biodegradation when **p-value < 0.05**
 - ***R*** function `stats::t.test()` [@r2025]
 
 ## {.unnumbered .center}
@@ -310,16 +320,16 @@ Model selection using Akaike information criterion (**AIC**) [@portet2020]
 ### Evolution
 
 ```{r}
-data |> filter(time %% 5 == 0) |>
-  ggplot(aes(x = time, y = bod, color = test)) +
+data |> filter(time %% 5 == 0) |> ggplot(aes(time, bod)) +
   geom_point(aes(shape = test), stat = "summary", fun = median) +
-  geom_ribbon(aes(fill = test), show.legend = F, alpha = .3, linetype = 0,
+  geom_ribbon(aes(fill = test), alpha = .3, linetype = 0,
               stat = "summary", fun.min = min, fun.max = max) +
   geom_line(aes(linetype = test), stat = "summary", fun = median) +
-  facet_wrap(~ medium, scales = "free_y") +
+  facet_wrap(~ medium) +
   scale_linetype_manual(values = c("dotted", "solid", "dashed"),
                         labels = labels_test) +
   scale_color_discrete(labels = labels_test) +
+  scale_fill_viridis_d(labels = labels_test) +
   scale_shape_manual(values = c(0, 16, 1), labels = labels_test) +
   labs(x = "time (days)", y = "BOD (mg/L)")
 ```
@@ -399,20 +409,23 @@ fits |> unnest(data) |> filter(medium == "lake") |> ggplot(aes(time, bod)) +
 ### AIC
 
 ```{r}
-fits |> unnest(metrics) |> ggplot(aes(model, AIC, fill = isConv)) +
+fits |> unnest(metrics) |> ggplot(aes(isConv, AIC)) +
   geom_boxplot(outliers = F) +
-  geom_point(position = position_jitterdodge(jitter.width = .2), alpha = .5) +
-  labs(fill = "converged")
+  geom_jitter(alpha = .5) +
+  facet_wrap(~ model) +
+  scale_x_discrete(labels = c(`FALSE` = "nonconverged", `TRUE` = "converged")) +
+  labs(x = "")
 ```
 
 ### Convergence
 
 ```{r}
-fits |> unnest(metrics) |> ggplot(aes(model, fill = test)) +
-  geom_bar(aes(weight = as.numeric(isConv)), position = "dodge") +
-  facet_wrap(~ medium) +
-  scale_fill_discrete(name = NULL, labels = labels_test) +
-  labs(y = "converging (n)")
+fits |> unnest(metrics) |> ggplot(aes(test)) +
+  geom_bar(aes(weight = as.numeric(isConv))) +
+  facet_wrap(~ medium + model) +
+  scale_x_discrete(labels = labels_test) +
+  scale_y_continuous(minor_breaks = NULL) +
+  labs(y = "converged (n)")
 ```
 
 :::
@@ -459,7 +472,8 @@ fits_s05 |> unnest(data) |> ggplot(aes(time, bod)) +
     )
   ) +
   labs(x = "time (days)", y = "BOD (mg/L)") +
-  theme(legend.title = element_blank())
+  theme(legend.position = "inside", legend.position.inside = c(.7, .2),
+        legend.title = element_blank())
 ```
 
 ::: footer
@@ -468,15 +482,50 @@ fits_s05 |> unnest(data) |> ggplot(aes(time, bod)) +
 
 # Discussion
 
-- Correlation between visual signs and BOD tests
-- Lake environment with higher biodegradation potential than marine
+<!-- ## {.unnumbered .center} -->
+<!-- ### Reference mapping {.unnumbered} -->
+<!-- - Lack of research for PLA/PBAT blends -->
+<!-- - PLA is not biodegradable at sea [@royer2023] -->
+<!-- - PBAT in freshwater **knowledge gap** [review @lavagnolo2024] -->
+<!-- - DEM more accurate than SEM in wastewater [@mason2006] -->
 
+<!-- ::: footer -->
+<!-- 4 Discussion -->
+<!-- ::: -->
+
+## {.unnumbered .center}
+### Which are the main findings? {.unnumbered}
+- BOD tests **correlate well** with visual signs of biodegradation
+- Marine conditions can be characterized by a **low biodegradation potential** (compared to lake)
+- Ecovio® compostable plastic **lacks fast biodegradation** in lake and marine benthic environments
+
+::: footer
+4 Discussion
+:::
+
+## {.unnumbered .center}
+### Why did Ecovio® not biodegrade? {.unnumbered}
+- **Smooth plastic surfaces** hamper biofilm formation [@dang2007]
+- Lack of **mycelial organisms** [@tosin2012]
+
+### Which limitations were encountered? {.unnumbered .fragment}
+- **High variability** between test of the same environment
+- **Too short incubation time** for some tests to determine BOD~L~ (e.g. +C)
 
 ::: footer
 4 Discussion
 :::
 
 # Conclusion
+
+## What should I take home? {.unnumbered .center}
+- Ecovio® biodegradation in benthic environment is **doubtful**
+- More complex models fit BOD data **more accurately**
+- Plastic pollution is **not solved by biotechnology** alone
+
+::: footer
+5 Conclusion
+:::
 
 # References {.unnumbered}
 ::: {#refs}
