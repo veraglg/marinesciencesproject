@@ -66,7 +66,7 @@ source("scripts/common.R")
 - Accelerating trend driven by **'business as usual'** [@oecd2022]
 
 ### Where is the safe limit? {.unnumbered .fragment}
-- **6 out of 9** planetary boundaries transgressed [@richardson2023]
+- **6 out of 9 planetary boundaries** transgressed [@richardson2023]
 - Plastic production **outpaces safety assessment** [@persson2022]
 
 <!-- --- -->
@@ -110,7 +110,7 @@ How much can Earth system **tolerate** before shifting into a **less habitable s
 ## {.unnumbered .center}
 ### Why is plastic so threatening? {.unnumbered}
 
-- Plastic **is persistent** and **accumulates** in the ocean.
+- Environmental **persistence** and **accumulation** in the ocean
   - Plastic bags captured on camera at **10,000 m deep** [@jamieson2022]
   - High abundance of microplastics in **Arctic deep-sea sediment** [@bergmann2017]
 - Engineered remediation is unlikely to succeed [@macleod2021]
@@ -131,8 +131,9 @@ How much can Earth system **tolerate** before shifting into a **less habitable s
 :::
 
 ::: {.column width="50%"}
-![](images/albatross.jpeg){width="350"}
 ![](images/entanglement.jpg){width="350"}
+
+![](images/albatross.jpeg){width="350"}
 :::
 ::::
 
@@ -143,14 +144,21 @@ How much can Earth system **tolerate** before shifting into a **less habitable s
 ## 'Bioplastics'
 ### What can be labelled as 'bio'? {.unnumbered}
 
-- Term used for **compostable** and/or **biobased** polymers
-- Standard **EN 13432** demands 90% biodegradation in less than 6 months [@eubp2023]
-- Biodegradation in **industrial composting** at high temperatures [60 °C @farah2016]
+![@lavagnolo2024](images/bioplastics-diagram.jpg)
+
+::: footer
+1 Introduction
+:::
+
+---
 
 ::: {layout-ncol=2}
 ![](images/compostable.png){width="150"}
 ![](images/biobased.jpg){width="300"}
 :::
+
+- Compostable standard **EN 13432** demands 90% biodegradation in less than 6 months [@eubp2023]
+- Conditions in **industrial composting** need high temperatures [60 °C @farah2016]
 
 ::: footer
 1 Introduction
@@ -160,7 +168,7 @@ How much can Earth system **tolerate** before shifting into a **less habitable s
 ### Are they environmentally safe? {.unnumbered}
 
 ::: incremental
-- Depends on polymer composition, salinity, T, microbial diversity [@lott2021]
+- Depends on **polymer composition** and environmental conditions [@lott2021]
 - Many **do not degrade** at sea [e.g. PLA @royer2023]
 - **Lack of consensus** around biodegradation test methods [@lavagnolo2024]
 - Environmental research falls behind leaving a **knowledge gap** [@ribba2022]
@@ -172,9 +180,9 @@ How much can Earth system **tolerate** before shifting into a **less habitable s
 
 ## Objectives of the study {.center}
 
-- Evaluate **Ecovio®** compostable plastic biodegradability
-- Develop fast (**30 days**) BOD test method [based on @tosin2012]
-- Propose **DEM** as a more accurate model for BOD prediction [@mason2006]
+- Evaluate **Ecovio® biodegradation** in benthic environments
+- Develop fast and reproducible **respirometric test method**
+- Propose **non-linear models** for ultimate biodegradation prediction
 
 ::: footer
 1 Introduction
@@ -195,12 +203,18 @@ $$
 ### How to quatify O~2~ consumption? {.unnumbered .fragment}
 
 ::: {.fragment}
-$$\ce{CO2(aq) + 2Na^+ + 2OH^- + H2O->\\ Na2CO3v + 2H2O}$$
+$$\ce{CO2(aq) + 2Na^+ + 2OH^- + H2O-> Na2CO3v + 2H2O}$$
+Biological oxygen demand (**BOD**)
+:::
+
+::: footer
+2 Materials and Methods
 :::
 
 ---
 
-Therefore, biodegradation becomes a **pressure measurement**,
+### How was BOD determined? {.unnumbered}
+
 $$PV = nRT \quad (V,T) \equiv const.$$
 
 ::: {.fragment}
@@ -215,16 +229,14 @@ Using **OxiTop® Control System**
 
 ## Testing materials
 
-Compostable plastic bag (**Ecovio®**), components:
+- Compostable plastic bag (**Ecovio®**), components:
+  - Polylactic acid (**PLA**): **renewable** origin
+  - Polybuthylene adipate terephthalate (**PBAT**): **fossil** origin
+- Filter-paper (cellulose) as a positive control (+C) [@tosin2012]
 
-::: {.nonincremental}
-- Polylactic acid (**PLA**): **renewable** origin
-- Polybuthylene adipate terephthalate (**PBAT**): **fossil** origin
-:::
+![](images/ecovio-bag.jpg){.absolute .fragment bottom=50 left=250 width="500"}
 
-![](images/ecovio-bag.jpg){.absolute bottom=50 left=0 width="650"}
-
-![](images/testing-disks.jpg){.absolute bottom=50 right=0 width="325"}
+![](images/testing-disks.jpg){.absolute .fragment bottom=50 right=0 width="250"}
 
 ::: footer
 2 Materials and Methods
@@ -274,13 +286,18 @@ leaflet(samples) |>
 :::
 
 ## Statistical considerations {.center}
-### Which statistical test was used? {.unnumbered}
+### How was significant BOD response determined? {.unnumbered}
+
 - **Two-sample t-test** between testing material and control (-C) [@mcdonald2015]
 - Positive biodegradation when **p-value < 0.05**
 - ***R*** function `stats::t.test()` [@r2025]
 
+::: footer
+2 Materials and Methods
+:::
+
 ## {.unnumbered .center}
-### How was ultimate biodegradability inferred? {.unnumbered}
+### How was ultimate biodegradability estimated? {.unnumbered}
 
 Simple exponential model (**SEM**) [@hewitt1975]
 $$BOD_t=BOD_u\ (1-e^{-kt})$$
@@ -331,7 +348,11 @@ data |> filter(time %% 5 == 0) |> ggplot(aes(time, bod)) +
   scale_color_discrete(labels = labels_test) +
   scale_fill_viridis_d(labels = labels_test) +
   scale_shape_manual(values = c(0, 16, 1), labels = labels_test) +
-  labs(x = "time (days)", y = "BOD (mg/L)")
+  labs(x = "time (days)", y = "BOD (mg/L)") +
+  theme(
+    legend.position = "inside", legend.position.inside = c(.6, .8),
+    legend.title = element_blank()
+  )
 ```
 
 ### BOD~30~ (mg O~2~ L^-1^)
@@ -482,21 +503,10 @@ fits_s05 |> unnest(data) |> ggplot(aes(time, bod)) +
 
 # Discussion
 
-<!-- ## {.unnumbered .center} -->
-<!-- ### Reference mapping {.unnumbered} -->
-<!-- - Lack of research for PLA/PBAT blends -->
-<!-- - PLA is not biodegradable at sea [@royer2023] -->
-<!-- - PBAT in freshwater **knowledge gap** [review @lavagnolo2024] -->
-<!-- - DEM more accurate than SEM in wastewater [@mason2006] -->
-
-<!-- ::: footer -->
-<!-- 4 Discussion -->
-<!-- ::: -->
-
 ## {.unnumbered .center}
 ### Which are the main findings? {.unnumbered}
 - BOD tests **correlate well** with visual signs of biodegradation
-- Marine conditions can be characterized by a **low biodegradation potential** (compared to lake)
+- Marine conditions characterized by **low biodegradation potential** compared to freshwater
 - Ecovio® compostable plastic **lacks fast biodegradation** in lake and marine benthic environments
 
 ::: footer
@@ -507,10 +517,11 @@ fits_s05 |> unnest(data) |> ggplot(aes(time, bod)) +
 ### Why did Ecovio® not biodegrade? {.unnumbered}
 - **Smooth plastic surfaces** hamper biofilm formation [@dang2007]
 - Lack of **mycelial organisms** [@tosin2012]
+- **Too cold** (25 °C) for PLA digestion [@farah2016]
 
 ### Which limitations were encountered? {.unnumbered .fragment}
 - **High variability** between test of the same environment
-- **Too short incubation time** for some tests to determine BOD~L~ (e.g. +C)
+- **Too short incubation time** for some tests to determine BOD~L~
 
 ::: footer
 4 Discussion
@@ -519,7 +530,7 @@ fits_s05 |> unnest(data) |> ggplot(aes(time, bod)) +
 # Conclusion
 
 ## What should I take home? {.unnumbered .center}
-- Ecovio® biodegradation in benthic environment is **doubtful**
+- **Doubtful** fast biodegradation of Ecovio® in lake and marine environments
 - More complex models fit BOD data **more accurately**
 - Plastic pollution is **not solved by biotechnology** alone
 
