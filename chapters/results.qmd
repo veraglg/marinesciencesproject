@@ -24,7 +24,7 @@ Recovered materials (Ecovio\textsuperscript{\textregistered} and paper) after 30
 
 <!-- ![Recovered materials (Ecovio\textsuperscript{\textregistered} and paper) after 30 days, A: lake B: marine.](/images/results-visual.jpg){#fig-visual width="11cm"} -->
 
-## BOD tests results
+## Respirometric tests results
 
 Generally, Ecovio\textsuperscript{\textregistered} tests exhibited BOD levels close to those observed in control (-C) tests. Conversely, positive control tests consistently demonstrated a rapid increase in BOD since the beginning of the incubation. The median BOD~30~, as well as the minimum-maximum range, are presented in @tbl-bod. Notably, marine tests showed a narrower range of variation compared to lake tests, which displayed greater heterogeneity between individual tests. No statistically significant response was detected for Ecovio\textsuperscript{\textregistered} tests in either the lake or marine environments (t-test, p-value > 0.05). Whereas, cellulose tests (+C) results were statistically significant in both environments (t-test, p-value < 0.05).
 
