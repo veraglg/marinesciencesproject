@@ -4,13 +4,13 @@ project:
   execute-dir: project
 
 book:
-  output-file: "bachelor-thesis"
-  title: "Are 'bioplastics' a solution to plastic pollution in the ocean?"
-  subtitle: |
+  output-file: memorandum
+  title: Are 'bioplastics' a solution to plastic pollution in the ocean?
+  subtitle:
     Laboratory testing of Ecovio\textsuperscript{\textregistered}
     compostable plastic potential biodegradation in lake and marine
     benthic environments
-  author: "Vera Gómez-Limón Gallardo"
+  author: Vera Gómez-Limón Gallardo
   date: last-modified
   chapters:
     - index.qmd

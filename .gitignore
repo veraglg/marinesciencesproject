@@ -2,8 +2,10 @@
 .Rhistory
 .RData
 .Ruserdata
-bachelor-thesis.Rproj
-bachelor-thesis.pdf
-defense.html
+marinesciencesproject.Rproj
+
 
 /.quarto/
+/_freeze/
+/defense.html
+/memorandum.pdf
